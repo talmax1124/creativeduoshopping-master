@@ -26,7 +26,7 @@ const HomeScreen = ({ match }) => {
   return (
     <>
       <Meta />
-      <h3>Our Best Selling Products👇🏻</h3>
+      <h3>Our Best Selling Products<span>👇🏻</span></h3>
       {!keyword ? (
         <ProductCarousel />
       ) : (
