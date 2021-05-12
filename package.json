@@ -13,6 +13,10 @@
     "data:destroy": "node backend/seeder -d",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
   },
+  "engines": {
+    "node": "^15.11.0",
+    "npm": "^7.11.1"
+  },
   "author": "Brad Traversy",
   "license": "MIT",
   "dependencies": {
@@ -30,6 +34,7 @@
     "express-async-handler": "^1.1.4",
     "express-session": "^1.17.1",
     "google-translate": "^3.0.0",
+    "heroku-cli": "^7.0.9",
     "http-proxy-middleware": "^0.19.1",
     "i": "^0.3.6",
     "joi": "^17.4.0",
