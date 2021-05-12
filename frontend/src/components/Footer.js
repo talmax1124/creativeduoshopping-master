@@ -18,7 +18,7 @@ const Footer = () => {
         <Row className="rowfoot">
           <Col className="text-center py-3">
             <p style={{ display: "inline" }}>External Links: </p>
-            <a href="https://creativeduo.netlify.app/privacy.html">
+            <a href="/privacypolicy">
               Privacy Policy{" "}
             </a>{" "}
             {" - "}{" "}

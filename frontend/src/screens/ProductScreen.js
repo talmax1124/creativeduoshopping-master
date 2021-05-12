@@ -313,10 +313,15 @@ const ProductScreen = ({ history, match }) => {
                           onChange={(e) => setRating(e.target.value)}
                         >
                           <option value="">Select...</option>
+                          {/* eslint-disable-next-line */}
                           <option value="1">⭐️ - Poor</option>
+                          {/* eslint-disable-next-line */}
                           <option value="2">⭐️⭐️ - Fair</option>
+                          {/* eslint-disable-next-line */}
                           <option value="3">⭐️⭐️⭐️ - Good</option>
+                          {/* eslint-disable-next-line */}
                           <option value="4">⭐️⭐️⭐️⭐️ - Very Good</option>
+                           {/* eslint-disable-next-line */}
                           <option value="5">⭐️⭐️⭐️⭐️⭐️ - Excellent</option>
                         </Form.Control>
                       </Form.Group>

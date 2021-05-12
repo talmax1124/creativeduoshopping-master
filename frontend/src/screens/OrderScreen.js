@@ -277,13 +277,15 @@ const OrderScreen = ({ match, history }) => {
                     Mark As Delivered/Shipped
                   </Button>
 
-                  <Button
-                    type="button"
-                    className="btn btn-block"
-                    onClick={paidMark}
-                  >
-                    Mark As Paid
-                  </Button>
+                  {userInfo && userInfo.isAdmin && !order.isPaid && (
+                    <Button
+                      type="button"
+                      className="btn btn-block"
+                      onClick={paidMark}
+                    >
+                      Mark Order As Paid
+                    </Button>
+                  )}
                 </ListGroup.Item>
               )}
               {/* 
