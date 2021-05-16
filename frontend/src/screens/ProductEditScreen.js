@@ -140,7 +140,10 @@ const ProductEditScreen = ({ match, history }) => {
 
             <Form.Group controlId="specialPrice">
               <Form.Label>Special Price?</Form.Label>
-              <p style={{color: "red"}}>* If you want to have discounted price, leave the field above at $0 and add the discounted price here.</p>
+              <p style={{ color: "red" }}>
+                * If you want to have discounted price, leave the field above at
+                $0 and add the discounted price here.
+              </p>
               <Form.Control
                 type="number"
                 step="any"
@@ -174,8 +177,7 @@ const ProductEditScreen = ({ match, history }) => {
                 value={brand}
                 onChange={(e) => setBrand(e.target.value)}
               >
-                <option value="Sacoleira">Sacoleira</option>
-                <option value="Farmasi">Farmasi</option>
+                <option value="Sacoleira">Creative Duo</option>
                 <option value="Other">Other</option>
               </Form.Control>
             </Form.Group>
@@ -203,13 +205,12 @@ const ProductEditScreen = ({ match, history }) => {
                 onChange={(e) => setCategory(e.target.value)}
               >
                 <option value="...">Select...</option>
-                <option value="Blusas">Blusas</option>
-                <option value="Plataformas">Plataformas</option>
-                <option value="Mahones">Mahones</option>
-                <option value="Trajes De Baño">Trajes De Baño</option>
-                <option value="Tennis">Tennis</option>
-                <option value="Sandalias">Sandalias</option>
-                <option value="Accessories">Accessories</option>
+                <option value="Shirts">Shirts</option>
+                <option value="Infused Design">Infused Design</option>
+                <option value="Mug / Cup">Mug/Cup</option>
+                <option value="Cups/Tumblers/Mugs">Cups/Tumblers/Mugs</option>
+                <option value="Stickers">Stickers</option>
+                <option value="Car Products">Car Products</option>
                 <option value="Other">Other</option>
               </Form.Control>
               {/* <Form.Control
