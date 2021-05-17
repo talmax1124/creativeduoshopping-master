@@ -177,7 +177,7 @@ const ProductEditScreen = ({ match, history }) => {
                 value={brand}
                 onChange={(e) => setBrand(e.target.value)}
               >
-                <option value="Sacoleira">Creative Duo</option>
+                <option value="Creative Duo">Creative Duo</option>
                 <option value="Other">Other</option>
               </Form.Control>
             </Form.Group>
