@@ -23,7 +23,14 @@ const Header = () => {
   return (
     <header>
       <div>
-        <h6 className="headertitle">Shipping Available To The United States Of America & Puerto Rico (PR)</h6>
+        <h6 className="headertitle">
+          Shipping Available To The United States Of America & Puerto Rico (PR)
+        </h6>
+        {/* eslint-disable-next-line */}
+        {/* <marquee className="marq">
+          Sign In With Google Now Available! Privacy Policy Link & Terms are Now
+          Updated!
+        </marquee> */}
       </div>
       <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
         <Container>
@@ -32,7 +39,11 @@ const Header = () => {
           </LinkContainer>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-          <Route render={({ history }) => <SearchBox history={history} className="ml-auto mr-auto" />} />
+            <Route
+              render={({ history }) => (
+                <SearchBox history={history} className="ml-auto mr-auto" />
+              )}
+            />
 
             <Nav className="ml-auto">
               <LinkContainer to="/cart">

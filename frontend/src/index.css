@@ -292,9 +292,19 @@ h2 {
   padding: 15px;
   background-color: #000;
   color: white;
-  margin: 0 0;
+  margin: 0;
   font-size: .8em;
 }
+/* .marq{
+  text-align: center;
+  padding: 5px;
+  background-color: #000;
+  color: white;
+  margin: 0;
+  font-size: .8em; */
+/* } */
+
+
 
 .signningoogle{
   background-color: transparent;
