@@ -31,7 +31,7 @@ const PlaceOrderScreen = ({ history }) => {
 
   cart.itemsPrice = addDecimals(
     cart.cartItems.reduce(
-      (acc, item) => acc + item.price + item.specialPrice * item.qty,
+      (acc, item) => acc + (item.price + item.specialPrice) * item.qty,
       0
     )
   );
