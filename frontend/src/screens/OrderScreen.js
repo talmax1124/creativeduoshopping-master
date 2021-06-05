@@ -49,7 +49,7 @@ const OrderScreen = ({ match, history }) => {
 
     order.itemsPrice = addDecimals(
       order.orderItems.reduce(
-        (acc, item) => acc + item.price + item.specialPrice * item.qty,
+        (acc, item) => acc + (item.price + item.specialPrice) * item.qty,
         // +
         // item.qty1 +
         // item.qty2 +
