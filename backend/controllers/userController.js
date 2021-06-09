@@ -34,6 +34,47 @@ const registerUser = asyncHandler(async (req, res) => {
 
   const userExists = await User.findOne({ email });
 
+  const radnString = () => {
+    const len = 8;
+    let randStr = "";
+    for (let i = 0; i < len; i++) {
+      const ch = Math.floor(Math.random() * 10 + 1);
+      randStr += ch;
+    }
+
+    return randStr;
+  };
+
+  const sendMail = (email, uniquestring) => {
+    var Transport = nodemailer.createTransport({
+      service: "Gmail",
+      auth: {
+        user: "noreply.creativeduo@gmail.com",
+        pass: "noreply",
+      },
+    });
+
+    var mailOptions;
+    let sender = "Creative Duo Registration Verification";
+    mailOptions = {
+      from: sender,
+      to: email,
+      subject: "Email Confirmation",
+      html: `Press <a href="http://localhost:3000/verify/${uniqueString}> here </a> to verify your email. <br><br> - The Creative Duo Team`,
+    };
+
+    Transport.sendMail(mailOptions, function (error, response) {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log("Message Sent");
+      }
+    });
+  };
+
+  const uniqueString = radnString();
+  const isValid = false;
+
   if (userExists) {
     res.status(400);
     throw new Error("User already exists");
@@ -44,7 +85,11 @@ const registerUser = asyncHandler(async (req, res) => {
     email,
     password,
     phone,
+    uniqueString,
+    isValid,
   });
+
+  sendEmail(email);
 
   if (user) {
     res.status(201).json({
