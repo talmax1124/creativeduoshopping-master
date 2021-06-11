@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { Form, Button, Row, Col } from 'react-bootstrap'
+import { Form, Button, Row, Col , Spinner} from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import FormContainer from '../components/FormContainer'
-import { register } from '../actions/userActions'
+import { verify } from '../actions/userActions'
 
 const RegisterScreen = ({ location, history }) => {
   const [name, setName] = useState('')
@@ -17,8 +17,12 @@ const RegisterScreen = ({ location, history }) => {
 
   const dispatch = useDispatch()
 
+  const userVerification = useSelector((state) => state.userVerification)
+  
+  const { verification, loading, error } = userVerification
+
   const userRegister = useSelector((state) => state.userRegister)
-  const { loading, error, userInfo } = userRegister
+  const { loading: loadingRegister, error: errorRegister, userInfo } = userRegister
 
   const redirect = location.search ? location.search.split('=')[1] : '/'
 
@@ -33,16 +37,13 @@ const RegisterScreen = ({ location, history }) => {
     if (password !== confirmPassword) {
       setMessage('Passwords do not match')
     } else {
-      dispatch(register(name, email, password, phone))
+      dispatch(verify(name, email, password, phone))
     }
   }
 
   return (
     <FormContainer>
       <h1>Sign Up</h1>
-      {message && <Message variant='danger'>{message}</Message>}
-      {error && <Message variant='danger'>{error}</Message>}
-      {loading && <Loader />}
       <Form onSubmit={submitHandler}>
         <Form.Group controlId='name'>
           <Form.Label>Name</Form.Label>
@@ -107,6 +108,27 @@ const RegisterScreen = ({ location, history }) => {
           </Link>
         </Col>
       </Row>
+      {loading && (
+        <Spinner
+          animation='border'
+          role='status'
+          variant='danger'
+          style={{
+            width: '100px',
+            margin: 'auto',
+            height: '100px',
+            display: 'block',
+          }}
+        />
+      )}
+      {verification && (
+        <Message variant='success'>{verification.response}</Message>
+      )}
+      {error && <Message variant='danger'>{error}</Message>}
+      {message && <Message variant='danger'>{message}</Message>}
+      {errorRegister && <Message variant='danger'>{errorRegister}</Message>}
+      {loadingRegister && <Loader />}
+
     </FormContainer>
   )
 }

@@ -10,6 +10,7 @@ import {
   USER_REGISTER_FAIL,
   USER_REGISTER_REQUEST,
   USER_REGISTER_SUCCESS,
+  USER_REGISTER_RESET,
   USER_UPDATE_PROFILE_FAIL,
   USER_UPDATE_PROFILE_REQUEST,
   USER_UPDATE_PROFILE_SUCCESS,
@@ -24,6 +25,10 @@ import {
   USER_UPDATE_FAIL,
   USER_UPDATE_SUCCESS,
   USER_UPDATE_REQUEST,
+  USER_VERIFICATION_LINK_FAIL,
+  USER_VERIFICATION_LINK_REQUEST,
+  USER_VERIFICATION_LINK_RESET,
+  USER_VERIFICATION_LINK_SUCCESS,
 } from '../constants/userConstants';
 import { ORDER_LIST_MY_RESET } from '../constants/orderConstants';
 
@@ -100,9 +105,15 @@ export const logout = () => {
       localStorage.removeItem('shippingAddress');
       localStorage.removeItem('paymentMethod');
       dispatch({ type: USER_LOGOUT });
+      dispatch({
+        type: USER_REGISTER_RESET,
+      })
       dispatch({ type: USER_DETAILS_RESET });
       dispatch({ type: ORDER_LIST_MY_RESET });
       dispatch({ type: USER_LIST_RESET });
+      dispatch({
+        type: USER_VERIFICATION_LINK_RESET,
+      })
       document.location.href = '/login';
     } catch (err) {
       console.error(err);
@@ -110,7 +121,39 @@ export const logout = () => {
   };
 };
 
-export const register = (name, email, password, phone) => async (dispatch) => {
+export const verify =
+  (name, email, password, phone) => async (dispatch) => {
+    try {
+      dispatch({
+        type: USER_VERIFICATION_LINK_REQUEST,
+      })
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+
+      const { data } = await axios.post(
+        '/api/users/verificationlink',
+        { name, email, password, phone },
+        config
+      )
+      dispatch({
+        type: USER_VERIFICATION_LINK_SUCCESS,
+        payload: data,
+      })
+    } catch (error) {
+      dispatch({
+        type: USER_VERIFICATION_LINK_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      })
+    }
+  }
+
+export const register = (token) => async (dispatch) => {
   try {
     dispatch({
       type: USER_REGISTER_REQUEST,
@@ -124,7 +167,7 @@ export const register = (name, email, password, phone) => async (dispatch) => {
 
     const { data } = await axios.post(
       '/api/users',
-      { name, email, password, phone },
+      { token },
       config
     );
 

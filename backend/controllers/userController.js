@@ -1,6 +1,8 @@
 import asyncHandler from "express-async-handler";
 import generateToken from "../utils/generateToken.js";
 import User from "../models/userModel.js";
+import jwt from 'jsonwebtoken'
+import Mailgun from 'mailgun-js'
 
 // @desc    Auth user & get token
 // @route   POST /api/users/login
@@ -26,70 +28,94 @@ const authUser = asyncHandler(async (req, res) => {
   }
 });
 
+const verificationLink = asyncHandler(async (req, res) => {
+  let { name, email, password, phone } = req.body
+  // console.log(req.body)
+  const userExists = await User.findOne({ email })
+  if (userExists) {
+    res.status(400)
+    throw new Error('Email is already registered')
+  }
+  const validatename = name.length
+  // console.log(validatename)
+  const validatepassword = password.length
+  // console.log(validatepassword)
+
+
+
+  if (validatename < 3) {
+    res.status(400)
+    throw new Error('Name must be of 3 characters  or more length ')
+  }
+  if (validatepassword < 6) {
+    res.status(400)
+    throw new Error('Password length must be greater than 5')
+  }
+
+  const tokengenerate = jwt.sign(
+    { name, email, password, phone},
+    process.env.JWT_SECRET,
+    { expiresIn: '10m' }
+  )
+  //send email to regitering user
+  var mailgun = new Mailgun({
+    apiKey: process.env.MailGunAPI,
+    domain: process.env.MailGunDomain,
+  })
+  var data = {
+    from: 'Creative Duo Shopping <creativeduo2020@gmail.com>',
+    to: email,
+    subject: 'Account activation link',
+
+    html: `
+    <h1>Please click on the link below to activate your account</h1>
+    <p>${process.env.CLIENT_URL}/verify/${tokengenerate}</p>
+    <hr />
+    <p>This email may contain sensetive information</p>
+    <p>${process.env.CLIENT_URL}</p>
+    `,
+  }
+  
+  mailgun.messages().send(data, function (error, info) {
+    if (error) {
+      res.status(400)
+      throw new Error(error)
+    } else {
+      // console.log('Email sent: ' + info.response)
+      res.status(201).json({
+        response:
+          'A verification link has been sent to your Email. Verify it at first.',
+      })
+    }
+  })
+})
+
 // @desc    Register a new user
 // @route   POST /api/users
 // @access  Public
 const registerUser = asyncHandler(async (req, res) => {
-  const { name, email, password, phone } = req.body;
-
-  const userExists = await User.findOne({ email });
-
-  const radnString = () => {
-    const len = 8;
-    let randStr = "";
-    for (let i = 0; i < len; i++) {
-      const ch = Math.floor(Math.random() * 10 + 1);
-      randStr += ch;
-    }
-
-    return randStr;
-  };
-
-  const sendMail = (email, uniquestring) => {
-    var Transport = nodemailer.createTransport({
-      service: "Gmail",
-      auth: {
-        user: "noreply.creativeduo@gmail.com",
-        pass: "noreply",
-      },
-    });
-
-    var mailOptions;
-    let sender = "Creative Duo Registration Verification";
-    mailOptions = {
-      from: sender,
-      to: email,
-      subject: "Email Confirmation",
-      html: `Press <a href="http://localhost:3000/verify/${uniqueString}> here </a> to verify your email. <br><br> - The Creative Duo Team`,
-    };
-
-    Transport.sendMail(mailOptions, function (error, response) {
-      if (error) {
-        console.log(error);
-      } else {
-        console.log("Message Sent");
+  const { token } = req.body
+  if (token) {
+    jwt.verify(token, process.env.JWT_SECRET),
+      function (err, decoded) {
+        if (err) {
+          // console.log('JWT verify error')
+          return res.status(401).json({
+            error: 'Expired Link. Signup Again',
+          })
+        }
       }
-    });
-  };
 
-  const uniqueString = radnString();
-  const isValid = false;
+    const { name, email, password, phone } = jwt.decode(token)
 
-  if (userExists) {
-    res.status(400);
-    throw new Error("User already exists");
-  }
 
   const user = await User.create({
     name,
     email,
     password,
     phone,
-    uniqueString,
-    isValid,
   });
 
-  sendEmail(email);
 
   if (user) {
     res.status(201).json({
@@ -105,6 +131,7 @@ const registerUser = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("Invalid user data");
   }
+}
 });
 
 // @desc    Get user profile
@@ -249,6 +276,7 @@ const updateUser = asyncHandler(async (req, res) => {
 
 export {
   authUser,
+  verificationLink,
   registerUser,
   getUserProfile,
   updateUserProfile,

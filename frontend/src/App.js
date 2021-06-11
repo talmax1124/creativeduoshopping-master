@@ -20,6 +20,7 @@ import ProductEditScreen from "./screens/ProductEditScreen";
 import OrderListScreen from "./screens/OrderListScreen";
 import forgotPassword from "./screens/forgotPassword";
 import PrivacyPolicy from "./screens/PrivacyPolicy";
+import EmailVerificationScreen from './screens/EmailVerificationScreen'
 const App = () => {
   return (
     <Router>
@@ -49,6 +50,11 @@ const App = () => {
             component={ProductListScreen}
             exact
           />
+          <Route
+                  path='/verify/:token'
+                  component={EmailVerificationScreen}
+                  exact
+                />
           <Route path="/admin/product/:id/edit" component={ProductEditScreen} />
           <Route path="/admin/orderlist" component={OrderListScreen} />
           <Route path="/search/:keyword" component={HomeScreen} exact />

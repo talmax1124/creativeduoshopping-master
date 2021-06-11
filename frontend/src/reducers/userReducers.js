@@ -14,6 +14,7 @@ import {
   USER_REGISTER_FAIL,
   USER_REGISTER_REQUEST,
   USER_REGISTER_SUCCESS,
+  USER_REGISTER_RESET,
   USER_UPDATE_PROFILE_FAIL,
   USER_UPDATE_PROFILE_REQUEST,
   USER_UPDATE_PROFILE_SUCCESS,
@@ -25,6 +26,10 @@ import {
   USER_UPDATE_SUCCESS,
   USER_UPDATE_FAIL,
   USER_UPDATE_PROFILE_RESET,
+  USER_VERIFICATION_LINK_FAIL,
+  USER_VERIFICATION_LINK_REQUEST,
+  USER_VERIFICATION_LINK_RESET,
+  USER_VERIFICATION_LINK_SUCCESS,
 } from "../constants/userConstants";
 
 export const userLoginReducer = (state = {}, action) => {
@@ -42,6 +47,31 @@ export const userLoginReducer = (state = {}, action) => {
   }
 };
 
+export const userVerificationReducer = (state = {}, action) => {
+  switch (action.type) {
+    case USER_VERIFICATION_LINK_REQUEST:
+      return {
+        loading: true,
+      }
+
+    case USER_VERIFICATION_LINK_SUCCESS:
+      return {
+        loading: false,
+        verification: action.payload,
+      }
+    case USER_VERIFICATION_LINK_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      }
+    case USER_VERIFICATION_LINK_RESET:
+      return {}
+
+    default:
+      return state
+  }
+}
+
 export const userRegisterReducer = (state = {}, action) => {
   switch (action.type) {
     case USER_REGISTER_REQUEST:
@@ -50,8 +80,8 @@ export const userRegisterReducer = (state = {}, action) => {
       return { loading: false, userInfo: action.payload };
     case USER_REGISTER_FAIL:
       return { loading: false, error: action.payload };
-    case USER_LOGOUT:
-      return {};
+      case USER_REGISTER_RESET:
+        return {}
     default:
       return state;
   }
