@@ -61,15 +61,7 @@ const HomeScreen = ({ match }) => {
           />
         </>
       )}
-      <div id="smart_reviews_widget_b3a4f55a-ec73-4fb5-ab73-5a518810313a">
-        Loading...
-        <a
-          id="smart_reviews_widget_link_b3a4f55a-ec73-4fb5-ab73-5a518810313a"
-          href="https://smart.reviews"
-        >
-          Smart.Reviews
-        </a>
-      </div>
+
     </>
   );
 };
