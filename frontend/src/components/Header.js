@@ -65,21 +65,23 @@ const Header = () => {
                   </div>
                 </Nav.Link>
               </LinkContainer>
-              <LinkContainer to='/wishlist'>
-                <Nav.Link>
-                  <div className='header__cart_icon'>
-                    <i className=' fas fa-heart' />{' '}
-                    <strong>
-                      {wishlist.length > 0 && (
-                        <span className='header__cart__count'>
-                          {wishlist.reduce((acc, item) => acc + item.qty, 0)}
-                        </span>
-                      )}
-                    </strong>
-                  </div>
-                </Nav.Link>
-              </LinkContainer>
+             
               {userInfo ? (
+                <>
+                 <LinkContainer to='/wishlist'>
+                 <Nav.Link>
+                   <div className='header__cart_icon'>
+                     <i className=' fas fa-heart' />{' '}
+                     <strong>
+                       {wishlist.length > 0 && (
+                         <span className='header__cart__count'>
+                           {wishlist.reduce((acc, item) => acc + item.qty, 0)}
+                         </span>
+                       )}
+                     </strong>
+                   </div>
+                 </Nav.Link>
+               </LinkContainer>
                 <NavDropdown title={userInfo.name} id="username">
                   <LinkContainer to="/profile">
                     <NavDropdown.Item>Profile</NavDropdown.Item>
@@ -112,6 +114,7 @@ const Header = () => {
                     </>
                   )}
                 </NavDropdown>
+                </>
               ) : (
                 <LinkContainer to="/login">
                   <Nav.Link>

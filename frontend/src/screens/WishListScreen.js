@@ -25,7 +25,6 @@ const CartScreen = ({ match, location, history }) => {
 
   const removeFromWishListHandler = (id) => {
     dispatch(removeFromWishList(id))
-
   }
 
   const addToCartHandler = (productId) => {
@@ -47,7 +46,7 @@ const CartScreen = ({ match, location, history }) => {
 
   return (
     <Row>
-      <Col md={12}>
+      <Col md={12} className="Cardde">
         <h1>Wishlist</h1>
         {wishlist.length === 0 ? (
           <Message>
@@ -64,16 +63,16 @@ const CartScreen = ({ match, location, history }) => {
                     </Col>
                     <Col md={3} className='m-auto'>
                       {' '}
-                      <Link to={`/product/${item.product}`}>{item.name}</Link>
+                      <Link to={`/product/${item.product}`} className="ccc">{item.name}</Link>
                     </Col>
-                    <Col md={2} className='m-auto'>
+                    <Col md={2} className='m-auto cccc'>
                       $ {item.price}
                     </Col>
                     
                     <Col md={2} className='m-auto'>
                       <Button
                         onClick={(e) => addToCartHandler(item.product)}
-                        className='btn-block'
+                        className='btn-block cc'
                         type='button'
                         disabled={item.countInStock === 0}
                       >
@@ -84,6 +83,7 @@ const CartScreen = ({ match, location, history }) => {
                       <Button
                         type='button'
                         variant='light'
+                        className='btn-block c'
                         onClick={() => removeFromWishListHandler(item.product)}
                       >
                         <i className='fas fa-trash' />

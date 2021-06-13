@@ -23,6 +23,7 @@ import PrivacyPolicy from "./screens/PrivacyPolicy";
 import WishList from "./screens/WishListScreen";
 import EmailVerificationScreen from './screens/EmailVerificationScreen'
 import CurrentOffers from "./screens/CurrentCoupons";
+import TermsandConditions from "./screens/termsandconditions";
 const App = () => {
   return (
     <Router>
@@ -44,6 +45,7 @@ const App = () => {
           <Route path="/admin/userlist" component={UserListScreen} />
           <Route path="/admin/user/:id/edit" component={UserEditScreen} />
           <Route path="/currentoffers" component={CurrentOffers} />
+          <Route path='/termsandconditions' component={TermsandConditions}/>
           <Route
             path="/admin/productlist"
             component={ProductListScreen}

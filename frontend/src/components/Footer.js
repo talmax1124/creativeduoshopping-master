@@ -22,7 +22,7 @@ const Footer = () => {
               Privacy Policy{" "}
             </a>{" "}
             {" - "}{" "}
-            <a href="https://creativeduo.netlify.app/terms_and_conditions.html">
+            <a href="/termsandconditions">
               Terms & Conditions{" "}
             </a>
             {" - "}

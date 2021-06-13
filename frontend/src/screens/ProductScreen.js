@@ -22,6 +22,7 @@ import {
 import { PRODUCT_CREATE_REVIEW_RESET } from "../constants/productConstants";
 // import { HeartOutlined } from "@ant-design/icons/HeartOutlined";
 import { deleteProduct } from "../actions/productActions";
+import { addToWishList } from "../actions/wishListActions";
 
 const ProductScreen = ({ history, match }) => {
   const [qty, setQty] = useState(1);
@@ -29,6 +30,8 @@ const ProductScreen = ({ history, match }) => {
   const [comment, setComment] = useState("");
 
   const dispatch = useDispatch();
+
+  const productId = match.params.id;
 
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
@@ -50,6 +53,9 @@ const ProductScreen = ({ history, match }) => {
     error: errorProductReviewDelete,
   } = productReviewDelete;
 
+  const wishlistStore = useSelector((state) => state.productWishList);
+  const { wishlist } = wishlistStore;
+
   useEffect(() => {
     if (successProductReview) {
       setRating(0);
@@ -68,8 +74,6 @@ const ProductScreen = ({ history, match }) => {
       setComment("");
     }
   }, [successProductReviewDelete]);
-
-
 
   const addToCartHandler = () => {
     history.push(`/cart/${match.params.id}?qty=${qty}`);
@@ -96,6 +100,19 @@ const ProductScreen = ({ history, match }) => {
       })
     );
     LoadOnce();
+  };
+
+  const addToWishListHandler = (id) => {
+    history.push(`/wishlist/${id}`);
+    dispatch(addToWishList(productId, qty));
+  };
+
+  const checkWishList = (productId) => {
+    if (productId) {
+      return wishlist.find((item) => {
+        return item.product === productId;
+      });
+    }
   };
 
   const deleteHandler = (id) => {
@@ -144,6 +161,10 @@ const ProductScreen = ({ history, match }) => {
                     text={`${product.numReviews} reviews`}
                   />
                 </ListGroup.Item>
+                <ListGroup.Item>
+                  Last Updated At: {product.updatedAt}
+                </ListGroup.Item>
+
                 <ListGroup.Item>Brand: {product.brand}</ListGroup.Item>
                 <ListGroup.Item>Price: $ {product.price}</ListGroup.Item>
 
@@ -163,9 +184,6 @@ const ProductScreen = ({ history, match }) => {
             <Col md={3}>
               <Card>
                 <ListGroup variant="flush">
-                  {/* <ListGroup.Item>
-                    <p>Add to wishlist:</p>
-                  </ListGroup.Item> */}
                   {product.price > 0 && (
                     <>
                       <ListGroup.Item>
@@ -226,6 +244,19 @@ const ProductScreen = ({ history, match }) => {
                     >
                       Add To Cart
                     </Button>
+
+                    <br />
+
+                    {userInfo && (
+                      <Button
+                        addToWishList={addToWishListHandler}
+                        checkWishlist={checkWishList(product._id)}
+                        disabled
+                        className="btn-block"
+                      >
+                        Add To Wishlist
+                      </Button>
+                    )}
                   </ListGroup.Item>
 
                   {userInfo && userInfo.isAdmin && (
@@ -311,7 +342,7 @@ const ProductScreen = ({ history, match }) => {
                           <option value="3">⭐️⭐️⭐️ - Good</option>
                           {/* eslint-disable-next-line */}
                           <option value="4">⭐️⭐️⭐️⭐️ - Very Good</option>
-                           {/* eslint-disable-next-line */}
+                          {/* eslint-disable-next-line */}
                           <option value="5">⭐️⭐️⭐️⭐️⭐️ - Excellent</option>
                         </Form.Control>
                       </Form.Group>

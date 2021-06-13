@@ -355,3 +355,28 @@ h2 {
   cursor: pointer;
   align-items: center;
 }
+
+.cardde {
+  margin: 1em;
+}
+
+@media (max-width: 1000px){
+  .c {
+    margin-top: 1em;
+    background-color: rgb(99, 99, 99);
+    color: white;
+  }
+
+  .cc{
+    margin-top: 1em;
+  }
+  
+  .ccc{
+    font-size: 1.5em;
+  }
+
+  .cccc {
+    font-size: 1.2em;
+  }
+}
+

@@ -1,16 +1,26 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Card } from "react-bootstrap";
 import Rating from "./Rating";
 import Favorites from './Favorites'
 
 const Product = ({ product }) => {
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
   return (
+  
     <Card className="my-3 p-1 rounded cardsss">
       <Link to={`/product/${product._id}`}>
         <Card.Img src={product.image} variant="top" className="imggg" />
       </Link>
-      <Favorites product={product} />
+
+    {userInfo && (
+              <Favorites product={product} />
+    )}
+
       <Card.Body>
         <Link to={`/product/${product._id}`}>
           <Card.Title as="div">
