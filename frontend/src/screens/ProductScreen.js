@@ -69,17 +69,7 @@ const ProductScreen = ({ history, match }) => {
     }
   }, [successProductReviewDelete]);
 
-  // useEffect(() => {
-  //   if (successProductReviewDelete) {
-  //     setRating("");
-  //     setComment("");
-  //   }
 
-  //   if (!product._id || product._id !== match.params.id) {
-  //     dispatch(listProductDetails(match.params.id));
-  //     dispatch({ type: PRODUCT_DELETE_REVIEW_RESET });
-  //   }
-  // }, [dispatch, match, successProductReviewDelete, product]);
 
   const addToCartHandler = () => {
     history.push(`/cart/${match.params.id}?qty=${qty}`);

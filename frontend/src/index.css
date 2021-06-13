@@ -271,7 +271,6 @@ h2 {
   }
 }
 
-
 .wishlist-icon-heart-card {
   display: flex;
   justify-content: flex-end;
@@ -286,14 +285,13 @@ h2 {
   cursor: pointer;
 }
 
-
-.headertitle{
+.headertitle {
   text-align: center;
   padding: 15px;
   background-color: #000;
   color: white;
   margin: 0;
-  font-size: .8em;
+  font-size: 0.8em;
 }
 /* .marq{
   text-align: center;
@@ -304,9 +302,7 @@ h2 {
   font-size: .8em; */
 /* } */
 
-
-
-.signningoogle{
+.signningoogle {
   background-color: transparent;
   border: 1px solid #000;
   color: #000;
@@ -315,16 +311,47 @@ h2 {
   border-radius: 2em;
 }
 
-.signningoogle:hover{
+.signningoogle:hover {
   background-color: #000;
   color: white;
 }
 
-.signningoogle:active{
+.signningoogle:active {
   background-color: #333;
 }
 
 .signningoogle i {
   color: red;
   margin-right: 5px;
+}
+
+.boldcode {
+  font-weight: bold;
+}
+
+.header__cart__icon__product {
+  position: absolute;
+  color: #eb1919;
+  border: 2px solid;
+  padding: 5px;
+  border-radius: 50%;
+  min-width: 35px;
+  text-align: center;
+  right: 20px;
+  top: 20px;
+  cursor: pointer;
+  align-items: center;
+}
+.header__cart__icon__product__filled {
+  position: absolute;
+  color: rgb(17, 223, 68);
+  border: 2px solid;
+  padding: 5px;
+  border-radius: 50%;
+  min-width: 35px;
+  text-align: center;
+  right: 20px;
+  top: 20px;
+  cursor: pointer;
+  align-items: center;
 }

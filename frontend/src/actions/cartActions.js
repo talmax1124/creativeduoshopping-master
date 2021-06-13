@@ -77,15 +77,15 @@ export const addCoupon = (coupon) => (dispatch) => {
 
   // TODO: Get couponDiscount value from db
 
-  if (coupon.toLowerCase() === "sacoleiraspecial") {
-    couponDiscount = .3;
+  if (coupon.toLowerCase() === "creativeduomembers") {
+    couponDiscount = .03;
   }
 
   if (coupon.toLowerCase() === "militarydiscount") {
     couponDiscount = .05;
   }
 
-  if (coupon.toLowerCase() === "sacoleiraspecialty") {
+  if (coupon.toLowerCase() === "fathersday") {
     couponDiscount = .05;
   }
 

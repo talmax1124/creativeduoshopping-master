@@ -47,6 +47,7 @@ const UserListScreen = ({ history }) => {
               <th>NAME</th>
               <th>EMAIL</th>
               <th>PHONE #</th>
+              <th>Google ID</th>
               <th>ADMIN</th>
               <th>Pro Member</th>
               <th></th>
@@ -62,6 +63,15 @@ const UserListScreen = ({ history }) => {
                 </td>
                 <td>
                   <a href={`tel: ${user.phone}`}>{user.phone}</a>
+                </td>
+                <td>
+                {user.googleId ? (
+                    user.googleId
+                  ) : (
+                    <>
+                    <i className="fas fa-times" style={{ color: "red" }}> No Google Account</i>
+                    </>
+                  )}
                 </td>
                 <td>
                   {user.isAdmin ? (

@@ -17,7 +17,7 @@ import orderRoutes from "./routes/orderRoutes.js";
 import uploadRoutes from "./routes/uploadRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 import passport from "./config/passport.js";
-
+import wishListRoutes from './routes/wishListRoutes.js'
 Sentry.init({
   dsn:
     "https://72643a64db6c448ab1c27d8403375315@o682560.ingest.sentry.io/5771014",
@@ -64,6 +64,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/upload", uploadRoutes);
 app.use("/api/auth", authRoutes);
+app.use('/api/wishlist', wishListRoutes)
 
 app.get("/api/config/paypal", (req, res) =>
   res.send(process.env.PAYPAL_CLIENT_ID)

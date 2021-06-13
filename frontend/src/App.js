@@ -20,7 +20,9 @@ import ProductEditScreen from "./screens/ProductEditScreen";
 import OrderListScreen from "./screens/OrderListScreen";
 import forgotPassword from "./screens/forgotPassword";
 import PrivacyPolicy from "./screens/PrivacyPolicy";
+import WishList from "./screens/WishListScreen";
 import EmailVerificationScreen from './screens/EmailVerificationScreen'
+import CurrentOffers from "./screens/CurrentCoupons";
 const App = () => {
   return (
     <Router>
@@ -34,12 +36,14 @@ const App = () => {
           <Route path="/payment" component={PaymentScreen} />
           <Route path="/placeorder" component={PlaceOrderScreen} />
           <Route path="/login" component={LoginScreen} />
+          <Route path="/wishlist" component={WishList}/>
           <Route path="/register" component={RegisterScreen} />
           <Route path="/profile" component={ProfileScreen} />
           <Route path="/product/:id" component={ProductScreen} />
           <Route path="/cart/:id?" component={CartScreen} />
           <Route path="/admin/userlist" component={UserListScreen} />
           <Route path="/admin/user/:id/edit" component={UserEditScreen} />
+          <Route path="/currentoffers" component={CurrentOffers} />
           <Route
             path="/admin/productlist"
             component={ProductListScreen}
