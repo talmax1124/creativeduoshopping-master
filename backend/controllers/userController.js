@@ -1,8 +1,8 @@
 import asyncHandler from "express-async-handler";
 import generateToken from "../utils/generateToken.js";
 import User from "../models/userModel.js";
-import jwt from 'jsonwebtoken'
-import Mailgun from 'mailgun-js'
+import jwt from "jsonwebtoken";
+import Mailgun from "mailgun-js";
 
 // @desc    Auth user & get token
 // @route   POST /api/users/login
@@ -29,109 +29,115 @@ const authUser = asyncHandler(async (req, res) => {
 });
 
 const verificationLink = asyncHandler(async (req, res) => {
-  let { name, email, password, phone } = req.body
+  let { name, email, password, phone } = req.body;
   // console.log(req.body)
-  const userExists = await User.findOne({ email })
+  const userExists = await User.findOne({ email });
   if (userExists) {
-    res.status(400)
-    throw new Error('Email is already registered')
+    res.status(400);
+    throw new Error("Email is already registered");
   }
-  const validatename = name.length
+  const validatename = name.length;
   // console.log(validatename)
-  const validatepassword = password.length
+  const validatepassword = password.length;
   // console.log(validatepassword)
 
-
-
   if (validatename < 3) {
-    res.status(400)
-    throw new Error('Name must be of 3 characters  or more length ')
+    res.status(400);
+    throw new Error("Name must be of 3 characters  or more length ");
   }
   if (validatepassword < 6) {
-    res.status(400)
-    throw new Error('Password length must be greater than 5')
+    res.status(400);
+    throw new Error("Password length must be greater than 5");
   }
 
   const tokengenerate = jwt.sign(
-    { name, email, password, phone},
+    { name, email, password, phone },
     process.env.JWT_SECRET,
-    { expiresIn: '10m' }
-  )
+    { expiresIn: "10m" }
+  );
   //send email to regitering user
   var mailgun = new Mailgun({
     apiKey: process.env.MailGunAPI,
     domain: process.env.MailGunDomain,
-  })
+  });
   var data = {
-    from: 'Creative Duo Shopping <creativeduo2020@gmail.com>',
+    from: "Creative Duo Shopping <creativeduo2020@gmail.com>",
     to: email,
-    subject: 'Account activation link',
+    subject: "Account activation link",
 
     html: `
-    <h1>Please click on the link below to activate your account</h1>
-    <p>${process.env.CLIENT_URL}/verify/${tokengenerate}</p>
+    <img src="https://i.ibb.co/0DCPbRR/Artboard-1.jpg" alt="header" width="100%">
+    <br>
+    <h1>Click The Button Below To Finish The Verification Process</h1>
+    <a href="${process.env.CLIENT_URL}/verify/${tokengenerate}"><button>Verify Your Account</button></a>
+    <br><br/>
+    <p> or click this link: ${process.env.CLIENT_URL}/verify/${tokengenerate}
+    <br><br/>
     <hr />
     <p>This email may contain sensetive information</p>
+    <b><p>Domain:</p></b>
     <p>${process.env.CLIENT_URL}</p>
+
+    <br><br/><br><br/><br><br/>
+
+    This email is sent from the website ${process.env.CLIENT_URL} and all information is secure.
     `,
-  }
-  
+  };
+
   mailgun.messages().send(data, function (error, info) {
     if (error) {
-      res.status(400)
-      throw new Error(error)
+      res.status(400);
+      throw new Error(error);
     } else {
       // console.log('Email sent: ' + info.response)
       res.status(201).json({
         response:
-          'A verification link has been sent to your Email. Verify it at first.',
-      })
+          "A verification email has been sent with a link to finish registration and verification. If you do not see the email in your inbox, it may be in the spam folder.",
+      });
     }
-  })
-})
+  });
+});
 
 // @desc    Register a new user
 // @route   POST /api/users
 // @access  Public
 const registerUser = asyncHandler(async (req, res) => {
-  const { token } = req.body
+  const { token } = req.body;
   if (token) {
     jwt.verify(token, process.env.JWT_SECRET),
       function (err, decoded) {
         if (err) {
           // console.log('JWT verify error')
           return res.status(401).json({
-            error: 'Expired Link. Signup Again',
-          })
+            error: "Expired Link. Signup Again",
+          });
         }
-      }
+      };
 
-    const { name, email, password, phone } = jwt.decode(token)
+    const { name, email, password, phone } = jwt.decode(token);
 
-
-  const user = await User.create({
-    name,
-    email,
-    password,
-    phone,
-  });
-
-
-  if (user) {
-    res.status(201).json({
-      _id: user._id,
-      name: user.name,
-      email: user.email,
-      isAdmin: user.isAdmin,
-      ispromember: user.ispromember,
-      phone: user.phone,
-      token: generateToken(user._id),
+    const user = await User.create({
+      name,
+      email,
+      password,
+      phone,
     });
-  } else {
-    res.status(400);
-    throw new Error("Invalid user data");
+
+    if (user) {
+      res.status(201).json({
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        isAdmin: user.isAdmin,
+        ispromember: user.ispromember,
+        phone: user.phone,
+        token: generateToken(user._id),
+      });
+    } else {
+      res.status(400);
+      throw new Error("Invalid user data");
+    }
   }
-}
 });
 
 // @desc    Get user profile

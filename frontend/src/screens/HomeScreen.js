@@ -8,11 +8,12 @@ import Loader from "../components/Loader";
 import Paginate from "../components/Paginate";
 import ProductCarousel from "../components/ProductCarousel";
 import Meta from "../components/Meta";
+import Hero from "../components/Hero";
 import { listProducts } from "../actions/productActions";
-import { addToWishList } from '../actions/wishListActions'
-const HomeScreen = ({ match, history , location }) => {
-  const productId = match.params.id
-  const qty = location.search ? Number(location.search.split('=')[1]) : 1
+import { addToWishList } from "../actions/wishListActions";
+const HomeScreen = ({ match, history, location }) => {
+  const productId = match.params.id;
+  const qty = location.search ? Number(location.search.split("=")[1]) : 1;
   const keyword = match.params.keyword;
 
   const pageNumber = match.params.pageNumber || 1;
@@ -22,29 +23,30 @@ const HomeScreen = ({ match, history , location }) => {
   const productList = useSelector((state) => state.productList);
   const { loading, error, products, page, pages } = productList;
 
-  const wishlistStore = useSelector((state) => state.productWishList)
-  const { wishlist } = wishlistStore
+  const wishlistStore = useSelector((state) => state.productWishList);
+  const { wishlist } = wishlistStore;
 
   useEffect(() => {
     dispatch(listProducts(keyword, pageNumber));
   }, [dispatch, keyword, pageNumber]);
 
   const addToWishListHandler = (id) => {
-    history.push(`/wishlist/${id}`)
-    dispatch(addToWishList(productId, qty))
-  }
+    history.push(`/wishlist/${id}`);
+    dispatch(addToWishList(productId, qty));
+  };
 
   const checkWishList = (productId) => {
     if (productId) {
       return wishlist.find((item) => {
-        return item.product === productId
-      })
+        return item.product === productId;
+      });
     }
-  }
+  };
 
   return (
     <>
       <Meta />
+      <Hero />
       <h3>
         Our Best Selling Products
         <span role="img" aria-label="">
@@ -69,9 +71,11 @@ const HomeScreen = ({ match, history , location }) => {
           <Row>
             {products.map((product) => (
               <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
-                <Product product={product}
-                addToWishList={addToWishListHandler}
-                checkWishlist={checkWishList(product._id)} />
+                <Product
+                  product={product}
+                  addToWishList={addToWishListHandler}
+                  checkWishlist={checkWishList(product._id)}
+                />
               </Col>
             ))}
           </Row>
@@ -82,7 +86,6 @@ const HomeScreen = ({ match, history , location }) => {
           />
         </>
       )}
-
     </>
   );
 };
