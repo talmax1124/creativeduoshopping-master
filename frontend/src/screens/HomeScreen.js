@@ -8,7 +8,7 @@ import Loader from "../components/Loader";
 import Paginate from "../components/Paginate";
 import ProductCarousel from "../components/ProductCarousel";
 import Meta from "../components/Meta";
-import Hero from "../components/Hero";
+// import Hero from "../components/Hero";
 import { listProducts } from "../actions/productActions";
 import { addToWishList } from "../actions/wishListActions";
 const HomeScreen = ({ match, history, location }) => {
@@ -46,7 +46,7 @@ const HomeScreen = ({ match, history, location }) => {
   return (
     <>
       <Meta />
-      <Hero />
+      {/* <Hero /> */}
       <h3>
         Our Best Selling Products
         <span role="img" aria-label="">
