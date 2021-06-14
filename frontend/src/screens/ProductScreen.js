@@ -161,12 +161,9 @@ const ProductScreen = ({ history, match }) => {
                     text={`${product.numReviews} reviews`}
                   />
                 </ListGroup.Item>
-                <ListGroup.Item>
-                  Last Updated At: {product.updatedAt}
-                </ListGroup.Item>
 
-                <ListGroup.Item>Brand: {product.brand}</ListGroup.Item>
-                <ListGroup.Item>Price: $ {product.price}</ListGroup.Item>
+                <ListGroup.Item>Brand: <br></br><br></br> <h5>{product.brand}</h5></ListGroup.Item>
+                <ListGroup.Item>Price: <br></br><br></br> <h5>$ {product.price}</h5></ListGroup.Item>
 
                 {product.specialPrice > 0 && (
                   <>
@@ -175,9 +172,9 @@ const ProductScreen = ({ history, match }) => {
                     </ListGroup.Item>
                   </>
                 )}
-                <ListGroup.Item>Category: {product.category}</ListGroup.Item>
+                <ListGroup.Item>Category: <br></br><br></br> <h5>{product.category}</h5></ListGroup.Item>
                 <ListGroup.Item>
-                  Description: {product.description}
+                  Description: <br></br><br></br> {product.description}
                 </ListGroup.Item>
               </ListGroup>
             </Col>
@@ -301,7 +298,7 @@ const ProductScreen = ({ history, match }) => {
                         className="btn btn-danger btn-block"
                         onClick={deleteReviewHandler(review._id)}
                       >
-                        Delete Comment
+                      <i className="fas fa-trash"></i>  Delete Comment
                       </Button>
                     )}
                   </ListGroup.Item>
@@ -358,6 +355,7 @@ const ProductScreen = ({ history, match }) => {
                       <Button
                         disabled={loadingProductReview}
                         type="submit"
+                        className="btn-block"
                         variant="primary"
                       >
                         Submit

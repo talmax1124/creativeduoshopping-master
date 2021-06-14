@@ -78,7 +78,7 @@ const ProductListScreen = ({ history, match }) => {
         </Col>
         <Col className="text-right">
           <Button className="my-3" onClick={createProductHandler}>
-            <i className="fas fa-plus"></i> Create Product
+            <i className="fas fa-plus"></i>  Create Product
           </Button>
         </Col>
       </Row>
@@ -110,7 +110,13 @@ const ProductListScreen = ({ history, match }) => {
                   <td>{product._id}</td>
                   <td>{product.name}</td>
                   <td>${product.price}</td>
-                  <td>${product.specialPrice}</td>
+                  {product.specialPrice > 0 ? (
+                    <td>${product.specialPrice}</td>
+                  ) : (
+                    <td>
+                      <i className="fas fa-times" style={{ color: "red" }}></i>
+                    </td>
+                  )}
                   <td>{product.category}</td>
                   <td>{product.brand}</td>
                   <td>
