@@ -66,11 +66,19 @@ const verificationLink = asyncHandler(async (req, res) => {
     subject: "Account activation link",
 
     html: `
-    <h1>Please click on the link below to activate your account</h1>
-    <p>${process.env.CLIENT_URL}/verify/${tokengenerate}</p>
+    <img src="https://i.ibb.co/0DCPbRR/Artboard-1.jpg" alt="header" width="100%">
+    <br><br/>
+    Verification Link: ${process.env.CLIENT_URL}/verify/${tokengenerate}
+    <br><br/>
     <hr />
     <p>This email may contain sensetive information</p>
+    <b><p>Domain:</p></b>
     <p>${process.env.CLIENT_URL}</p>
+
+    <br><br/><br><br/><br><br/>
+
+    This email is sent from the website ${process.env.CLIENT_URL} and all information is secure.
+
     `,
   };
 
