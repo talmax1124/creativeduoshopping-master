@@ -1,65 +1,86 @@
-import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import { Form, Button, Row, Col , Spinner} from 'react-bootstrap'
-import { useDispatch, useSelector } from 'react-redux'
-import Message from '../components/Message'
-import Loader from '../components/Loader'
-import FormContainer from '../components/FormContainer'
-import { verify } from '../actions/userActions'
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { Form, Button, Row, Col, Spinner } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import Message from "../components/Message";
+import Loader from "../components/Loader";
+import FormContainer from "../components/FormContainer";
+import { verify } from "../actions/userActions";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
 
 const RegisterScreen = ({ location, history }) => {
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [password, setPassword] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('')
-  const [message, setMessage] = useState(null)
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [message, setMessage] = useState(null);
 
-  const dispatch = useDispatch()
+  const eye = <FontAwesomeIcon icon={faEye} />;
+  const eye2 = <FontAwesomeIcon icon={faEye} />;
 
-  const userVerification = useSelector((state) => state.userVerification)
-  
-  const { verification, loading, error } = userVerification
+  const [passwordShown, setPasswordShown] = useState(false);
+  const togglePasswordVisiblity = () => {
+    setPasswordShown(passwordShown ? false : true);
+  };
 
-  const userRegister = useSelector((state) => state.userRegister)
-  const { loading: loadingRegister, error: errorRegister, userInfo } = userRegister
+  // For Confirm Password
 
-  const redirect = location.search ? location.search.split('=')[1] : '/'
+  const [confirmpasswordShown, setconfirmPasswordShown] = useState(false);
+  const togglePasswordVisiblity2 = () => {
+    setconfirmPasswordShown(confirmpasswordShown ? false : true);
+  };
+
+  const dispatch = useDispatch();
+
+  const userVerification = useSelector((state) => state.userVerification);
+
+  const { verification, loading, error } = userVerification;
+
+  const userRegister = useSelector((state) => state.userRegister);
+  const {
+    loading: loadingRegister,
+    error: errorRegister,
+    userInfo,
+  } = userRegister;
+
+  const redirect = location.search ? location.search.split("=")[1] : "/";
 
   useEffect(() => {
     if (userInfo) {
-      history.push(redirect)
+      history.push(redirect);
     }
-  }, [history, userInfo, redirect])
+  }, [history, userInfo, redirect]);
 
   const submitHandler = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     if (password !== confirmPassword) {
-      setMessage('Passwords do not match')
+      setMessage("Passwords do not match");
     } else {
-      dispatch(verify(name, email, password, phone))
+      dispatch(verify(name, email, password, phone));
     }
-  }
+  };
 
   return (
     <FormContainer>
       <h1>Sign Up</h1>
       <Form onSubmit={submitHandler}>
-        <Form.Group controlId='name'>
+        <Form.Group controlId="name">
           <Form.Label>Name</Form.Label>
           <Form.Control
-            type='name'
-            placeholder='Enter name'
+            type="name"
+            placeholder="Enter name"
             value={name}
             onChange={(e) => setName(e.target.value)}
           ></Form.Control>
         </Form.Group>
 
-        <Form.Group controlId='email'>
+        <Form.Group controlId="email">
           <Form.Label>Email Address</Form.Label>
           <Form.Control
-            type='email'
-            placeholder='Enter email'
+            type="email"
+            placeholder="Enter email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           ></Form.Control>
@@ -75,62 +96,68 @@ const RegisterScreen = ({ location, history }) => {
           ></Form.Control>
         </Form.Group>
 
-        <Form.Group controlId='password'>
+        <Form.Group controlId="password">
           <Form.Label>Password</Form.Label>
           <Form.Control
-            type='password'
-            placeholder='Enter password'
+            type={passwordShown ? "text" : "password"}
+            placeholder="Enter password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           ></Form.Control>
+          <Button className="btn-block btn-info" onClick={togglePasswordVisiblity}>
+            <i>{eye}</i>
+            {""} Show/Hide Password
+          </Button>
         </Form.Group>
 
-        <Form.Group controlId='confirmPassword'>
+        <Form.Group controlId="confirmPassword">
           <Form.Label>Confirm Password</Form.Label>
           <Form.Control
-            type='password'
-            placeholder='Confirm password'
+            type={confirmpasswordShown ? "text" : "password"}
+            placeholder="Confirm password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
           ></Form.Control>
+          <Button className='btn-block btn-info' onClick={togglePasswordVisiblity2}>
+            <i>{eye2}</i>{""} Show/Hide Password
+          </Button>
         </Form.Group>
 
-        <Button type='submit' className="btn-block" variant='primary'>
+        <Button type="submit" className="btn-block" variant="primary">
           Register
         </Button>
       </Form>
 
-      <Row className='py-3'>
+      <Row className="py-3">
         <Col>
-          Alread Have An Account?{' '}
-          <Link to={redirect ? `/login?redirect=${redirect}` : '/login'}>
+          Alread Have An Account?{" "}
+          <Link to={redirect ? `/login?redirect=${redirect}` : "/login"}>
             Login
           </Link>
         </Col>
       </Row>
       {loading && (
         <Spinner
-          animation='border'
-          role='status'
-          variant='danger'
+          animation="border"
+          role="status"
+          variant="danger"
           style={{
-            width: '100px',
-            margin: 'auto',
-            height: '100px',
-            display: 'block',
+            width: "100px",
+            margin: "auto",
+            height: "100px",
+            display: "block",
           }}
         />
       )}
       {verification && (
-        <Message variant='success'>{verification.response}</Message>
+        <Message variant="success">{verification.response}</Message>
       )}
-      {error && <Message variant='danger'>{error}</Message>}
-      {message && <Message variant='danger'>{message}</Message>}
-      {errorRegister && <Message variant='danger'>{errorRegister}</Message>}
+      {error && <Message variant="danger">{error}</Message>}
+      {message && <Message variant="danger">{message}</Message>}
+      {errorRegister && <Message variant="danger">{errorRegister}</Message>}
       {loadingRegister && <Loader />}
-
     </FormContainer>
-  )
-}
+  );
+};
 
-export default RegisterScreen
+export default RegisterScreen;

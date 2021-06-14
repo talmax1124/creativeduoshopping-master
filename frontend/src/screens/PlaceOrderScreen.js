@@ -53,7 +53,9 @@ const PlaceOrderScreen = ({ history }) => {
   );
 
   const orderCreate = useSelector((state) => state.orderCreate);
-  const { order, success, error } = orderCreate;
+  const { order, success,
+    //  error
+     } = orderCreate;
 
   useEffect(() => {
     if (success) {
@@ -84,19 +86,19 @@ const PlaceOrderScreen = ({ history }) => {
     }
   }, [dispatch, history, success, successPay, order, userInfo]);
 
-  const placeOrderHandler = () => {
-    dispatch(
-      createOrder({
-        orderItems: cart.cartItems,
-        shippingAddress: cart.shippingAddress,
-        paymentMethod: cart.paymentMethod,
-        couponCode: cart.couponCode,
-        itemsPrice: cart.itemsPrice,
-        feePrice: cart.feePrice,
-        totalPrice: cart.totalPrice,
-      })
-    );
-  };
+  // const placeOrderHandler = () => {
+  //   dispatch(
+  //     createOrder({
+  //       orderItems: cart.cartItems,
+  //       shippingAddress: cart.shippingAddress,
+  //       paymentMethod: cart.paymentMethod,
+  //       couponCode: cart.couponCode,
+  //       itemsPrice: cart.itemsPrice,
+  //       feePrice: cart.feePrice,
+  //       totalPrice: cart.totalPrice,
+  //     })
+  //   );
+  // };
 
   if (cart.couponDiscount) {
     var tempDisc = Number(cart.couponDiscount) * cart.totalPrice;
@@ -253,11 +255,12 @@ const PlaceOrderScreen = ({ history }) => {
                   <PayPalButton
                     amount={cart.totalPrice}
                     onSuccess={successPaymentHandler}
+                    disabled={cart.cartItems === 0}
                   />
                   
               
 
-              <ListGroup.Item>
+              {/* <ListGroup.Item>
                 {error && <Message variant="danger">{error}</Message>}
               </ListGroup.Item>
               <ListGroup.Item>
@@ -269,7 +272,7 @@ const PlaceOrderScreen = ({ history }) => {
                 >
                   Place Order
                 </Button>
-              </ListGroup.Item>
+              </ListGroup.Item> */}
             </ListGroup>
           </Card>
         </Col>

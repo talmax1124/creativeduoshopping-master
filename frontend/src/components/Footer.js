@@ -8,10 +8,10 @@ const Footer = () => {
       <Container>
         <Row>
           <Col className="text-center py-3">
-            Copyright &copy; Creative Duo Shop
+            Copyright {new Date().getFullYear()} &copy; Creative Duo Shop
           </Col>
           <Col className="text-center py-3">
-            Copyright &copy;{" "}
+            Copyright {new Date().getFullYear()} &copy;{" "}
             <a href="https://creativeduo.netlify.app">Creative Duo</a>
           </Col>
         </Row>
