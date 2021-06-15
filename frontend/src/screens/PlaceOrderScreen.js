@@ -8,7 +8,12 @@ import { createOrder } from "../actions/orderActions";
 import { ORDER_CREATE_RESET } from "../constants/orderConstants";
 import { USER_DETAILS_RESET } from "../constants/userConstants";
 import { addCoupon } from "../actions/cartActions";
+// import dotenv from 'dotenv'
 
+// Stripe
+// import {Elements} from '@stripe/react-stripe-js';
+// import {loadStripe} from '@stripe/stripe-js';
+// PayPal
 import { payOrder } from "../actions/orderActions";
 import { ORDER_PAY_RESET } from "../constants/orderConstants";
 import { PayPalButton } from "react-paypal-button-v2";
@@ -25,6 +30,8 @@ const PlaceOrderScreen = ({ history }) => {
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
+
+  // const stripePromise = loadStripe('process.env.StripeEnv');
 
   const cart = useSelector((state) => state.cart);
 

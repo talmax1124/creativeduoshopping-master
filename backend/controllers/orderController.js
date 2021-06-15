@@ -34,6 +34,39 @@ const addOrderItems = asyncHandler(async (req, res) => {
       totalPrice,
     });
 
+    // const orderDetails = asyncHandler(async (req, res) => {
+    //   let { orderItems, email, shippingAddress, totalPrice } = req.body;
+    //   //send email to regitering user
+    //   var mailgun = new Mailgun({
+    //     apiKey: process.env.MailGunAPI,
+    //     domain: process.env.MailGunDomain,
+    //   });
+    //   var data = {
+    //     from: "Creative Duo Shopping <creativeduo2020@gmail.com>",
+    //     to: email,
+    //     subject: "Order Details",
+
+    //     html: `
+    //         <h1>Your Order Details: </h1>
+    //         <hr>
+    //         <p>Your Order Items : <br> {order.orderItems} </p>
+
+    //     `,
+    //   };
+
+    //   mailgun.messages().send(data, function (error, info) {
+    //     if (error) {
+    //       res.status(400);
+    //       throw new Error(error);
+    //     } else {
+    //       // console.log('Email sent: ' + info.response)
+    //       res.status(201).json({
+    //         response: "We have sent an email with your order details",
+    //       });
+    //     }
+    //   });
+    // });
+
     const createdOrder = await order.save();
 
     res.status(201).json(createdOrder);
