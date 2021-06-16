@@ -1,4 +1,4 @@
-# Obsession Boutique Shopping
+# Creative Duo Shopping
 
 > Your Next Place To Shop
 
