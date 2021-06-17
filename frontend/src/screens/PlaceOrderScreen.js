@@ -8,30 +8,13 @@ import { createOrder } from "../actions/orderActions";
 import { ORDER_CREATE_RESET } from "../constants/orderConstants";
 import { USER_DETAILS_RESET } from "../constants/userConstants";
 import { addCoupon } from "../actions/cartActions";
-// import dotenv from 'dotenv'
-
-// Stripe
-// import {Elements} from '@stripe/react-stripe-js';
-// import {loadStripe} from '@stripe/stripe-js';
-// PayPal
-import { payOrder } from "../actions/orderActions";
-import { ORDER_PAY_RESET } from "../constants/orderConstants";
-import { PayPalButton } from "react-paypal-button-v2";
-import axios from "axios";
 
 const PlaceOrderScreen = ({ history }) => {
   const dispatch = useDispatch();
   const [coupon, setCoupon] = useState("");
-// eslint-disable-next-line
-  const [sdkReady, setSdkReady] = useState(false);
-
-  const orderPay = useSelector((state) => state.orderPay);
-  const { success: successPay } = orderPay;
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
-
-  // const stripePromise = loadStripe('process.env.StripeEnv');
 
   const cart = useSelector((state) => state.cart);
 
@@ -60,9 +43,7 @@ const PlaceOrderScreen = ({ history }) => {
   );
 
   const orderCreate = useSelector((state) => state.orderCreate);
-  const { order, success,
-    //  error
-     } = orderCreate;
+  const { order, success, error } = orderCreate;
 
   useEffect(() => {
     if (success) {
@@ -71,41 +52,21 @@ const PlaceOrderScreen = ({ history }) => {
       dispatch({ type: ORDER_CREATE_RESET });
     }
     // eslint-disable-next-line
+  }, [history, success]);
 
-    const addPayPalScript = async () => {
-      const { data: clientId } = await axios.get("/api/config/paypal");
-      const script = document.createElement("script");
-      script.type = "text/javascript";
-      script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`;
-      script.async = true;
-      script.onload = () => {
-        setSdkReady(true);
-      };
-      document.body.appendChild(script);
-    };
-
-    if (!order || successPay) {
-      dispatch({ type: ORDER_PAY_RESET });
-    } else if (!order.isPaid) {
-      addPayPalScript();
-    } else {
-      setSdkReady(true);
-    }
-  }, [dispatch, history, success, successPay, order, userInfo]);
-
-  // const placeOrderHandler = () => {
-  //   dispatch(
-  //     createOrder({
-  //       orderItems: cart.cartItems,
-  //       shippingAddress: cart.shippingAddress,
-  //       paymentMethod: cart.paymentMethod,
-  //       couponCode: cart.couponCode,
-  //       itemsPrice: cart.itemsPrice,
-  //       feePrice: cart.feePrice,
-  //       totalPrice: cart.totalPrice,
-  //     })
-  //   );
-  // };
+  const placeOrderHandler = () => {
+    dispatch(
+      createOrder({
+        orderItems: cart.cartItems,
+        shippingAddress: cart.shippingAddress,
+        paymentMethod: cart.paymentMethod,
+        couponCode: cart.couponCode,
+        itemsPrice: cart.itemsPrice,
+        feePrice: cart.feePrice,
+        totalPrice: cart.totalPrice,
+      })
+    );
+  };
 
   if (cart.couponDiscount) {
     var tempDisc = Number(cart.couponDiscount) * cart.totalPrice;
@@ -120,23 +81,6 @@ const PlaceOrderScreen = ({ history }) => {
   const addCouponHandler = () => {
     dispatch(addCoupon(coupon));
   };
-
-  const successPaymentHandler = (paymentResult, orderId) => {
-    console.log(paymentResult);
-    dispatch(payOrder(orderId, paymentResult));
-    dispatch(
-      createOrder({
-        orderItems: cart.cartItems,
-        shippingAddress: cart.shippingAddress,
-        paymentMethod: cart.paymentMethod,
-        couponCode: cart.couponCode,
-        itemsPrice: cart.itemsPrice,
-        feePrice: cart.feePrice,
-        totalPrice: cart.totalPrice,
-      })
-    );
-  };
-
 
   return (
     <>
@@ -188,8 +132,7 @@ const PlaceOrderScreen = ({ history }) => {
                         </Col>
                         <Col md={4}>
                           {item.qty} x {item.price > 0 && <>${item.price}</>}
-                          {item.specialPrice > 0 && <>{item.specialPrice}</>} =
-                          $ {""}
+                          {item.specialPrice > 0 && <>{item.specialPrice}</>} = $ {""}
                           {item.qty * (item.price + item.specialPrice)}
                         </Col>
                       </Row>
@@ -257,17 +200,7 @@ const PlaceOrderScreen = ({ history }) => {
                 </Row>
               </ListGroup.Item>
 
-        
-            
-                  <PayPalButton
-                    amount={cart.totalPrice}
-                    onSuccess={successPaymentHandler}
-                    disabled={cart.cartItems === 0}
-                  />
-                  
-              
-
-              {/* <ListGroup.Item>
+              <ListGroup.Item>
                 {error && <Message variant="danger">{error}</Message>}
               </ListGroup.Item>
               <ListGroup.Item>
@@ -279,7 +212,7 @@ const PlaceOrderScreen = ({ history }) => {
                 >
                   Place Order
                 </Button>
-              </ListGroup.Item> */}
+              </ListGroup.Item>
             </ListGroup>
           </Card>
         </Col>

@@ -66,7 +66,7 @@ const createProduct = asyncHandler(async (req, res) => {
     specialPrice: 0.0,
     user: req.user._id,
     image: "https://i.ibb.co/5cwCHky/FY3017-2.jpg",
-    brand: "Sacoleira",
+    brand: "Creative Duo",
     category: "",
     countInStock: 10,
     // countSmall: 0,

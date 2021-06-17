@@ -9,6 +9,7 @@ import {
   Card,
   Button,
   Form,
+  Badge
 } from "react-bootstrap";
 import Rating from "../components/Rating";
 import Message from "../components/Message";
@@ -204,7 +205,7 @@ const ProductScreen = ({ history, match }) => {
                     <Row>
                       <Col>Status:</Col>
                       <Col>
-                        {product.countInStock > 0 ? "In Stock" : "Out Of Stock"}
+                        {product.countInStock > 0 ? <Badge className="badge" bg="success" variant="success">In Stock</Badge> : <Badge className="badge" bg="danger" variant="danger">Out Of Stock</Badge>}
                       </Col>
                     </Row>
                   </ListGroup.Item>
@@ -358,7 +359,7 @@ const ProductScreen = ({ history, match }) => {
                         className="btn-block"
                         variant="primary"
                       >
-                        Submit
+                        Submit Your Review
                       </Button>
                     </Form>
                   ) : (

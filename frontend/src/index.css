@@ -24,6 +24,10 @@ h2 {
   border-radius: 5px;
 }
 
+.badge {
+  font-size: .9em;
+}
+
 /* carousel */
 .carousel-item-next,
 .carousel-item-prev,
