@@ -151,7 +151,7 @@ const OrderScreen = ({ match, history }) => {
                         },
                         {
                           style: "h2",
-                          text: `Phone #: ${userInfo.phoneNumber}`,
+                          text: `Phone #: ${userInfo.phone}`,
                         },
                       ],
                     },
@@ -181,7 +181,7 @@ const OrderScreen = ({ match, history }) => {
                   [
                     {
                       border: ["#5bc0de", false, false, false],
-                      text: "Orders List",
+                      text: "Your Cart",
                     },
                   ],
                 ],
@@ -260,8 +260,21 @@ const OrderScreen = ({ match, history }) => {
                 body: [
                   ["Order Id", order._id],
                   ["Name", order.user.name],
-                  ["Address", order.shippingAddress.address],
-                  ["Order CreatedAt", order.createdAt],
+                  [
+                    "Delivery Address",
+                    {
+                      type: "none",
+                      ol: [
+                        order.shippingAddress.address,
+                        order.shippingAddress.city,
+                        order.shippingAddress.city,
+                        order.shippingAddress.state,
+                        order.shippingAddress.postalCode,
+                        order.shippingAddress.country,
+                      ],
+                    },
+                  ],
+                  ["Order Placed At", order.createdAt],
                   ["Payment Method", order.paymentMethod],
                   ["Fee", order.feePrice],
                   ["Total", order.totalPrice],
@@ -310,7 +323,7 @@ const OrderScreen = ({ match, history }) => {
             },
           },
         };
-        pdfMake.createPdf(docDefinition).download(`{order.user.name}_{order._id}.pdf`);
+        pdfMake.createPdf(docDefinition).download("Your_Order.pdf");
 
         break;
       case "excel":
@@ -352,10 +365,6 @@ const OrderScreen = ({ match, history }) => {
         <span className="float-right">
           <Print printAs={printAs} />
         </span>
-
-        {/* <span className="float-right">
-          <Print printAs={printAs} />
-        </span> */}
       </div>
       <Row>
         <Col md={8}>
