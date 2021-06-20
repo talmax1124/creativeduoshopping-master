@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 import Paginate from "../components/Paginate";
+import moment from 'moment'
 import {
   listProducts,
   deleteProduct,
@@ -101,6 +102,7 @@ const ProductListScreen = ({ history, match }) => {
                 <th>Special Price</th>
                 <th>CATEGORY</th>
                 <th>BRAND</th>
+                <th>Product Date Created</th>
                 <th></th>
               </tr>
             </thead>
@@ -119,6 +121,9 @@ const ProductListScreen = ({ history, match }) => {
                   )}
                   <td>{product.category}</td>
                   <td>{product.brand}</td>
+                  <td>{moment(product.createdAt).format(
+                        'LLL'
+                      )}</td> 
                   <td>
                     <LinkContainer to={`/admin/product/${product._id}/edit`}>
                       <Button variant="dark" className="btn-sm">

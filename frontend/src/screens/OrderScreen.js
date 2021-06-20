@@ -19,6 +19,14 @@ import {
   ORDER_STATUS_RESET,
 } from "../constants/orderConstants";
 
+// Download / Print
+
+import moment from "moment";
+import Print from "../components/Print";
+import pdfMake from "pdfmake/build/pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
 const OrderScreen = ({ match, history }) => {
   const orderId = match.params.id;
 
@@ -107,6 +115,212 @@ const OrderScreen = ({ match, history }) => {
     userInfo,
   ]);
 
+  const printAs = (e) => {
+    const downloadAs = e.target.value;
+
+    switch (downloadAs) {
+      case "pdf":
+        var docDefinition = {
+          content: [
+            //Header
+            {
+              table: {
+                widths: ["auto", "*"],
+
+                body: [
+                  [
+                    {
+                      text: "Creative Duo",
+                      style: "mainheader",
+                      bold: true,
+                      marginTop: 10,
+                    },
+
+                    {
+                      width: "*",
+                      style: "usersOrders",
+                      marginBottom: 30,
+                      stack: [
+                        {
+                          style: "h2",
+                          text: `Name: ${userInfo.name}`,
+                        },
+                        {
+                          style: "h2",
+                          text: `Email: ${userInfo.email}`,
+                        },
+                        {
+                          style: "h2",
+                          text: `Phone #: ${userInfo.phoneNumber}`,
+                        },
+                      ],
+                    },
+                  ],
+                ],
+              },
+
+              layout: {
+                hLineWidth: function (line) {
+                  return line === 1;
+                },
+                vLineWidth: function () {
+                  return 0;
+                },
+                paddingBottom: function () {
+                  return 5;
+                },
+              },
+            },
+
+            //Vitals Details
+            {
+              style: "header",
+              table: {
+                widths: "*",
+                body: [
+                  [
+                    {
+                      border: ["#5bc0de", false, false, false],
+                      text: "Orders List",
+                    },
+                  ],
+                ],
+              },
+            },
+
+            order.orderItems.length > 0
+              ? {
+                  layout: {
+                    hLineWidth: function () {
+                      return 0;
+                    },
+                    vLineWidth: function () {
+                      return 0;
+                    },
+                    paddingBottom: function () {
+                      return 5;
+                    },
+                  },
+                  table: {
+                    headerRows: 1,
+                    body: [
+                      [
+                        {
+                          text: "S.No",
+                          bold: true,
+                          fillColor: "#2B2B52",
+                          color: "white",
+                        },
+                        {
+                          text: "ProductID",
+                          bold: true,
+                          fillColor: "#2B2B52",
+                          color: "white",
+                        },
+                        {
+                          text: "Product Name",
+                          bold: true,
+                          fillColor: "#2B2B52",
+                          color: "white",
+                        },
+                        {
+                          text: "Price",
+                          bold: true,
+                          fillColor: "#2B2B52",
+                          color: "white",
+                        },
+                        {
+                          text: "Quantity",
+                          bold: true,
+                          fillColor: "#2B2B52",
+                          color: "white",
+                        },
+                      ],
+
+                      ...order.orderItems.map((o, i) => [
+                        i + 1,
+                        o.product,
+                        o.name,
+                        o.price,
+                        o.qty,
+                      ]),
+                    ],
+                  },
+
+                  fontSize: 9,
+                  alignment: "center",
+                }
+              : null,
+
+            { text: "Order Summary", style: "subheader" },
+            {
+              style: "tableExample",
+              table: {
+                heights: [20, 50, 70],
+                body: [
+                  ["Order Id", order._id],
+                  ["Name", order.user.name],
+                  ["Address", order.shippingAddress.address],
+                  ["Order CreatedAt", order.createdAt],
+                  ["Payment Method", order.paymentMethod],
+                  ["Fee", order.feePrice],
+                  ["Total", order.totalPrice],
+                  [
+                    "Paid",
+                    order.isPaid
+                      ? moment(order.paidAt).format("LLL")
+                      : "Order is Not Paid Yet",
+                  ],
+                  [
+                    "Delivered",
+                    order.isDelivered
+                      ? moment(order.deliveredAt).format("LLL")
+                      : "Order is Not Delivered Yet",
+                  ],
+                ],
+              },
+            },
+          ],
+          styles: {
+            header: {
+              fontSize: 12,
+              marginBottom: 20,
+              marginTop: 20,
+              bold: true,
+            },
+            mainheader: {
+              fontSize: 15,
+            },
+
+            usersOrders: {
+              marginLeft: 315,
+            },
+
+            h2: {
+              marginTop: 5,
+              fontSize: 7,
+            },
+            subheader: {
+              fontSize: 16,
+              bold: true,
+              margin: [0, 10, 0, 5],
+            },
+            tableExample: {
+              margin: [0, 5, 0, 15],
+            },
+          },
+        };
+        pdfMake.createPdf(docDefinition).download(`{order.user.name}_{order._id}.pdf`);
+
+        break;
+      case "excel":
+        break;
+
+      default:
+        break;
+    }
+  };
+
   const successPaymentHandler = (paymentResult) => {
     console.log(paymentResult);
     dispatch(payOrder(orderId, paymentResult));
@@ -130,7 +344,19 @@ const OrderScreen = ({ match, history }) => {
     <Message variant="danger">{error}</Message>
   ) : (
     <>
-      <h1 className="orderid">Order ID: {order._id}</h1>
+      <div className="orderid">
+        <span className="float-left">
+          <h1>Order ID: {order._id} </h1>
+        </span>
+
+        <span className="float-right">
+          <Print printAs={printAs} />
+        </span>
+
+        {/* <span className="float-right">
+          <Print printAs={printAs} />
+        </span> */}
+      </div>
       <Row>
         <Col md={8}>
           <ListGroup variant="flush">

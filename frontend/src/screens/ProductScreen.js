@@ -4,12 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   Row,
   Col,
-  Image,
+  // Image,
   ListGroup,
   Card,
   Button,
   Form,
-  Badge
+  Badge,
 } from "react-bootstrap";
 import Rating from "../components/Rating";
 import Message from "../components/Message";
@@ -24,6 +24,16 @@ import { PRODUCT_CREATE_REVIEW_RESET } from "../constants/productConstants";
 // import { HeartOutlined } from "@ant-design/icons/HeartOutlined";
 import { deleteProduct } from "../actions/productActions";
 // import { addToWishList } from "../actions/wishListActions";
+
+import LightGallery from "lightgallery/react";
+
+// import styles
+import "lightgallery/css/lightgallery.css";
+import "lightgallery/css/lg-zoom.css";
+import "lightgallery/css/lg-thumbnail.css";
+
+import lgThumbnail from "lightgallery/plugins/thumbnail";
+import lgZoom from "lightgallery/plugins/zoom";
 
 const ProductScreen = ({ history, match }) => {
   const [qty, setQty] = useState(1);
@@ -149,7 +159,12 @@ const ProductScreen = ({ history, match }) => {
           <Meta title={product.name} />
           <Row>
             <Col md={6}>
-              <Image src={product.image} alt={product.name} fluid />
+              <LightGallery speed={500} plugins={[lgThumbnail, lgZoom]} >
+                <a href={product.image}>
+                  <img alt={product.name} src={product.image} fluid  width="100%"/>
+                </a>
+              </LightGallery>
+              {/* <Image src={product.image} alt={product.name} fluid /> */}
             </Col>
             <Col md={3}>
               <ListGroup variant="flush">
@@ -163,8 +178,14 @@ const ProductScreen = ({ history, match }) => {
                   />
                 </ListGroup.Item>
 
-                <ListGroup.Item>Brand: <br></br><br></br> <h5>{product.brand}</h5></ListGroup.Item>
-                <ListGroup.Item>Price: <br></br><br></br> <h5>$ {product.price}</h5></ListGroup.Item>
+                <ListGroup.Item>
+                  Brand: <br></br>
+                  <br></br> <h5>{product.brand}</h5>
+                </ListGroup.Item>
+                <ListGroup.Item>
+                  Price: <br></br>
+                  <br></br> <h5>$ {product.price}</h5>
+                </ListGroup.Item>
 
                 {product.specialPrice > 0 && (
                   <>
@@ -173,9 +194,13 @@ const ProductScreen = ({ history, match }) => {
                     </ListGroup.Item>
                   </>
                 )}
-                <ListGroup.Item>Category: <br></br><br></br> <h5>{product.category}</h5></ListGroup.Item>
                 <ListGroup.Item>
-                  Description: <br></br><br></br> {product.description}
+                  Category: <br></br>
+                  <br></br> <h5>{product.category}</h5>
+                </ListGroup.Item>
+                <ListGroup.Item>
+                  Description: <br></br>
+                  <br></br> {product.description}
                 </ListGroup.Item>
               </ListGroup>
             </Col>
@@ -205,7 +230,19 @@ const ProductScreen = ({ history, match }) => {
                     <Row>
                       <Col>Status:</Col>
                       <Col>
-                        {product.countInStock > 0 ? <Badge className="badge" bg="success" variant="success">In Stock</Badge> : <Badge className="badge" bg="danger" variant="danger">Out Of Stock</Badge>}
+                        {product.countInStock > 0 ? (
+                          <Badge
+                            className="badge"
+                            bg="success"
+                            variant="success"
+                          >
+                            In Stock
+                          </Badge>
+                        ) : (
+                          <Badge className="badge" bg="danger" variant="danger">
+                            Out Of Stock
+                          </Badge>
+                        )}
                       </Col>
                     </Row>
                   </ListGroup.Item>
@@ -299,7 +336,7 @@ const ProductScreen = ({ history, match }) => {
                         className="btn btn-danger btn-block"
                         onClick={deleteReviewHandler(review._id)}
                       >
-                      <i className="fas fa-trash"></i>  Delete Comment
+                        <i className="fas fa-trash"></i> Delete Comment
                       </Button>
                     )}
                   </ListGroup.Item>

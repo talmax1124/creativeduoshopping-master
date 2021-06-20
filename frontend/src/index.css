@@ -25,7 +25,7 @@ h2 {
 }
 
 .badge {
-  font-size: .9em;
+  font-size: 0.9em;
 }
 
 /* carousel */
@@ -202,6 +202,7 @@ h2 {
   padding-left: 20px;
   color: transparent;
   cursor: pointer;
+  border-radius: .2em;
   transition: all 0.5s;
   background: #fff
     url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat
@@ -210,10 +211,12 @@ h2 {
 
 #demo-2 input[type="search"]:hover {
   background-color: #fff;
+  
 }
 #demo-2 input[type="search"]:focus {
   width: 50%;
   padding-left: 32px;
+  border-radius: .3em;
   color: #000;
   background-color: #fff;
   cursor: auto;
@@ -229,7 +232,7 @@ h2 {
   width: 130px;
   background-color: #fff;
   border-color: #66cc75;
-
+  
   -webkit-box-shadow: 0 0 5px rgba(109, 207, 246, 0.5);
   -moz-box-shadow: 0 0 5px rgba(109, 207, 246, 0.5);
   box-shadow: 0 0 5px rgba(109, 207, 246, 0.5);
@@ -256,6 +259,7 @@ h2 {
     color: #000;
     background-color: #fff;
     cursor: auto;
+    
   }
   #demo-2 input:-moz-placeholder {
     color: transparent;
@@ -265,7 +269,7 @@ h2 {
   }
 
   .srchfld input[type="search"]:focus {
-    width: 130px;
+    width: 150px;
     background-color: #fff;
     border-color: #66cc75;
 
@@ -364,18 +368,18 @@ h2 {
   margin: 1em;
 }
 
-@media (max-width: 1000px){
+@media (max-width: 1000px) {
   .c {
     margin-top: 1em;
     background-color: rgb(99, 99, 99);
     color: white;
   }
 
-  .cc{
+  .cc {
     margin-top: 1em;
   }
-  
-  .ccc{
+
+  .ccc {
     font-size: 1.5em;
   }
 
@@ -384,3 +388,13 @@ h2 {
   }
 }
 
+.login,
+.image {
+  min-height: 100vh;
+}
+
+.bg-image {
+  background-image: url("https://therichpost.com/wp-content/uploads/2021/02/login-split.jpg");
+  background-size: cover;
+  background-position: center center;
+}
