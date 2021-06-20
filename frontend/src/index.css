@@ -2,6 +2,12 @@ main {
   min-height: 80vh;
 }
 
+/* main .container{
+margin: 0;
+}  */
+
+
+
 h3 {
   padding: 1rem 0;
 }
@@ -314,9 +320,11 @@ h2 {
   background-color: transparent;
   border: 1px solid #000;
   color: #000;
-  padding: 5px;
+  padding: .35em;
+  margin: 10px 0;
   width: 100%;
   border-radius: 2em;
+  transition: .25s ease;
 }
 
 .signningoogle:hover {
@@ -397,4 +405,42 @@ h2 {
   background-image: url("https://therichpost.com/wp-content/uploads/2021/02/login-split.jpg");
   background-size: cover;
   background-position: center center;
+}
+
+.division {
+  float: none;
+  margin: 0 auto 18px;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+  width: 100%;
+}
+
+.division .line {
+  border-top: 1px solid #DFDFDF;
+  position: absolute;
+  top: 10px;
+  width: 34%;
+}
+
+.division .line.l {
+  left: 0;
+}
+
+.division .line.r {
+  right: 0;
+}
+
+.division span {
+  color: #424242;
+  font-size: 17px;
+}
+
+
+@media (max-width: 1000px) {
+  .maincontainer{
+    border: transparent;
+    outline: transparent;
+  }
+  
 }

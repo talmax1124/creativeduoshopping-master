@@ -15,6 +15,8 @@ import Rating from "../components/Rating";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 import Meta from "../components/Meta";
+import moment from 'moment'
+
 import {
   listProductDetails,
   createProductReview,
@@ -159,9 +161,14 @@ const ProductScreen = ({ history, match }) => {
           <Meta title={product.name} />
           <Row>
             <Col md={6}>
-              <LightGallery speed={500} plugins={[lgThumbnail, lgZoom]} >
+              <LightGallery speed={500} plugins={[lgThumbnail, lgZoom]}>
                 <a href={product.image}>
-                  <img alt={product.name} src={product.image} fluid  width="100%"/>
+                  <img
+                    alt={product.name}
+                    src={product.image}
+                    fluid
+                    width="100%"
+                  />
                 </a>
               </LightGallery>
               {/* <Image src={product.image} alt={product.name} fluid /> */}
@@ -179,10 +186,6 @@ const ProductScreen = ({ history, match }) => {
                 </ListGroup.Item>
 
                 <ListGroup.Item>
-                  Brand: <br></br>
-                  <br></br> <h5>{product.brand}</h5>
-                </ListGroup.Item>
-                <ListGroup.Item>
                   Price: <br></br>
                   <br></br> <h5>$ {product.price}</h5>
                 </ListGroup.Item>
@@ -194,6 +197,19 @@ const ProductScreen = ({ history, match }) => {
                     </ListGroup.Item>
                   </>
                 )}
+
+                <ListGroup.Item>
+                  Date Created: <br></br>
+                  <br></br> <h5> {moment(product.createdAt).format(
+                        'L'
+                      )}</h5>
+                </ListGroup.Item>
+
+                <ListGroup.Item>
+                  Brand: <br></br>
+                  <br></br> <h5>{product.brand}</h5>
+                </ListGroup.Item>
+
                 <ListGroup.Item>
                   Category: <br></br>
                   <br></br> <h5>{product.category}</h5>
