@@ -18,6 +18,9 @@ const CartScreen = ({ match, location, history }) => {
 
   const qty = location.search ? Number(location.search.split("=")[1]) : 1;
 
+  const productDetails = useSelector((state) => state.productDetails)
+  const {product} = productDetails
+
   const dispatch = useDispatch();
 
   const cart = useSelector((state) => state.cart);
@@ -33,8 +36,18 @@ const CartScreen = ({ match, location, history }) => {
     dispatch(removeFromCart(id));
   };
 
+  // const checkoutHandler = () => {
+  //   history.push("/login?redirect=shipping");
+  // };
+
   const checkoutHandler = () => {
-    history.push("/login?redirect=shipping");
+    cartItems.forEach(() => {
+      if (product.countInStock > 0) {
+        history.push("/login?redirect=shipping");
+      } else {
+        alert("Seems like the product is out of stock");
+      }
+    });
   };
 
   return (
