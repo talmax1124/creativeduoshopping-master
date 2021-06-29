@@ -448,10 +448,17 @@ h2 {
 
 .shop-by-category .btn {
   display: flex;
-  width: 120px;
-  height: 100px;
+  margin: 5px;
+  height: 150px;
+  font-size: auto;
   text-align: center;
-  font-size: 0.8rem;
   justify-content: center;
   align-items: center;
+}
+
+@media (max-width: 1000px)  {
+  .shop-by-category .btn{
+    width: 100%;
+    font-size: 1.2em;
+  }
 }
