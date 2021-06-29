@@ -691,6 +691,7 @@ const OrderScreen = ({ match, history }) => {
                       type="button"
                       className="btn btn-block"
                       onClick={cancelHandler}
+                      disabled
                     >
                       Cancel Order
                     </Button>
