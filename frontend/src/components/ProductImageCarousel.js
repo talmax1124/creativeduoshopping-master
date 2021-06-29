@@ -14,22 +14,23 @@ const ProductImageCarousel = ({ match }) => {
     <Message variant="danger">{error}</Message>
   ) : (
     <>
-      <Carousel className="d-block w-100 h-100">
+      <Carousel className="">
         <Carousel.Item className="product-carousel-image">
           <Image
             className="d-block w-100 h-100"
             src={product.image}
             alt="Main"
             fluid
+            style={{ height: "420px", width: "100%", objectFit: "contain" }}
           />
         </Carousel.Item>
 
         {product.additionalimageone && (
           <Carousel.Item className="product-carousel-image">
             <Image
-              className="d-block w-100 h-100"
               src={product.additionalimageone}
               alt="First slide"
+              style={{ height: "420px", width: "100%", objectFit: "contain" }}
               fluid
             />
           </Carousel.Item>
@@ -37,9 +38,9 @@ const ProductImageCarousel = ({ match }) => {
         {product.additionalimagetwo && (
           <Carousel.Item className="product-carousel-image">
             <Image
-              className="d-block w-100 h-100"
               src={product.additionalimagetwo}
               alt="First slide"
+              style={{ height: "420px", width: "100%", objectFit: "contain" }}
               fluid
             />
           </Carousel.Item>
@@ -47,8 +48,8 @@ const ProductImageCarousel = ({ match }) => {
         {product.additionalimagethree && (
           <Carousel.Item className="product-carousel-image">
             <Image
-              className="d-block w-100 h-100"
               src={product.additionalimagethree}
+              style={{ height: "420px", width: "100%", objectFit: "contain" }}
               alt="third slide"
               fluid
             />

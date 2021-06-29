@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   Row,
   Col,
-  // Image,
+  Image,
   ListGroup,
   Card,
   Button,
@@ -17,6 +17,8 @@ import Loader from "../components/Loader";
 import Meta from "../components/Meta";
 import moment from 'moment'
 
+import ProductImageCarousel from "../components/ProductImageCarousel";
+
 import {
   listProductDetails,
   createProductReview,
@@ -27,15 +29,15 @@ import { PRODUCT_CREATE_REVIEW_RESET } from "../constants/productConstants";
 import { deleteProduct } from "../actions/productActions";
 // import { addToWishList } from "../actions/wishListActions";
 
-import LightGallery from "lightgallery/react";
+// import LightGallery from "lightgallery/react";
 
 // import styles
 import "lightgallery/css/lightgallery.css";
 import "lightgallery/css/lg-zoom.css";
 import "lightgallery/css/lg-thumbnail.css";
 
-import lgThumbnail from "lightgallery/plugins/thumbnail";
-import lgZoom from "lightgallery/plugins/zoom";
+// import lgThumbnail from "lightgallery/plugins/thumbnail";
+// import lgZoom from "lightgallery/plugins/zoom";
 
 const ProductScreen = ({ history, match }) => {
   const [qty, setQty] = useState(1);
@@ -160,7 +162,25 @@ const ProductScreen = ({ history, match }) => {
         <>
           <Meta title={product.name} />
           <Row>
-            <Col md={6}>
+          <Col md={6}>
+              {product.additionalimageone ||
+              product.additionalimagetwo ||
+              product.additionalimagethree ? (
+                <ProductImageCarousel match={match} />
+              ) : (
+                <Image
+                  src={product.image}
+                  alt={product.name}
+                  fluid
+                  style={{
+                    maxHeight: "400px",
+                    width: "100%",
+                    objectFit: "contain",
+                  }}
+                />
+              )}
+            </Col>
+            {/* <Col md={6}>
               <LightGallery speed={500} plugins={[lgThumbnail, lgZoom]}>
                 <a href={product.image}>
                   <img
@@ -171,8 +191,8 @@ const ProductScreen = ({ history, match }) => {
                   />
                 </a>
               </LightGallery>
-              {/* <Image src={product.image} alt={product.name} fluid /> */}
-            </Col>
+              <Image src={product.image} alt={product.name} fluid />
+            </Col> */}
             <Col md={3}>
               <ListGroup variant="flush">
                 <ListGroup.Item>
@@ -214,7 +234,7 @@ const ProductScreen = ({ history, match }) => {
                   Category: <br></br>
                   <br></br> <h5>{product.category}</h5>
                 </ListGroup.Item>
-                <ListGroup.Item>
+                <ListGroup.Item className="desc1">
                   Description: <br></br>
                   <br></br> {product.description}
                 </ListGroup.Item>
@@ -309,6 +329,7 @@ const ProductScreen = ({ history, match }) => {
                       </Button>
                     )} */}
                   </ListGroup.Item>
+                  
 
                   {userInfo && userInfo.isAdmin && (
                     <ListGroup.Item>
@@ -336,6 +357,41 @@ const ProductScreen = ({ history, match }) => {
               </Card>
             </Col>
           </Row>
+          <ListGroup
+            style={{
+              marginTop: "10px",
+              marginBottom: "10px",
+
+              justifyContent: "center",
+              textAlign: "center",
+              alignItems: "center",
+            }}
+          >
+            <ListGroup.Item style={{ minWidth: "100%" }} className="desc2">
+              <Row
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  textAlign: "center",
+                  alignItems: "center",
+                }}
+              >
+                <h3>Description</h3>
+              </Row>
+              <Row
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  textAlign: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Col md={6}>
+                  <p>{product.description}</p>
+                </Col>
+              </Row>
+            </ListGroup.Item>
+          </ListGroup>
           <Row>
             <Col md={6}>
               <h2>Reviews</h2>

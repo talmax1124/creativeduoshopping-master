@@ -461,4 +461,15 @@ h2 {
     width: 100%;
     font-size: 1.2em;
   }
+
+  .desc2{
+    display: none;
+  }
+}
+
+
+@media (min-width: 1001px){
+  .desc1{
+    display: none;
+  }
 }
