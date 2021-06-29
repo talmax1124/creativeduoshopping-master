@@ -157,6 +157,24 @@ const OrderListScreen = ({ history }) => {
                           fillColor: "#2B2B52",
                           color: "white",
                         },
+                        {
+                          text: "Packed",
+                          bold: true,
+                          fillColor: "#2B2B52",
+                          color: "white",
+                        },
+                        {
+                          text: "Dispatched",
+                          bold: true,
+                          fillColor: "#2B2B52",
+                          color: "white",
+                        },
+                        {
+                          text: "Cancled?",
+                          bold: true,
+                          fillColor: "#2B2B52",
+                          color: "white",
+                        },
                       ],
 
                       ...orders.map((o, i) => [
@@ -169,6 +187,13 @@ const OrderListScreen = ({ history }) => {
                         o.isDelivered
                           ? moment(o.deliveredAt).format("LLL")
                           : "Not Delivered",
+                        o.isPacked
+                          ? moment(o.packedAt).format("LLL")
+                          : "Not Packed",
+                        o.isDispatched ? "Dispatched" : "Not Dispatched",
+                        o.isCancled
+                          ? moment(o.canceledAt).format("LLL")
+                          : "Not Canceled",
                       ]),
                     ],
                   },
@@ -249,6 +274,9 @@ const OrderListScreen = ({ history }) => {
               <th>TOTAL</th>
               <th>PAID</th>
               <th>DELIVERED</th>
+              <th>Packed</th>
+              <th>Dispatched</th>
+              <th>Cancled</th>
               <th>Order Status</th>
               <th></th>
             </tr>
@@ -270,6 +298,27 @@ const OrderListScreen = ({ history }) => {
                 <td>
                   {order.isDelivered ? (
                     order.deliveredAt.substring(0, 10)
+                  ) : (
+                    <i className="fas fa-times" style={{ color: "red" }}></i>
+                  )}
+                </td>
+                <td>
+                  {order.isPacked ? (
+                    order.packedAt.substring(0, 10)
+                  ) : (
+                    <i className="fas fa-times" style={{ color: "red" }}></i>
+                  )}
+                </td>
+                <td>
+                  {order.isDispatched ? (
+                    <i className="fas fa-check" style={{ color: "red" }}></i>
+                  ) : (
+                    <i className="fas fa-times" style={{ color: "red" }}></i>
+                  )}
+                </td>
+                <td>
+                  {order.isCancled ? (
+                    order.cancledAt.substring(0, 10)
                   ) : (
                     <i className="fas fa-times" style={{ color: "red" }}></i>
                   )}

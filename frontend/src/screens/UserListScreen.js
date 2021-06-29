@@ -50,6 +50,7 @@ const UserListScreen = ({ history }) => {
               <th>Google ID</th>
               <th>ADMIN</th>
               <th>Pro Member</th>
+              <th>Military/Veteran</th>
               <th></th>
             </tr>
           </thead>
@@ -82,6 +83,13 @@ const UserListScreen = ({ history }) => {
                 </td>
                 <td>
                   {user.ispromember ? (
+                    <i className="fas fa-check" style={{ color: "green" }}></i>
+                  ) : (
+                    <i className="fas fa-times" style={{ color: "red" }}></i>
+                  )}
+                </td>
+                <td>
+                  {user.isMilitary ? (
                     <i className="fas fa-check" style={{ color: "green" }}></i>
                   ) : (
                     <i className="fas fa-times" style={{ color: "red" }}></i>

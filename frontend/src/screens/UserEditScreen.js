@@ -17,6 +17,7 @@ const UserEditScreen = ({ match, history }) => {
   const [phone, setPhone] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
   const [ispromember, setispromember] = useState(false);
+  const [isMilitary, setisMilitary] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -38,12 +39,13 @@ const UserEditScreen = ({ match, history }) => {
       if (!user.name || user._id !== userId) {
         dispatch(getUserDetails(userId));
       } else {
-        setName(user.name); 
+        setName(user.name);
         setEmail(user.email);
         setPassword(user.password);
         setPhone(user.phone);
         setIsAdmin(user.isAdmin);
-        setispromember(user.ispromember)
+        setispromember(user.ispromember);
+        setisMilitary(user.isMilitary);
       }
     }
   }, [dispatch, history, userId, user, successUpdate]);
@@ -51,7 +53,16 @@ const UserEditScreen = ({ match, history }) => {
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(
-      updateUser({ _id: userId, name, email, isAdmin, ispromember, phone, password, })
+      updateUser({
+        _id: userId,
+        name,
+        email,
+        isAdmin,
+        ispromember,
+        isMilitary,
+        phone,
+        password,
+      })
     );
   };
 
@@ -125,6 +136,15 @@ const UserEditScreen = ({ match, history }) => {
                 label="Is Pro Member"
                 checked={ispromember}
                 onChange={(e) => setispromember(e.target.checked)}
+              ></Form.Check>
+            </Form.Group>
+
+            <Form.Group controlId="isMilitary">
+              <Form.Check
+                type="checkbox"
+                label="Military/Veteran?"
+                checked={isMilitary}
+                onChange={(e) => setisMilitary(e.target.checked)}
               ></Form.Check>
             </Form.Group>
 

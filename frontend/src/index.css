@@ -473,3 +473,18 @@ h2 {
     display: none;
   }
 }
+
+
+.colmain {
+  display: flex;
+  margin: 5px;
+  align-content: center;
+  justify-content: space-around;
+} 
+
+
+@media (max-width: 1000px) {
+  .colmain{
+    display: block;
+  }
+}

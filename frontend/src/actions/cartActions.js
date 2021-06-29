@@ -5,45 +5,49 @@ import {
   CART_SAVE_SHIPPING_ADDRESS,
   CART_SAVE_PAYMENT_METHOD,
   CART_ADD_COUPON,
+  CART_SAVE_ORDERNOTES
 } from "../constants/cartConstants";
 
-export const addToCart = (id, 
-  qty
-  // , qty1, 
-  // qty2, 
-  // qty3, 
-  // qty4, qty5
-  ) => async (
-  dispatch,
-  getState
-) => {
-  const { data } = await axios.get(`/api/products/${id}`);
+export const addToCart =
+  (
+    id,
+    qty
+    // , qty1,
+    // qty2,
+    // qty3,
+    // qty4, qty5
+  ) =>
+  async (dispatch, getState) => {
+    const { data } = await axios.get(`/api/products/${id}`);
 
-  dispatch({
-    type: CART_ADD_ITEM,
-    payload: {
-      product: data._id,
-      name: data.name,
-      image: data.image,
-      price: data.price,
-      specialPrice: data.specialPrice,
-      countInStock: data.countInStock,
-      // countSmall: data.countSmall,
-      // countMedium: data.countMedium,
-      // countLarge: data.countLarge,
-      // countXLarge: data.countXLarge,
-      // countXXLarge: data.countXXLarge,
-      qty,
-      // qty1,
-      // qty2,
-      // qty3,
-      // qty4,
-      // qty5,
-    },
-  });
+    dispatch({
+      type: CART_ADD_ITEM,
+      payload: {
+        product: data._id,
+        name: data.name,
+        image: data.image,
+        price: data.price,
+        specialPrice: data.specialPrice,
+        countInStock: data.countInStock,
+        // countSmall: data.countSmall,
+        // countMedium: data.countMedium,
+        // countLarge: data.countLarge,
+        // countXLarge: data.countXLarge,
+        // countXXLarge: data.countXXLarge,
+        qty,
+        // qty1,
+        // qty2,
+        // qty3,
+        // qty4,
+        // qty5,
+      },
+    });
 
-  localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
-};
+    localStorage.setItem(
+      "cartItems",
+      JSON.stringify(getState().cart.cartItems)
+    );
+  };
 
 export const removeFromCart = (id) => (dispatch, getState) => {
   dispatch({
@@ -72,21 +76,30 @@ export const savePaymentMethod = (data) => (dispatch) => {
   localStorage.setItem("paymentMethod", JSON.stringify(data));
 };
 
+export const saveOrderNotesMethod = (data) => (dispatch) => {
+  dispatch({
+    type: CART_SAVE_ORDERNOTES,
+    payload: data,
+  });
+
+  localStorage.setItem("paymentMethod", JSON.stringify(data));
+};
+
 export const addCoupon = (coupon) => (dispatch) => {
   let couponDiscount = 0;
 
   // TODO: Get couponDiscount value from db
 
-  if (coupon.toLowerCase() === "creativeduomembers") {
-    couponDiscount = .03;
+  if (coupon.toLowerCase() === "creativeduoadmin") {
+    couponDiscount = 0.1;
   }
 
-  if (coupon.toLowerCase() === "militarydiscount") {
-    couponDiscount = .05;
+  if (coupon.toLowerCase() === "militarydiscount5") {
+    couponDiscount = 0.05;
   }
 
-  if (coupon.toLowerCase() === "fathersday") {
-    couponDiscount = .05;
+  if (coupon.toLowerCase() === "sister") {
+    couponDiscount = 0.03;
   }
 
   dispatch({

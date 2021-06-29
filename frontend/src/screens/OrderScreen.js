@@ -147,7 +147,6 @@ const OrderScreen = ({ match, history }) => {
     userInfo,
   ]);
 
-  
   const printAs = (e) => {
     const downloadAs = e.target.value;
 
@@ -309,6 +308,7 @@ const OrderScreen = ({ match, history }) => {
                   ],
                   ["Order Placed At", order.createdAt],
                   ["Payment Method", order.paymentMethod],
+                  ["Order Notes", order.orderNotes],
                   ["Fee", order.feePrice],
                   ["Total", order.totalPrice],
                   [
@@ -447,6 +447,12 @@ const OrderScreen = ({ match, history }) => {
               </ListGroup.Item>
             )}
 
+            {userInfo && userInfo.isMilitary && (
+              <ListGroup.Item>
+                <h1>Thanks You For Your Service!</h1>
+              </ListGroup.Item>
+            )}
+
             <h3>Thank You {order.user.name} for ordering with us!</h3>
             <ListGroup.Item>
               <h2>Shipping</h2>
@@ -512,6 +518,14 @@ const OrderScreen = ({ match, history }) => {
               ) : (
                 <Message variant="danger">Not Paid</Message>
               )}
+            </ListGroup.Item>
+
+            <ListGroup.Item>
+              <h2>Order Notes:</h2>
+              <p>
+                <strong>Note/Request: </strong>
+                {order.orderNotes}
+              </p>
             </ListGroup.Item>
 
             <ListGroup.Item>

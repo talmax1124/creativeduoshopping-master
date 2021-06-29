@@ -20,7 +20,7 @@ const ShippingScreen = ({ history }) => {
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(saveShippingAddress({ address, city, state, postalCode, country }));
-    history.push("/payment");
+    history.push("/ordernotes");
   };
 
   return (

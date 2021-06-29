@@ -20,6 +20,7 @@ const authUser = asyncHandler(async (req, res) => {
       phone: user.phone,
       isAdmin: user.isAdmin,
       ispromember: user.ispromember,
+      isMilitary: user.isMilitary,
       token: generateToken(user._id),
     });
   } else {
@@ -132,6 +133,7 @@ const registerUser = asyncHandler(async (req, res) => {
         email: user.email,
         isAdmin: user.isAdmin,
         ispromember: user.ispromember,
+        isMilitary: user.isMilitary,
         phone: user.phone,
         token: generateToken(user._id),
       });
@@ -156,6 +158,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
       phone: user.phone,
       isAdmin: user.isAdmin,
       ispromember: user.ispromember,
+      isMilitary: user.isMilitary,
     };
 
     if (user.googleId) {
@@ -190,6 +193,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       email: updatedUser.email,
       isAdmin: updatedUser.isAdmin,
       ispromember: updateUser.ispromember,
+      isMilitary: updateUser.isMilitary,
       phone: updatedUser.phone,
       token: generateToken(updatedUser._id),
     };
@@ -258,6 +262,7 @@ const updateUser = asyncHandler(async (req, res) => {
     user.email = req.body.email || user.email;
     user.isAdmin = req.body.isAdmin;
     user.ispromember = req.body.ispromember;
+    user.isMilitary = req.body.isMilitary,
     user.phone = req.body.phone || user.phone;
 
     const updatedUser = await user.save();
@@ -269,6 +274,7 @@ const updateUser = asyncHandler(async (req, res) => {
       phone: updatedUser.phone,
       isAdmin: updatedUser.isAdmin,
       ispromember: updatedUser.ispromember,
+      isMilitary: updatedUser.isMilitary,
     };
 
     if (updatedUser.googleId) {

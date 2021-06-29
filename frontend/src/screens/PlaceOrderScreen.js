@@ -20,7 +20,7 @@ const PlaceOrderScreen = ({ history }) => {
 
   if (!cart.shippingAddress.address) {
     history.push("/shipping");
-  } else if (!cart.paymentMethod) {
+  }  else if (!cart.paymentMethod) {
     history.push("/payment");
   }
 
@@ -60,6 +60,7 @@ const PlaceOrderScreen = ({ history }) => {
         orderItems: cart.cartItems,
         shippingAddress: cart.shippingAddress,
         paymentMethod: cart.paymentMethod,
+        orderNotes: cart.orderNotes,
         couponCode: cart.couponCode,
         itemsPrice: cart.itemsPrice,
         feePrice: cart.feePrice,
@@ -84,7 +85,7 @@ const PlaceOrderScreen = ({ history }) => {
 
   return (
     <>
-      <CheckoutSteps step1 step2 step3 step4 />
+      <CheckoutSteps step1 step2 step3 step4 step5 />
       <Row>
         <Col md={8}>
           <ListGroup variant="flush">
@@ -106,6 +107,12 @@ const PlaceOrderScreen = ({ history }) => {
               <h2>Payment Method</h2>
               <strong>Method: </strong>
               {cart.paymentMethod}
+            </ListGroup.Item>
+
+            <ListGroup.Item>
+              <h2>Order Notes</h2>
+              <strong>Notes/Request: </strong>
+              {cart.orderNotes}
             </ListGroup.Item>
 
             <ListGroup.Item>
@@ -132,7 +139,8 @@ const PlaceOrderScreen = ({ history }) => {
                         </Col>
                         <Col md={4}>
                           {item.qty} x {item.price > 0 && <>${item.price}</>}
-                          {item.specialPrice > 0 && <>{item.specialPrice}</>} = $ {""}
+                          {item.specialPrice > 0 && <>{item.specialPrice}</>} =
+                          $ {""}
                           {item.qty * (item.price + item.specialPrice)}
                         </Col>
                       </Row>
@@ -181,6 +189,15 @@ const PlaceOrderScreen = ({ history }) => {
                       You are getting this message because you are part of the
                       promember family. You get a dollar discount!
                     </p>
+                  )}
+
+                  {userInfo && userInfo.isMilitary && (
+                    <>
+                    <hr/>
+                    <p style={{ color: "blue" }}>
+                      Thank you for your service, for being a military/veteran, please visit our coupons/offers page to get your discount code!
+                    </p>
+                    </>
                   )}
 
                   <input

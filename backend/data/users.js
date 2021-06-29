@@ -8,6 +8,7 @@ const users = [
     password: bcrypt.hashSync('cjd0646536', 10),
     isAdmin: true,
     ispromember: true,
+    isMilitary: true,
   },
   {
     name: 'Anaid',
@@ -15,6 +16,7 @@ const users = [
     password: bcrypt.hashSync('anaid', 10),
     phone: 3213169898,
     ispromember: false,
+    isMilitary: false,
   },
   {
     name: 'Cuchito',
@@ -23,6 +25,7 @@ const users = [
     phone: 9412241056,
     isAdmin: true,
     ispromember: false,
+    isMilitary: false,
   },
 
   {
@@ -32,6 +35,7 @@ const users = [
     phone: 4075809881,
     isAdmin: true,
     ispromember: false,
+    isMilitary: false,
   },
 
 ]

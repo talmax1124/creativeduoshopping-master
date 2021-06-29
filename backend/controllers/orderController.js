@@ -9,6 +9,7 @@ const addOrderItems = asyncHandler(async (req, res) => {
     orderItems,
     shippingAddress,
     paymentMethod,
+    orderNotes,
     itemsPrice,
     specialPrice,
     couponCode,
@@ -26,6 +27,7 @@ const addOrderItems = asyncHandler(async (req, res) => {
       user: req.user._id,
       shippingAddress,
       paymentMethod,
+      orderNotes,
       itemsPrice,
       specialPrice,
       shippingAddress,
@@ -86,6 +88,7 @@ const getOrderById = asyncHandler(async (req, res) => {
     order &&
     (req.user.isAdmin ||
       req.user.ispromember ||
+      req.user.isMilitary || 
       req.user._id.toString() === order.user._id.toString())
   ) {
     res.json(order);

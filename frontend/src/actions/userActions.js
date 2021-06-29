@@ -104,6 +104,7 @@ export const logout = () => {
       localStorage.removeItem('cartItems');
       localStorage.removeItem('shippingAddress');
       localStorage.removeItem('paymentMethod');
+      localStorage.removeItem('ordernotes');
       dispatch({ type: USER_LOGOUT });
       dispatch({
         type: USER_REGISTER_RESET,

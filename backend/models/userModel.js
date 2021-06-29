@@ -28,6 +28,10 @@ const userSchema = mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    isMilitary: {
+      type: Boolean,
+      default: false
+    },
     isgoldmember: {
       type: Boolean,
       default: false,
