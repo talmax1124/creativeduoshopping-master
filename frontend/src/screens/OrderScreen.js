@@ -11,12 +11,18 @@ import {
   getOrderDetails,
   payOrder,
   deliverOrder,
+  orderPacked,
+  orderDispatched,
+  orderCancelled,
   // orderStatus,
 } from "../actions/orderActions";
 import {
   ORDER_PAY_RESET,
   ORDER_DELIVER_RESET,
   ORDER_STATUS_RESET,
+  ORDER_PACKED_RESET,
+  ORDER_DISPATCHED_RESET,
+  ORDER_CANCEL_RESET,
 } from "../constants/orderConstants";
 
 // Download / Print
@@ -42,6 +48,16 @@ const OrderScreen = ({ match, history }) => {
 
   const orderDeliver = useSelector((state) => state.orderDeliver);
   const { loading: loadingDeliver, success: successDeliver } = orderDeliver;
+
+  const orderPack = useSelector((state) => state.orderPack);
+  const { success: successPack, loading: loadingPack } = orderPack;
+
+  const orderDispatch = useSelector((state) => state.orderDispatch);
+  const { success: successDispatch, loading: loadingDispatch } = orderDispatch;
+
+  const orderCancel = useSelector((state) => state.orderCancel);
+  const { success: successOrderCancel, loading: loadingOrderCancel } =
+    orderCancel;
 
   // const orderStatus = useSelector((state) => state.orderStatus);
   // const { loading: loadingStatus, success: successStatus } = orderStatus;
@@ -70,8 +86,16 @@ const OrderScreen = ({ match, history }) => {
   }
 
   useEffect(() => {
+    //REDIRECTS TO LOGIN PAGE WHEN TRYING TO ACCESS ORDER PAGE WITHOUT LOGGED IN
     if (!userInfo) {
       history.push("/login");
+    }
+
+    //REDIRECTS TO HOME PAGE WHEN TRYING TO ACCESS OTHER'S ORDER PAGE IF NOT ADMIN
+    if (order && userInfo) {
+      if (!userInfo.isAdmin && order.user._id !== userInfo._id) {
+        history.push("/");
+      }
     }
 
     const addPayPalScript = async () => {
@@ -90,12 +114,18 @@ const OrderScreen = ({ match, history }) => {
       !order ||
       successPay ||
       successDeliver ||
+      successPack ||
+      successDispatch ||
+      successOrderCancel ||
       // successStatus ||
       order._id !== orderId
     ) {
       dispatch({ type: ORDER_PAY_RESET });
       dispatch({ type: ORDER_DELIVER_RESET });
       dispatch({ type: ORDER_STATUS_RESET });
+      dispatch({ type: ORDER_PACKED_RESET });
+      dispatch({ type: ORDER_CANCEL_RESET });
+      dispatch({ type: ORDER_DISPATCHED_RESET });
       dispatch(getOrderDetails(orderId));
     } else if (!order.isPaid) {
       if (!window.paypal) {
@@ -111,10 +141,13 @@ const OrderScreen = ({ match, history }) => {
     successDeliver,
     // successStatus,
     order,
+    successDispatch,
+    successOrderCancel,
     history,
     userInfo,
   ]);
 
+  
   const printAs = (e) => {
     const downloadAs = e.target.value;
 
@@ -290,6 +323,18 @@ const OrderScreen = ({ match, history }) => {
                       ? moment(order.deliveredAt).format("LLL")
                       : "Order is Not Delivered Yet",
                   ],
+                  [
+                    "Packed",
+                    order.isPacked
+                      ? moment(order.packedAt).format("LLL")
+                      : "Order is Not Packed Yet",
+                  ],
+                  [
+                    "Dispatched",
+                    order.isDispatched
+                      ? "Order is Dispatched"
+                      : "Order is Not Packed Yet",
+                  ],
                 ],
               },
             },
@@ -347,6 +392,33 @@ const OrderScreen = ({ match, history }) => {
     dispatch(deliverOrder(order));
   };
 
+  //MARK AS PACKED HANDLER
+  const orderPackedHandler = () => {
+    if (window.confirm("Press ok to mark this packed")) {
+      dispatch(orderPacked(order));
+    }
+  };
+
+  //MARK AS DISPATCHED
+  const orderDispatchedHandler = () => {
+    if (window.confirm("Press ok to mark this dispatched")) {
+      dispatch(orderDispatched(order));
+      LoadOnce();
+    }
+  };
+
+  //CANCEL ORDER
+  const cancelHandler = () => {
+    if (window.confirm("Are You Sure ?")) {
+      dispatch(orderCancelled(order));
+      LoadOnce();
+    }
+  };
+
+  function LoadOnce() {
+    window.location.reload();
+  }
+
   // const statusHandler = () => {
   //   dispatch(orderStatus(order));
   // };
@@ -392,12 +464,40 @@ const OrderScreen = ({ match, history }) => {
                 {order.shippingAddress.postalCode},{" "}
                 {order.shippingAddress.country}
               </p>
+
+              {order.isCancelled && (
+                <Message variant="danger">
+                  Order is Cancelled at date {order.canceldAt}
+                </Message>
+              )}
+
+              {order.isPacked ? (
+                <Message variant="success">Packed On {order.packedAt}</Message>
+              ) : (
+                !order.isCancelled && (
+                  <Message variant="danger">Order is Not Packed Yet</Message>
+                )
+              )}
+
+              {order.isDispatched ? (
+                <Message variant="success">Order Has Been Dispatched</Message>
+              ) : (
+                !order.isCancelled && (
+                  <Message variant="danger">
+                    Order is Not Dispatched Yet
+                  </Message>
+                )
+              )}
+
               {order.isDelivered ? (
                 <Message variant="success">
                   Delivered/Shipped on {order.deliveredAt}
                 </Message>
               ) : (
-                <Message variant="danger">Not Delivered/Shipped </Message>
+                !order.isCancelled && (
+                  <Message variant="danger">Order is Not Delivered Yet</Message>
+                )
+                // <Message variant="danger">Not Delivered/Shipped </Message>
               )}
             </ListGroup.Item>
 
@@ -441,7 +541,7 @@ const OrderScreen = ({ match, history }) => {
                           Large: {item.qty3} X-Large {item.qty4} XX-Large
                           {item.qty5}
                            */}
-                          {item.qty} x{order.price > 0 && <>${item.price}</>}{" "}
+                          {item.qty} x {item.price > 0 && <>${item.price}</>}{" "}
                           {""}
                           {item.specialPrice > 0 && <>{item.specialPrice}</>}
                           {""} = ${item.qty * (item.price + item.specialPrice)}
@@ -483,7 +583,7 @@ const OrderScreen = ({ match, history }) => {
                 </Row>
               </ListGroup.Item>
 
-              {!order.isPaid && (
+              {!order.isPaid && !order.isCancelled && (
                 <ListGroup.Item>
                   {loadingPay && <Loader />}
                   {!sdkReady ? (
@@ -523,12 +623,65 @@ const OrderScreen = ({ match, history }) => {
                   )}
                 </ListGroup.Item>
               )}
+
+              {loadingPack && <Loader />}
+              {userInfo &&
+                userInfo.isAdmin &&
+                !order.isCancelled &&
+                !order.isPacked &&
+                !order.isDelivered && (
+                  <ListGroup.Item>
+                    <Button
+                      type="button"
+                      className="btn btn-block"
+                      onClick={orderPackedHandler}
+                    >
+                      Mark As Packed
+                    </Button>
+                  </ListGroup.Item>
+                )}
+
+              {loadingDispatch && <Loader />}
+              {userInfo &&
+                userInfo.isAdmin &&
+                order.isPacked &&
+                !order.isCancelled &&
+                !order.isDispatched &&
+                !order.isDelivered && (
+                  <ListGroup.Item>
+                    <Button
+                      type="button"
+                      className="btn btn-block"
+                      onClick={orderDispatchedHandler}
+                    >
+                      Mark As Dispatched
+                    </Button>
+                  </ListGroup.Item>
+                )}
+
               {/* 
               {userInfo && userInfo.isAdmin && (
                 <Button type="button" onClick={statusHandler}>
                   Submit Order Status
                 </Button>
               )} */}
+
+              {loadingOrderCancel && <Loader />}
+              {userInfo &&
+                (order.user._id === userInfo._id || userInfo.isAdmin) &&
+                !order.isCancelled &&
+                !order.isDelivered &&
+                !order.isDispatched && (
+                  <ListGroup.Item>
+                    <Button
+                      type="button"
+                      className="btn btn-block"
+                      onClick={cancelHandler}
+                    >
+                      Cancel Order
+                    </Button>
+                  </ListGroup.Item>
+                )}
             </ListGroup>
           </Card>
         </Col>

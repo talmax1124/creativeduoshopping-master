@@ -4,10 +4,10 @@ import Product from "../models/productModel.js";
 // @desc    Fetch all products
 // @route   GET /api/products
 // @access  Public
+
 const getProducts = asyncHandler(async (req, res) => {
   const pageSize = 12;
   const page = Number(req.query.pageNumber) || 1;
-
   const keyword = req.query.keyword
     ? {
         name: {
@@ -17,11 +17,30 @@ const getProducts = asyncHandler(async (req, res) => {
       }
     : {};
 
+  const brandKeyword = req.query.keyword
+    ? {
+        brand: {
+          $regex: req.query.keyword,
+          $options: "i",
+        },
+      }
+    : {};
+
+  const categoryKeyword = req.query.keyword
+    ? {
+        category: {
+          $regex: req.query.keyword,
+          $options: "i",
+        },
+      }
+    : {};
+
   const count = await Product.countDocuments({ ...keyword });
-  const products = await Product.find({ ...keyword })
+  const products = await Product.find({
+    $or: [{ ...keyword }, { ...brandKeyword }, { ...categoryKeyword }],
+  })
     .limit(pageSize)
     .skip(pageSize * (page - 1))
-    .find({})
     .sort([["createdAt", -1]]);
 
   res.json({ products, page, pages: Math.ceil(count / pageSize) });
@@ -38,6 +57,30 @@ const getProductById = asyncHandler(async (req, res) => {
   } else {
     res.status(404);
     throw new Error("Product not found");
+  }
+});
+
+//GET PRODUCT BY CATEGORY
+
+const getProductsByCategory = asyncHandler(async (req, res) => {
+  const product = await Product.find({ category: req.params.category });
+  if (product) {
+    res.json(product);
+  } else {
+    res.status(404);
+    throw new Error("Product Not Found");
+  }
+});
+
+//GET PRODUCT BY BRAND
+
+const getProductsByBrand = asyncHandler(async (req, res) => {
+  const product = await Product.find({ brand: req.params.brand });
+  if (product) {
+    res.json(product);
+  } else {
+    res.status(404);
+    throw new Error("Product Not Found");
   }
 });
 
@@ -66,16 +109,14 @@ const createProduct = asyncHandler(async (req, res) => {
     specialPrice: 0.0,
     user: req.user._id,
     image: "https://i.ibb.co/5cwCHky/FY3017-2.jpg",
+    additionalimageone: "",
+    additionalimagetwo: "",
+    additionalimagethree: "",
     brand: "Creative Duo",
     category: "",
     countInStock: 10,
-    // countSmall: 0,
-    // countMedium: 0,
-    // countLarge: 0,
-    // countXLarge: 0,
-    // countXXLarge: 0,
     numReviews: 0,
-    description: "",
+    description: "Description Currently Not Available",
   });
 
   const createdProduct = await product.save();
@@ -95,11 +136,9 @@ const updateProduct = asyncHandler(async (req, res) => {
     category,
     countInStock,
     specialPrice,
-    // countSmall,
-    // countMedium,
-    // countLarge,
-    // countXLarge,
-    // countXXLarge,
+    additionalimageone,
+    additionalimagetwo,
+    additionalimagethree,
   } = req.body;
 
   const product = await Product.findById(req.params.id);
@@ -107,17 +146,15 @@ const updateProduct = asyncHandler(async (req, res) => {
   if (product) {
     product.name = name;
     product.price = price;
-    product.specialPrice = specialPrice
+    product.specialPrice = specialPrice;
     product.description = description;
     product.image = image;
     product.brand = brand;
     product.category = category;
     product.countInStock = countInStock;
-    // product.countSmall = countSmall;
-    // product.countMedium = countMedium;
-    // product.countLarge = countLarge;
-    // product.countXLarge = countXLarge;
-    // product.countXXLarge = countXXLarge;
+    product.additionalimageone = additionalimageone;
+    product.additionalimagetwo = additionalimagetwo;
+    product.additionalimagethree = additionalimagethree;
 
     const updatedProduct = await product.save();
     res.json(updatedProduct);
@@ -185,8 +222,17 @@ const deleteProductReview = asyncHandler(async (req, res) => {
 // @desc    Get top rated products
 // @route   GET /api/products/top
 // @access  Public
+
+// GET TOP RATED PRODUCTS
+
 const getTopProducts = asyncHandler(async (req, res) => {
-  const products = await Product.find({}).sort({ rating: -1 }).limit(10);
+  const { rating, comment } = req.body;
+  const products = await Product.find({}).sort({ rating: -1 }).limit(3);
+  res.json(products);
+});
+
+const getLatestProducts = asyncHandler(async (req, res) => {
+  const products = await Product.find({}).sort({ createdAt: -1 }).limit(4);
   res.json(products);
 });
 
@@ -199,4 +245,7 @@ export {
   createProductReview,
   deleteProductReview,
   getTopProducts,
+  getLatestProducts,
+  getProductsByBrand,
+  getProductsByCategory,
 };

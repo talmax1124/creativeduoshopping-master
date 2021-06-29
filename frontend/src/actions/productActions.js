@@ -24,6 +24,13 @@ import {
   PRODUCT_TOP_REQUEST,
   PRODUCT_TOP_SUCCESS,
   PRODUCT_TOP_FAIL,
+  PRODUCT_LIST_BY_CATEGORY_REQUEST,
+  PRODUCT_LIST_BY_CATEGORY_SUCCESS,
+  PRODUCT_LIST_BY_CATEGORY_FAIL,
+  PRODUCTS_ORDER_BY_PRICE,
+  PRODUCT_LATEST_REQUEST,
+  PRODUCT_LATEST_SUCCESS,
+  PRODUCT_LATEST_FAIL,
 } from '../constants/productConstants'
 import { logout } from './userActions'
 
@@ -51,6 +58,53 @@ export const listProducts = (keyword = '', pageNumber = '') => async (
     })
   }
 }
+
+
+//LIST PRODUCT BY CATEGORY
+
+export const listProductByCategory = (category) => async (dispatch) => {
+  try {
+    dispatch({ type: PRODUCT_LIST_BY_CATEGORY_REQUEST });
+
+    const { data } = await axios.get(`/api/products/category/${category}`);
+
+    dispatch({
+      type: PRODUCT_LIST_BY_CATEGORY_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: PRODUCT_LIST_BY_CATEGORY_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+//LIST PRODUCT BY BRAND
+
+export const listProductByBrand = (brand) => async (dispatch) => {
+  try {
+    dispatch({ type: PRODUCT_LIST_BY_CATEGORY_REQUEST });
+
+    const { data } = await axios.get(`/api/products/brand/${brand}`);
+
+    dispatch({
+      type: PRODUCT_LIST_BY_CATEGORY_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: PRODUCT_LIST_BY_CATEGORY_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
 
 export const listProductDetails = (id) => async (dispatch) => {
   try {
@@ -289,3 +343,84 @@ export const listTopProducts = () => async (dispatch) => {
     })
   }
 }
+
+export const listLatestProducts = () => async (dispatch) => {
+  try {
+    dispatch({ type: PRODUCT_LATEST_REQUEST });
+
+    const { data } = await axios.get(`/api/products/latest`);
+
+    dispatch({
+      type: PRODUCT_LATEST_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: PRODUCT_LATEST_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const sortProducts = (products, sort, pages, page) => (dispatch) => {
+  const items = products.slice();
+  if (sort !== "") {
+    if (sort === "lowestprice") {
+      items.sort((a, b) =>
+        sort === "lowestprice"
+          ? a.price > b.price
+            ? 1
+            : -1
+          : a.price < b.price
+          ? 1
+          : -1
+      );
+    } else if (sort === "highestprice") {
+      items.sort((a, b) =>
+        sort === "highestprice"
+          ? a.price < b.price
+            ? 1
+            : -1
+          : a.price > b.price
+          ? 1
+          : -1
+      );
+    } else if (sort === "toprated") {
+      items.sort((a, b) =>
+        sort === "toprated"
+          ? a.rating < b.rating
+            ? 1
+            : -1
+          : a.rating > b.rating
+          ? 1
+          : -1
+      );
+    } else if (sort === "popularity") {
+      items.sort((a, b) =>
+        sort === "popularity"
+          ? a.numReviews < b.numReviews
+            ? 1
+            : -1
+          : a.numReviews > b.numReviews
+          ? 1
+          : -1
+      );
+    }
+  } else {
+    items.sort((a, b) => (a._id > b._id ? 1 : -1));
+  }
+
+  dispatch({
+    type: PRODUCTS_ORDER_BY_PRICE,
+    payload: {
+      products: items,
+      sort: sort,
+      pages: pages,
+      page: page,
+    },
+  });
+};
+

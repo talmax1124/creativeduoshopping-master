@@ -21,9 +21,11 @@ import OrderListScreen from "./screens/OrderListScreen";
 import forgotPassword from "./screens/forgotPassword";
 import PrivacyPolicy from "./screens/PrivacyPolicy";
 import WishList from "./screens/WishListScreen";
-import EmailVerificationScreen from './screens/EmailVerificationScreen'
+import EmailVerificationScreen from "./screens/EmailVerificationScreen";
 import CurrentOffers from "./screens/CurrentCoupons";
 import TermsandConditions from "./screens/termsandconditions";
+import ShopByCategoryScreen from "./screens/ShopByCategory";
+import ShopByBrandScreen from "./screens/ShopByBrandScreen";
 const App = () => {
   return (
     <Router>
@@ -36,7 +38,7 @@ const App = () => {
           <Route path="/shipping" component={ShippingScreen} />
           <Route path="/payment" component={PaymentScreen} />
           <Route path="/placeorder" component={PlaceOrderScreen} />
-          <Route path="/wishlist" component={WishList}/>
+          <Route path="/wishlist" component={WishList} />
           <Route path="/register" component={RegisterScreen} />
           <Route path="/profile" component={ProfileScreen} />
           <Route path="/product/:id" component={ProductScreen} />
@@ -44,7 +46,7 @@ const App = () => {
           <Route path="/admin/userlist" component={UserListScreen} />
           <Route path="/admin/user/:id/edit" component={UserEditScreen} />
           <Route path="/currentoffers" component={CurrentOffers} />
-          <Route path='/termsandconditions' component={TermsandConditions}/>
+          <Route path="/termsandconditions" component={TermsandConditions} />
           <Route
             path="/admin/productlist"
             component={ProductListScreen}
@@ -56,10 +58,10 @@ const App = () => {
             exact
           />
           <Route
-                  path='/verify/:token'
-                  component={EmailVerificationScreen}
-                  exact
-                />
+            path="/verify/:token"
+            component={EmailVerificationScreen}
+            exact
+          />
           <Route path="/admin/product/:id/edit" component={ProductEditScreen} />
           <Route path="/admin/orderlist" component={OrderListScreen} />
           <Route path="/search/:keyword" component={HomeScreen} exact />
@@ -70,9 +72,13 @@ const App = () => {
             exact
           />
           <Route path="/" component={HomeScreen} exact />
+          <Route
+            path="/products/category/:category"
+            component={ShopByCategoryScreen}
+          />
+          <Route path="/products/brands/:brand" component={ShopByBrandScreen} />
         </Container>
         <Route path="/login" component={LoginScreen} />
-
       </main>
       <Footer />
     </Router>

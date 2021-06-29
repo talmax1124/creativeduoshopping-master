@@ -1,34 +1,24 @@
-import mongoose from 'mongoose'
+import mongoose from "mongoose";
 
 const orderSchema = mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref: 'User',
+      ref: "User",
     },
     orderItems: [
       {
         name: { type: String, required: true },
         qty: { type: Number, required: true },
-        // qty1: { type: Number, required: true },
-        // qty2: { type: Number, required: true },
-        // qty3: { type: Number, required: true },
-        // qty4: { type: Number, required: true },
-        // qty5: { type: Number, required: true },
         image: { type: String, required: true },
         price: { type: Number, required: true },
-        specialPrice: {type: Number},
+        specialPrice: { type: Number },
         countInStock: { type: Number, required: true },
-        countSmall: { type: Number, default: 0 },
-        countMedium: { type: Number, default: 0 },
-        countLarge: { type: Number, default: 0 },
-        countXlarge: { type: Number, default: 0 },
-        countXXlarge: { type: Number, default: 0 },
         product: {
           type: mongoose.Schema.Types.ObjectId,
           required: true,
-          ref: 'Product',
+          ref: "Product",
         },
       },
     ],
@@ -42,6 +32,9 @@ const orderSchema = mongoose.Schema(
     paymentMethod: {
       type: String,
       required: true,
+    },
+    orderNotes: {
+      type: String,
     },
     paymentResult: {
       id: { type: String },
@@ -67,6 +60,18 @@ const orderSchema = mongoose.Schema(
     paidAt: {
       type: Date,
     },
+
+    isPacked: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
+    isDispatched: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
+
     isDelivered: {
       type: Boolean,
       required: true,
@@ -76,7 +81,7 @@ const orderSchema = mongoose.Schema(
       type: Date,
     },
     cdnURL: {
-      type:String,
+      type: String,
     },
     emailNotifier: {
       type: String,
@@ -87,12 +92,37 @@ const orderSchema = mongoose.Schema(
     orderStatus: {
       type: String,
     },
+
+    packedAt: {
+      type: String,
+      type: Date,
+    },
+    emailNotifier: {
+      dispatchedAt: {
+        type: String,
+        type: Date,
+      },
+    },
+    couponCode: {
+      isCancelled: {
+        type: String,
+        type: Boolean,
+        required: true,
+        default: false,
+      },
+    },
+    orderStatus: {
+      type: String,
+      cancelledAt: {
+        type: Date,
+      },
+    },
   },
   {
     timestamps: true,
   }
-)
+);
 
-const Order = mongoose.model('Order', orderSchema)
+const Order = mongoose.model("Order", orderSchema);
 
-export default Order
+export default Order;

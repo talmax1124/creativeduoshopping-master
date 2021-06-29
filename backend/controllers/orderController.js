@@ -121,6 +121,55 @@ const updateOrderToPaid = asyncHandler(async (req, res) => {
   }
 });
 
+
+//UPDATE ORDER TO PACKED
+const updateOrderToPacked = asyncHandler(async (req, res) => {
+  const order = await Order.findById(req.params.id);
+
+  if (order) {
+    order.isPacked = true;
+    order.packedAt = Date.now();
+
+    const updatedOrder = await order.save();
+    res.json(updatedOrder);
+  } else {
+    res.status(404);
+    throw new Error("Order not found");
+  }
+});
+
+//UPDATE ORDER TO DISPATCHED
+const updateOrderToDispatched = asyncHandler(async (req, res) => {
+  const order = await Order.findById(req.params.id);
+
+  if (order) {
+    order.isDispatched = true;
+    order.dispatchedAt = Date.now();
+
+    const updatedOrder = await order.save();
+    res.json(updatedOrder);
+  } else {
+    res.status(404);
+    throw new Error("Order not found");
+  }
+});
+
+//CANCEL ORDER
+const cancelOrder = asyncHandler(async (req, res) => {
+  const order = await Order.findById(req.params.id);
+
+  if (order) {
+    order.isCancelled = true;
+    order.cancelledAt = Date.now();
+
+    const updatedOrder = await order.save();
+    res.json(updatedOrder);
+  } else {
+    res.status(404);
+    throw new Error("Order not found");
+  }
+});
+
 // @desc    Update order to delivered
 // @route   GET /api/orders/:id/deliver
 // @access  Private/Admin
@@ -130,6 +179,17 @@ const updateOrderToDelivered = asyncHandler(async (req, res) => {
   if (order) {
     order.isDelivered = true;
     order.deliveredAt = Date.now();
+
+    // //UPDATE COUNT IN STOCK
+    // // ==========================================================
+
+    // for (const index in order.orderItems) {
+    //   const item = order.orderItems[index];
+    //   const product = await Product.findById(item.product);
+    //   product.countInStock -= item.qty;
+    //   await product.save();
+    // }
+    // // ========================================================
 
     const updatedOrder = await order.save();
 
@@ -202,4 +262,7 @@ export {
   updateOrderStatus,
   getOrders,
   deleteOrder,
+  updateOrderToPacked,
+  updateOrderToDispatched,
+  cancelOrder,
 };

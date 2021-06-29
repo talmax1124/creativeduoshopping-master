@@ -14,14 +14,15 @@
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
   },
   "engines": {
-    "node": "^15.11.0",
-    "npm": "^7.11.1"
+    "node": ">=15.11.0",
+    "npm": ">=7.11.1"
   },
   "author": "Carlos Diaz",
   "license": "MIT",
   "dependencies": {
     "@ant-design/icons": "^4.6.2",
     "@brainhubeu/react-carousel": "^2.0.3",
+    "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@fortawesome/react-fontawesome": "^0.1.14",
     "@glidejs/glide": "^3.4.1",
@@ -36,6 +37,7 @@
     "cloudinary-core": "^2.11.3",
     "colors": "^1.4.0",
     "darkmode-js": "^1.5.7",
+    "date-fns": "^2.22.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-async-handler": "^1.1.4",

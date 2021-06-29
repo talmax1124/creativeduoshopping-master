@@ -25,6 +25,15 @@ import {
   ORDER_DELETE_SUCCESS,
   ORDER_DELETE_REQUEST,
   ORDER_STATUS_SUCCESS,
+  ORDER_PACKED_REQUEST,
+  ORDER_PACKED_SUCCESS,
+  ORDER_PACKED_FAIL,
+  ORDER_DISPATCHED_REQUEST,
+  ORDER_DISPATCHED_SUCCESS,
+  ORDER_DISPATCHED_FAIL,
+  ORDER_CANCEL_REQUEST,
+  ORDER_CANCEL_SUCCESS,
+  ORDER_CANCEL_FAIL,
 } from '../constants/orderConstants'
 import { logout } from './userActions'
 
@@ -141,6 +150,121 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
     })
   }
 }
+
+// ORDER PACKED ACTION
+export const orderPacked = (order) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: ORDER_PACKED_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.put(
+      `/api/orders/${order._id}/packed`,
+      {},
+      config
+    );
+
+    dispatch({
+      type: ORDER_PACKED_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: ORDER_PACKED_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+// ORDER CANCEL ACTION
+export const orderCancelled = (order) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: ORDER_CANCEL_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.put(
+      `/api/orders/${order._id}/cancelled`,
+      {},
+      config
+    );
+
+    dispatch({
+      type: ORDER_CANCEL_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: ORDER_CANCEL_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+// ORDER DISPATCHED ACTION
+export const orderDispatched = (order) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: ORDER_DISPATCHED_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.put(
+      `/api/orders/${order._id}/dispatched`,
+      {},
+      config
+    );
+
+    dispatch({
+      type: ORDER_DISPATCHED_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: ORDER_DISPATCHED_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
 
 export const payOrder = (orderId, paymentResult) => async (
   dispatch,

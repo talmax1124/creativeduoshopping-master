@@ -31,6 +31,15 @@ const productSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    additionalimageone: {
+      type: String,
+    },
+    additionalimagetwo: {
+      type: String,
+    },
+    additionalimagethree: {
+      type: String,
+    },
     brand: {
       type: String,
       required: true,
@@ -70,11 +79,12 @@ const productSchema = mongoose.Schema(
       required: true,
       default: 0,
     },
-    // countSmall: { type: Number, default: 0 },
-    // countMedium: { type: Number, default: 0 },
-    // countLarge: { type: Number, default: 0 },
-    // countXlarge: { type: Number, default: 0 },
-    // countXXlarge: { type: Number, default: 0 },
+
+    originalPrice: {
+      type: Number,
+      default: 0,
+    }, 
+    
   },
   {
     timestamps: true,

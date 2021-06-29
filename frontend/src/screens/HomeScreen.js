@@ -8,6 +8,10 @@ import Loader from "../components/Loader";
 import Paginate from "../components/Paginate";
 import ProductCarousel from "../components/ProductCarousel";
 import Meta from "../components/Meta";
+import LatestProducts from "../components/LatestProducts";
+import ShopByCategory from "../components/ShopByCategory";
+import ShopByBrand from "../components/ShopByBrand";
+import Sort from "../components/Sort";
 // import Hero from "../components/Hero";
 import { listProducts } from "../actions/productActions";
 import { addToWishList } from "../actions/wishListActions";
@@ -47,20 +51,31 @@ const HomeScreen = ({ match, history, location }) => {
     <>
       <Meta />
       {/* <Hero /> */}
-      <h3>
-        Our Best Selling Products
-        <span role="img" aria-label="">
-          👇🏻
-        </span>
-      </h3>
-      {!keyword ? (
+
+      {/* {!keyword ? (
         <ProductCarousel />
       ) : (
         <Link to="/" className="btn btn-dark">
           Go Back
         </Link>
+      )} */}
+
+      {!keyword && pageNumber === 1 ? (
+        <>
+          <h3>
+            Our Best Selling Products
+            <span role="img" aria-label="">
+              👇🏻
+            </span>
+          </h3>
+          <ProductCarousel />
+        </>
+      ) : (
+        <Link to="/" className="btn btn-light">
+          Go Back
+        </Link>
       )}
-      <h1 className="titprd">Products</h1>
+      {/* <h1 className="titprd">Products</h1> */}
 
       {loading ? (
         <Loader />
@@ -68,6 +83,16 @@ const HomeScreen = ({ match, history, location }) => {
         <Message variant="danger">{error}</Message>
       ) : (
         <>
+          {!keyword && pageNumber === 1 && <LatestProducts />}
+
+          <h1>All products</h1>
+
+          <Row>
+            <Col md={3}>
+              <h6>Sort By:</h6>
+              <Sort products={products} pages={pages} page={page} />
+            </Col>
+          </Row>
           <Row>
             {products.map((product) => (
               <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
@@ -84,6 +109,8 @@ const HomeScreen = ({ match, history, location }) => {
             page={page}
             keyword={keyword ? keyword : ""}
           />
+          <ShopByCategory products={products} />
+          <ShopByBrand products={products} />
         </>
       )}
     </>
