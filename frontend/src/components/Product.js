@@ -43,6 +43,13 @@ const Product = ({ product }) => {
           />
         </Card.Text>
 
+        {product.lastPrice > 0 && (
+          <>
+          <br/>
+            <Card.Text as="h5">Original Price: ${product.lastPrice}</Card.Text>
+          </>
+        )}
+
         {product.price > 0 && (
           <>
             <Card.Text as="h3">${product.price}</Card.Text>

@@ -15,7 +15,7 @@ import Rating from "../components/Rating";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 import Meta from "../components/Meta";
-import moment from 'moment'
+import moment from "moment";
 
 import ProductImageCarousel from "../components/ProductImageCarousel";
 
@@ -162,7 +162,7 @@ const ProductScreen = ({ history, match }) => {
         <>
           <Meta title={product.name} />
           <Row>
-          <Col md={6}>
+            <Col md={6}>
               {product.additionalimageone ||
               product.additionalimagetwo ||
               product.additionalimagethree ? (
@@ -205,10 +205,21 @@ const ProductScreen = ({ history, match }) => {
                   />
                 </ListGroup.Item>
 
-                <ListGroup.Item>
-                  Price: <br></br>
-                  <br></br> <h5>$ {product.price}</h5>
-                </ListGroup.Item>
+                {product.price > 0 && (
+                  <ListGroup.Item>
+                    Price: <br></br>
+                    <br></br> <h5>$ {product.price}</h5>
+                  </ListGroup.Item>
+                )}
+
+                {product.lastPrice > 0 && (
+                  <>
+                    <ListGroup.Item>
+                      Original Price Before Discounted Price: ${" "}
+                      {product.lastPrice}
+                    </ListGroup.Item>
+                  </>
+                )}
 
                 {product.specialPrice > 0 && (
                   <>
@@ -220,9 +231,7 @@ const ProductScreen = ({ history, match }) => {
 
                 <ListGroup.Item>
                   Date Created: <br></br>
-                  <br></br> <h5> {moment(product.createdAt).format(
-                        'L'
-                      )}</h5>
+                  <br></br> <h5> {moment(product.createdAt).format("L")}</h5>
                 </ListGroup.Item>
 
                 <ListGroup.Item>
@@ -329,7 +338,6 @@ const ProductScreen = ({ history, match }) => {
                       </Button>
                     )} */}
                   </ListGroup.Item>
-                  
 
                   {userInfo && userInfo.isAdmin && (
                     <ListGroup.Item>

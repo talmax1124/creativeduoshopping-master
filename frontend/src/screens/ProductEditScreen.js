@@ -15,6 +15,7 @@ const ProductEditScreen = ({ match, history }) => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
   const [specialPrice, setSpecialPrice] = useState(0);
+  const [lastPrice, setLastPrice] = useState(0);
   const [image, setImage] = useState("");
   const [additionalimageone, setAdditionalimageone] = useState("");
   const [additionalimagetwo, setAdditionalimagetwo] = useState("");
@@ -51,6 +52,7 @@ const ProductEditScreen = ({ match, history }) => {
         setName(product.name);
         setPrice(product.price);
         setSpecialPrice(product.specialPrice);
+        setLastPrice(product.lastPrice)
         setImage(product.image);
         setBrand(product.brand);
         setCategory(product.category);
@@ -164,6 +166,7 @@ const ProductEditScreen = ({ match, history }) => {
           name,
           price,
           specialPrice,
+          lastPrice,
           image,
           brand,
           category,
@@ -213,6 +216,8 @@ const ProductEditScreen = ({ match, history }) => {
               ></Form.Control>
             </Form.Group>
 
+        
+
             <Form.Group controlId="specialPrice">
               <Form.Label>Special Price?</Form.Label>
               <p style={{ color: "red" }}>
@@ -225,6 +230,20 @@ const ProductEditScreen = ({ match, history }) => {
                 placeholder="Enter Special Price"
                 value={specialPrice}
                 onChange={(e) => setSpecialPrice(e.target.value)}
+              ></Form.Control>
+            </Form.Group>
+
+            <Form.Group controlId="lastPrice">
+              <Form.Label>Price Before Special Price</Form.Label>
+              <p style={{ color: "red" }}>
+                * Enter Original Price If You Fill In The Input Above
+              </p>
+              <Form.Control
+                type="number"
+                step="any"
+                placeholder="Enter Last Price"
+                value={lastPrice}
+                onChange={(e) => setLastPrice(e.target.value)}
               ></Form.Control>
             </Form.Group>
 
@@ -295,7 +314,6 @@ const ProductEditScreen = ({ match, history }) => {
               ></Form.File>
               {uploading && <Loader />}
             </Form.Group>
-
 
             <Form.Group controlId="brand">
               <Form.Label>Brand</Form.Label>

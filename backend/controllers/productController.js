@@ -107,6 +107,7 @@ const createProduct = asyncHandler(async (req, res) => {
     name: "Product",
     price: 0.0,
     specialPrice: 0.0,
+    lastPrice: 0.0,
     user: req.user._id,
     image: "https://i.ibb.co/5cwCHky/FY3017-2.jpg",
     additionalimageone: "",
@@ -136,6 +137,7 @@ const updateProduct = asyncHandler(async (req, res) => {
     category,
     countInStock,
     specialPrice,
+    lastPrice,
     additionalimageone,
     additionalimagetwo,
     additionalimagethree,
@@ -147,6 +149,7 @@ const updateProduct = asyncHandler(async (req, res) => {
     product.name = name;
     product.price = price;
     product.specialPrice = specialPrice;
+    product.lastPrice = lastPrice;
     product.description = description;
     product.image = image;
     product.brand = brand;
