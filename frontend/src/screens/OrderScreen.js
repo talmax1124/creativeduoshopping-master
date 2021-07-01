@@ -431,11 +431,11 @@ const OrderScreen = ({ match, history }) => {
     <>
       <div className="orderid">
         <span className="float-left">
-          <h1>Order ID: {order._id} </h1>
+          <h1 className="orderidleft">Order ID: {order._id} </h1>
         </span>
 
         <span className="float-right">
-          <Print printAs={printAs} />
+          <Print className="printt" printAs={printAs} />
         </span>
       </div>
       <Row>

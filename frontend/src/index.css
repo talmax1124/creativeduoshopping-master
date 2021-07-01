@@ -472,7 +472,13 @@ h2 {
   .desc1{
     display: none;
   }
+
+  .home {
+    display: none;
+  }
+
 }
+
 
 
 .colmain {
@@ -487,4 +493,31 @@ h2 {
   .colmain{
     display: block;
   }
+
+  .orderidleft{
+    font-size: 1.35em;
+  }
+
+  .printt {
+    width: 100%;
+  }
+  
+
+  .orderid {
+    display: block;
+    float: none;
+    width: 100%;
+  }
+
+  .orderid .float-left{
+    float: none;
+    display: block;
+  }
+
+  .orderid .float-right{
+    float: none;
+    display: block;
+    width: 100%;
+  }
 }
+

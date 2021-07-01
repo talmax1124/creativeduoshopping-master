@@ -65,6 +65,12 @@ const Header = () => {
                   </div>
                 </Nav.Link>
               </LinkContainer>
+
+              <LinkContainer to="/" className="home">
+                <Nav.Link>
+                  <i className="fas fa-home"></i> Home
+                </Nav.Link>
+              </LinkContainer>
              
               {userInfo ? (
                 <>
