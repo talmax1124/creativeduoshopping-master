@@ -353,7 +353,8 @@ const ProductEditScreen = ({ match, history }) => {
                 <option value="...">Select...</option>
                 <option value="Shirts">Shirts</option>
                 <option value="Infused Design">Infused Design</option>
-                <option value="Cups/Tumblers/Mugs">Cups/Tumblers/Mugs</option>
+                <option value="Mug / Cup">Mug/Cup</option>
+                <option value="Cups-Tumblers-Mugs">Cups/Tumblers/Mugs</option>
                 <option value="Stickers">Stickers</option>
                 <option value="Car Products">Car Products</option>
                 <option value="Other">Other</option>
