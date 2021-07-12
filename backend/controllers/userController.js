@@ -70,7 +70,7 @@ const verificationLink = asyncHandler(async (req, res) => {
     <img src="https://i.ibb.co/0DCPbRR/Artboard-1.jpg" alt="header" width="100%">
     <br>
     <h1>Click The Button Below To Finish The Verification Process</h1>
-    <a href="${process.env.CLIENT_URL}/verify/${tokengenerate}"><button>Verify Your Account</button></a>
+    <a href="${process.env.CLIENT_URL}/verify/${tokengenerate}"><button style="padding: 1.5em; background-color: black; color: white; font-size: 2em;">Verify Your Account</button></a>
     <br><br/>
     <p> or click this link: ${process.env.CLIENT_URL}/verify/${tokengenerate}
     <br><br/>
@@ -95,7 +95,7 @@ const verificationLink = asyncHandler(async (req, res) => {
       // console.log('Email sent: ' + info.response)
       res.status(201).json({
         response:
-          "A verification email has been sent with a link to finish registration and verification. If you do not see the email in your inbox, it may be in the spam folder.",
+          "A verification email has been sent with a link to finish registration and verification. If you do not see the email in your inbox, it may be in the spam folder. This email may take about a minute to arrive",
       });
     }
   });

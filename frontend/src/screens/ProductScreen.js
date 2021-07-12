@@ -201,7 +201,7 @@ const ProductScreen = ({ history, match }) => {
                 <ListGroup.Item>
                   <Rating
                     value={product.rating}
-                    text={`${product.numReviews} review(s)`}
+                    text= {product.numReviews > 1 ? (`${product.numReviews} review(s)`) : (`${product.numReviews} review`)}
                   />
                 </ListGroup.Item>
 
@@ -402,12 +402,12 @@ const ProductScreen = ({ history, match }) => {
           </ListGroup>
           <Row>
             <Col md={6}>
-              <h2>Reviews</h2>
+              <h2>({product.reviews.length}) Reviews</h2>
               {product.reviews.length === 0 && <Message>No Reviews</Message>}
               <ListGroup variant="flush">
                 {product.reviews.map((review) => (
                   <ListGroup.Item key={review._id}>
-                    <strong>{review.name}</strong>
+                    <strong className="bold">{review.name}</strong>
                     <Rating value={review.rating} />
                     <p>{review.createdAt.substring(0, 10)}</p>
                     <p>{review.comment}</p>

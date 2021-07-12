@@ -214,7 +214,7 @@ const deleteProductReview = asyncHandler(async (req, res) => {
 
     product.rating =
       product.reviews.length > 0
-        ? product.reviews.reduce((acc, item) => item.rating - acc, 0) /
+        ? product.reviews.reduce((acc, item) => item.rating + acc, 0) /
           product.reviews.length
         : 0;
 
