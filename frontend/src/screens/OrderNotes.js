@@ -26,15 +26,15 @@ const OrderNotes = ({ history }) => {
   return (
     <FormContainer>
       <CheckoutSteps step1 step2 step3 />
-      <h1>Order Notes</h1>
-      <h6 variant="danger">If this note is from your last order, just erase the message and write your new request/note</h6>
+      <h1>Order Notes / Requests</h1>
+      <h6 variant="danger">* If you see text in the box below, and you recognize it from a previous order made on this device, please delete the text and write your new request if needed.</h6>
       <Form onSubmit={submitHandler}>
       <Form.Group controlId="orderNotes">
-          <Form.Label>Order Notes? Requests?</Form.Label>
+          <Form.Label>Requests? Notes For The Order?</Form.Label>
           <Form.Control
             type="text"
             as="textarea"
-            placeholder="Enter your note"
+            placeholder="Enter your Request or Note."
             value={orderNotes}
             onChange={(e) => setOrderNotes(e.target.value)}
           ></Form.Control>
