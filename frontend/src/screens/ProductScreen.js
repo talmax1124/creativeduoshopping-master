@@ -27,7 +27,6 @@ import {
 import { PRODUCT_CREATE_REVIEW_RESET } from "../constants/productConstants";
 // import { HeartOutlined } from "@ant-design/icons/HeartOutlined";
 import { deleteProduct } from "../actions/productActions";
-// import { addToWishList } from "../actions/wishListActions";
 
 // import LightGallery from "lightgallery/react";
 
@@ -67,9 +66,6 @@ const ProductScreen = ({ history, match }) => {
     loading: loadingProductReviewDelete,
     error: errorProductReviewDelete,
   } = productReviewDelete;
-
-  // const wishlistStore = useSelector((state) => state.productWishList);
-  // const { wishlist } = wishlistStore;
 
   useEffect(() => {
     if (successProductReview) {
@@ -116,19 +112,6 @@ const ProductScreen = ({ history, match }) => {
     );
     LoadOnce();
   };
-
-  // const addToWishListHandler = (id) => {
-  //   history.push(`/wishlist/${id}`);
-  //   dispatch(addToWishList(productId, qty));
-  // };
-
-  // const checkWishList = (productId) => {
-  //   if (productId) {
-  //     return wishlist.find((item) => {
-  //       return item.product === productId;
-  //     });
-  //   }
-  // };
 
   const deleteHandler = (id) => {
     if (window.confirm("Are you sure you want to delete this?")) {
@@ -201,7 +184,11 @@ const ProductScreen = ({ history, match }) => {
                 <ListGroup.Item>
                   <Rating
                     value={product.rating}
-                    text= {product.numReviews > 1 ? (`${product.numReviews} review(s)`) : (`${product.numReviews} review`)}
+                    text={
+                      product.numReviews > 1
+                        ? `${product.numReviews} review(s)`
+                        : `${product.numReviews} review`
+                    }
                   />
                 </ListGroup.Item>
 
@@ -324,19 +311,6 @@ const ProductScreen = ({ history, match }) => {
                     >
                       Add To Cart
                     </Button>
-
-                    <br />
-
-                    {/* {userInfo && (
-                      <Button
-                        addToWishList={addToWishListHandler}
-                        checkWishlist={checkWishList(product._id)}
-                        disabled
-                        className="btn-block"
-                      >
-                        Add To Wishlist
-                      </Button>
-                    )} */}
                   </ListGroup.Item>
 
                   {userInfo && userInfo.isAdmin && (

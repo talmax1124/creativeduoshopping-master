@@ -7,6 +7,9 @@ import { Row, Col, ListGroup, Image, Card, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
+
+import { Widget } from "@uploadcare/react-widget";
+
 import {
   getOrderDetails,
   payOrder,
@@ -396,6 +399,7 @@ const OrderScreen = ({ match, history }) => {
   const orderPackedHandler = () => {
     if (window.confirm("Press ok to mark this packed")) {
       dispatch(orderPacked(order));
+      LoadOnce();
     }
   };
 
@@ -616,8 +620,30 @@ const OrderScreen = ({ match, history }) => {
               {loadingDeliver && <Loader />}
               {/* {loadingStatus && <Loader />} */}
 
-              {userInfo && userInfo.isAdmin && !order.isDelivered && (
+              {!userInfo && (
                 <ListGroup.Item>
+                  <Widget
+                    publicKey="ea2d5f102203c327acc8"
+                    onChange={(info) => {
+                      console.log(info.cdnUrl);
+                      alert(
+                        "Your File URL is: " +
+                          info.cdnUrl +
+                          " Screenshot it and send it to the message chat or to sales@creativeduo.net with your Order ID."
+                      );
+                    }}
+                    previewStep="true"
+                    // role="uploadcare-uploader"
+                    data-multiple="true"
+                    data-multiple-min="1"
+                    id="file"
+                    disabled="true"
+                  />
+                </ListGroup.Item>
+              )}
+
+              <ListGroup.Item>
+                {userInfo && userInfo.isAdmin && !order.isDelivered && (
                   <Button
                     type="button"
                     className="btn btn-block"
@@ -625,25 +651,24 @@ const OrderScreen = ({ match, history }) => {
                   >
                     Mark As Delivered/Shipped
                   </Button>
+                )}
 
-                  {userInfo && userInfo.isAdmin && !order.isPaid && (
-                    <Button
-                      type="button"
-                      className="btn btn-block"
-                      onClick={paidMark}
-                    >
-                      Mark Order As Paid
-                    </Button>
-                  )}
-                </ListGroup.Item>
-              )}
+                {userInfo && userInfo.isAdmin && !order.isPaid && (
+                  <Button
+                    type="button"
+                    className="btn btn-block"
+                    onClick={paidMark}
+                  >
+                    Mark Order As Paid
+                  </Button>
+                )}
+              </ListGroup.Item>
 
               {loadingPack && <Loader />}
               {userInfo &&
                 userInfo.isAdmin &&
                 !order.isCancelled &&
-                !order.isPacked &&
-                !order.isDelivered && (
+                !order.isPacked && (
                   <ListGroup.Item>
                     <Button
                       type="button"
@@ -658,10 +683,8 @@ const OrderScreen = ({ match, history }) => {
               {loadingDispatch && <Loader />}
               {userInfo &&
                 userInfo.isAdmin &&
-                order.isPacked &&
                 !order.isCancelled &&
-                !order.isDispatched &&
-                !order.isDelivered && (
+                !order.isDispatched && (
                   <ListGroup.Item>
                     <Button
                       type="button"

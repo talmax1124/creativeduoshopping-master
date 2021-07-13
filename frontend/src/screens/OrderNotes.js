@@ -27,7 +27,8 @@ const OrderNotes = ({ history }) => {
     <FormContainer>
       <CheckoutSteps step1 step2 step3 />
       <h1>Order Notes / Requests</h1>
-      <h6 variant="danger">* If you see text in the box below, and you recognize it from a previous order made on this device, please delete the text and write your new request if needed.</h6>
+      <h6 variant="danger" style={{color: "red"}}>* If you see text in the box below, and you recognize it from a previous order made on this device, please delete the text and write your new request if needed.</h6>
+      <br></br>
       <Form onSubmit={submitHandler}>
       <Form.Group controlId="orderNotes">
           <Form.Label>Requests? Notes For The Order?</Form.Label>
