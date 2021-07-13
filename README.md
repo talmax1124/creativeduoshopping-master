@@ -1,15 +1,34 @@
+
 # Creative Duo Shopping
 
-> Your Next Place To Shop
+An E-Commerce Site for Creative Duo. Shop for custom made products.
 
 
-For Business Inquiries:
-    <br>
-    Email: carlitosdiazplaza@gmail.com
-    <br>
-    Phone: (407)-483-2251
-    <br>
-    --------------------
-    <br>
-    Alternative Email: creativeduo2020@gmail.com
+## Authors
 
+- [@talmax](https://www.github.com/talmax1124)
+
+## Contributors
+
+- [@sujankarki269](https://github.com/sujankarki269)
+
+  
+## Demo
+
+Insert gif or link to demo
+
+  
+## Features
+
+- Checkout W/ PayPal
+- Sign in with google
+- More...
+
+  
+![Logo](https://i.ibb.co/mFJm6yt/Creative-Duo-New-Logo.png)
+
+## Support
+
+For support, email support@creativeduo.net.
+
+  
