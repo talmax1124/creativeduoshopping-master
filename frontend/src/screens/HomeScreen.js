@@ -60,6 +60,8 @@ const HomeScreen = ({ match, history, location }) => {
         </Link>
       )} */}
 
+      <ShopByCategory products={products} />
+      <br/>
       {!keyword && pageNumber === 1 ? (
         <>
           <h3>
@@ -71,8 +73,8 @@ const HomeScreen = ({ match, history, location }) => {
           <ProductCarousel />
         </>
       ) : (
-        <Link to="/" className="btn btn-light">
-          Go Back
+        <Link to="/" className="btn btn-dark">
+           <i className="fas fa-arrow-left"></i> Go Back
         </Link>
       )}
       {/* <h1 className="titprd">Products</h1> */}
@@ -109,7 +111,7 @@ const HomeScreen = ({ match, history, location }) => {
             page={page}
             keyword={keyword ? keyword : ""}
           />
-          <ShopByCategory products={products} />
+
           <ShopByBrand products={products} />
         </>
       )}

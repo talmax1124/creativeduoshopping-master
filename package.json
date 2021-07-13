@@ -73,6 +73,7 @@
     "react-cookies": "^0.1.1",
     "react-places-autocomplete": "^7.3.0",
     "react-scripts": "^2.1.8",
+    "react-swipeable-tabs": "^2.2.0",
     "react-swipeable-views": "^0.14.0",
     "ssl-express-www": "^3.0.7",
     "swiper": "^6.7.1",

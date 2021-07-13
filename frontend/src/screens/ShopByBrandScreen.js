@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Product from "../components/Product";
 import Message from "../components/Message";
@@ -38,9 +38,11 @@ const HomeScreen = ({ match }) => {
         <>
           {products && (
             <>
-              <Link to="/" className="btn btn-light">
-                <i className="fas fa-arrow-left"></i> Go Back
+          <Link to="/">
+                <Button><i className="fas fa-arrow-left"></i>  Go Back</Button>
+                <br/>
               </Link>
+              <br/>
               <Row>
                 <Col md={3}>
                   <h6>Sort By:</h6>

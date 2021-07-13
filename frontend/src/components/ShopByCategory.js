@@ -1,6 +1,11 @@
 import React from "react";
-import { Row, Col } from "react-bootstrap";
+// import { Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
+
+// import { makeStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
 
 const ShopByCategory = ({ products }) => {
   //GET CATEGORIES
@@ -17,7 +22,7 @@ const ShopByCategory = ({ products }) => {
   return (
     <div>
       <h1>Categories</h1>
-      <Row>
+      {/* <Row>
         {keys.map((cat, k) => (
           <Col className="shop-by-category" key={k} sm={12} md={2}>
             <p>
@@ -35,7 +40,23 @@ const ShopByCategory = ({ products }) => {
             </p>
           </Col>
         ))}
-      </Row>
+      </Row> */}
+
+      <AppBar color="inherit" position="static">
+        <Tabs
+          variant="scrollable"
+          scrollButtons="on"
+          aria-label="scrollable force tabs example"
+        > 
+          {keys.map((cat, k) => (
+            <Link to={`/products/category/${cat}`}>
+              <Tab key={k} style={{ color: "black" }} label={cat} textColor="primary">
+                {cat}
+              </Tab>
+            </Link>
+          ))}
+        </Tabs>
+      </AppBar>
     </div>
   );
 };

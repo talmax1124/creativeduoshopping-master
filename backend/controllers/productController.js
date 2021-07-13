@@ -43,6 +43,8 @@ const getProducts = asyncHandler(async (req, res) => {
     .skip(pageSize * (page - 1))
     .sort([["createdAt", -1]]);
 
+
+
   res.json({ products, page, pages: Math.ceil(count / pageSize) });
 });
 
