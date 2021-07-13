@@ -15,7 +15,7 @@ An E-Commerce Site for Creative Duo. Shop for custom made products.
   
 ## Demo
 
-<img src="https://onelineplayer.com/player.html?autoplay=true&autopause=false&muted=true&loop=true&url=https%3A%2F%2Fwww.dropbox.com%2Fs%2Fokb694k4nj2a5m2%2FScreen%2520Recording%25202021-07-13%2520at%25203.23.17%2520AM.mov%3Fraw%3D1&poster=&time=false&progressBar=false&overlay=false&muteButton=false&fullscreenButton=false&style=light&quality=auto&playButton=false" width="100%"/>
+<img src="https://media.giphy.com/media/6LHKZU1yOawIcVgMr3/giphy.gif" width="100%"/>
 
 
   
