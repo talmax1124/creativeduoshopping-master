@@ -15,7 +15,8 @@ An E-Commerce Site for Creative Duo. Shop for custom made products.
   
 ## Demo
 
-Insert gif or link to demo
+<img src="https://media.giphy.com/media/6LHKZU1yOawIcVgMr3/giphy.gif" width="100%"/>
+
 
   
 ## Features
