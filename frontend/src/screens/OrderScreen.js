@@ -312,6 +312,7 @@ const OrderScreen = ({ match, history }) => {
                   ["Order Placed At", order.createdAt],
                   ["Payment Method", order.paymentMethod],
                   ["Order Notes", order.orderNotes],
+                  ["File Upload", order.fileUpload],
                   ["Fee", order.feePrice],
                   ["Total", order.totalPrice],
                   [
@@ -529,6 +530,14 @@ const OrderScreen = ({ match, history }) => {
               <p>
                 <strong>Note/Request: </strong>
                 {order.orderNotes}
+              </p>
+            </ListGroup.Item>
+
+            <ListGroup.Item>
+              <h2>File URL</h2>
+              <p>
+                <strong>URL: </strong>
+                {order.fileUpload}
               </p>
             </ListGroup.Item>
 

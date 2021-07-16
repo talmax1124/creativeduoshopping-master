@@ -5,7 +5,8 @@ import {
   CART_SAVE_SHIPPING_ADDRESS,
   CART_SAVE_PAYMENT_METHOD,
   CART_ADD_COUPON,
-  CART_SAVE_ORDERNOTES
+  CART_SAVE_ORDERNOTES,
+  CART_SAVE_FILEUPLOAD
 } from "../constants/cartConstants";
 
 export const addToCart =
@@ -82,7 +83,18 @@ export const saveOrderNotesMethod = (data) => (dispatch) => {
     payload: data,
   });
 
-  localStorage.setItem("paymentMethod", JSON.stringify(data));
+  
+  localStorage.setItem("saveOrderNotesMethod", JSON.stringify(data));
+};
+
+export const saveFileUploadMethod = (data) => (dispatch) => {
+  dispatch({
+    type: CART_SAVE_FILEUPLOAD,
+    payload: data,
+  });
+
+  
+  localStorage.setItem("saveFileUploadMethod", JSON.stringify(data));
 };
 
 export const addCoupon = (coupon) => (dispatch) => {

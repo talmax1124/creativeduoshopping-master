@@ -71,7 +71,6 @@ const orderSchema = mongoose.Schema(
       required: true,
       default: false,
     },
-
     isDelivered: {
       type: Boolean,
       required: true,
@@ -90,6 +89,12 @@ const orderSchema = mongoose.Schema(
       type: String,
     },
     orderStatus: {
+      type: String,
+    },
+
+    countInStock: { type: Number},
+
+    fileUpload: {
       type: String,
     },
 

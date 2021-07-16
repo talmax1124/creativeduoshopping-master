@@ -5,7 +5,7 @@ const users = [
     name: 'Carlitos',
     email: 'carlitosdiazplaza@gmail.com',
     phone: 123123123,
-    password: bcrypt.hashSync('cjd0646536', 10),
+    password: bcrypt.hashSync('carlitos', 10),
     isAdmin: true,
     ispromember: true,
     isMilitary: true,
@@ -36,6 +36,16 @@ const users = [
     isAdmin: true,
     ispromember: false,
     isMilitary: false,
+  },
+
+  {
+    name: 'Carlitus',
+    email: 'carlitusjdiaz@gmail.com',
+    password: bcrypt.hashSync('carlos', 10),
+    phone: "8136775454",
+    isAdmin: false,
+    ispromember: false,
+    isMilitary: true,
   },
 
 ]

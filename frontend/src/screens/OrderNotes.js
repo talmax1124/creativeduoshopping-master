@@ -20,7 +20,7 @@ const OrderNotes = ({ history }) => {
   const submitHandler = (e) => {
     e.preventDefault()
     dispatch(saveOrderNotesMethod(orderNotes))
-    history.push('/payment')
+    history.push('/fileupload')
   }
 
   return (

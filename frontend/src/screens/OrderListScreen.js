@@ -335,7 +335,7 @@ const OrderListScreen = ({ history }) => {
                     className="btn-sm"
                     onClick={() => deleteHandler(order._id)}
                   >
-                    <i className="fas fa-trash"></i>
+                    <i className="fas fa-trash"></i>Delete
                   </Button>
                 </td>
               </tr>

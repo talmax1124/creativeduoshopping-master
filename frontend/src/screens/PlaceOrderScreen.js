@@ -61,6 +61,7 @@ const PlaceOrderScreen = ({ history }) => {
         shippingAddress: cart.shippingAddress,
         paymentMethod: cart.paymentMethod,
         orderNotes: cart.orderNotes,
+        fileUpload: cart.fileUpload,
         couponCode: cart.couponCode,
         itemsPrice: cart.itemsPrice,
         feePrice: cart.feePrice,
@@ -85,7 +86,7 @@ const PlaceOrderScreen = ({ history }) => {
 
   return (
     <>
-      <CheckoutSteps step1 step2 step3 step4 step5 />
+      <CheckoutSteps step1 step2 step3 step4 step5 step6/>
       <Row>
         <Col md={8}>
           <ListGroup variant="flush">
@@ -113,6 +114,12 @@ const PlaceOrderScreen = ({ history }) => {
               <h2>Order Notes</h2>
               <strong>Notes/Request: </strong>
               {cart.orderNotes}
+            </ListGroup.Item>
+
+            <ListGroup.Item>
+              <h2>File Upload</h2>
+              <strong>URL: </strong>
+              {cart.fileUpload}
             </ListGroup.Item>
 
             <ListGroup.Item>
