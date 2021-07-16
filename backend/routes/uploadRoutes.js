@@ -27,7 +27,7 @@ const storage = new CloudinaryStorage({
 });
 
 function checkFileType(file, cb) {
-  const filetypes = /jpg|jpeg|png/;
+  const filetypes = /jpg|jpeg|gif|GIF|png/;
   const extname = filetypes.test(
     path.extname(file.originalname).toLocaleLowerCase()
   );
