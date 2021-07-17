@@ -52,7 +52,7 @@ const ProductEditScreen = ({ match, history }) => {
         setName(product.name);
         setPrice(product.price);
         setSpecialPrice(product.specialPrice);
-        setLastPrice(product.lastPrice)
+        setLastPrice(product.lastPrice);
         setImage(product.image);
         setBrand(product.brand);
         setCategory(product.category);
@@ -216,8 +216,6 @@ const ProductEditScreen = ({ match, history }) => {
               ></Form.Control>
             </Form.Group>
 
-        
-
             <Form.Group controlId="specialPrice">
               <Form.Label>Special Price?</Form.Label>
               <p style={{ color: "red" }}>
@@ -324,6 +322,7 @@ const ProductEditScreen = ({ match, history }) => {
               >
                 <option value="">Select...</option>
                 <option value="Creative Duo">Creative Duo</option>
+                <option value="Anna Sweet Treats">Anna Sweet Treats</option>
                 <option value="Other">Other</option>
               </Form.Control>
             </Form.Group>
@@ -358,6 +357,9 @@ const ProductEditScreen = ({ match, history }) => {
                 <option value="Stickers">Stickers</option>
                 <option value="Car Products">Car Products</option>
                 <option value="Other">Other</option>
+                <option value="Anna Sweet Treats Merch">
+                  Anna Sweet Treats Merch
+                </option>
               </Form.Control>
               {/* <Form.Control
                 as="select"
