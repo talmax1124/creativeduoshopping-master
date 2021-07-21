@@ -68,7 +68,7 @@ const productSchema = mongoose.Schema(
     },
     specialPrice: {
       type: Number,
-      default: 0
+      default: 0,
     },
     lastPrice: {
       type: Number,
@@ -79,12 +79,19 @@ const productSchema = mongoose.Schema(
       required: true,
       default: 0,
     },
-
     originalPrice: {
       type: Number,
       default: 0,
-    }, 
-    
+    },
+    productVideo: {
+      type: String,
+    },
+    productTutorial: {
+      type: String,
+    },
+    productImportantInformation: {
+      type: String,
+    },
   },
   {
     timestamps: true,

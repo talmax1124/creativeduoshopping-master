@@ -10,6 +10,7 @@ import {
   Button,
   Form,
   Badge,
+  Modal,
 } from "react-bootstrap";
 import Rating from "../components/Rating";
 import Message from "../components/Message";
@@ -112,6 +113,11 @@ const ProductScreen = ({ history, match }) => {
     );
     LoadOnce();
   };
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const deleteHandler = (id) => {
     if (window.confirm("Are you sure you want to delete this?")) {
@@ -374,6 +380,93 @@ const ProductScreen = ({ history, match }) => {
               </Row>
             </ListGroup.Item>
           </ListGroup>
+
+          <Row>
+            <Col>
+              <h1>More on product: {product.name}</h1>
+
+              {product.productImportantInformation && (
+                <>
+                <h6>
+                  Product Important Information:
+                </h6>
+                <p>
+                  {product.productImportantInformation}
+                </p>
+                </>
+              )}
+              {product.productVideo && (
+                <>
+                  <Button variant="primary" onClick={handleShow} className="btn btn-block">
+                    Open Product Video
+                  </Button>
+
+                  <Modal
+                    show={show}
+                    onHide={handleClose}
+                    keyboard={false}
+                    centered
+                  >
+                    <Modal.Header closeButton>
+                      <Modal.Title>Product Video</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                      <iframe
+                        width="100%"
+                        height="250px"
+                        src={product.productVideo}
+                        title="YouTube video player"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen
+                      ></iframe>
+                    </Modal.Body>
+                    <Modal.Footer>
+                      <Button variant="primary" onClick={handleClose}>
+                        Close
+                      </Button>
+                    </Modal.Footer>
+                  </Modal>
+                </>
+              )}
+
+        {product.productTutorial && (
+                <>
+                  <Button variant="primary" onClick={handleShow} className="btn btn-block">
+                    Open Product Tutorial
+                  </Button>
+
+                  <Modal
+                    show={show}
+                    onHide={handleClose}
+                    keyboard={false}
+                    centered
+                  >
+                    <Modal.Header closeButton>
+                      <Modal.Title>Product Tutorial</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                      <iframe
+                        width="100%"
+                        height="250px"
+                        src={product.productTutorial}
+                        title="YouTube video player"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen
+                      ></iframe>
+                    </Modal.Body>
+                    <Modal.Footer>
+                      <Button variant="primary" onClick={handleClose}>
+                        Close
+                      </Button>
+                    </Modal.Footer>
+                  </Modal>
+                </>
+              )}
+            </Col>
+          </Row>
+          <hr></hr>
           <Row>
             <Col md={6}>
               <h2>({product.reviews.length}) Reviews</h2>

@@ -115,6 +115,9 @@ const createProduct = asyncHandler(async (req, res) => {
     additionalimageone: "",
     additionalimagetwo: "",
     additionalimagethree: "",
+    productVideo: "",
+    productTutorial: "",
+    productImportantInformation: "",
     brand: "Creative Duo",
     category: "",
     countInStock: 10,
@@ -143,6 +146,9 @@ const updateProduct = asyncHandler(async (req, res) => {
     additionalimageone,
     additionalimagetwo,
     additionalimagethree,
+    productVideo,
+    productTutorial,
+    productImportantInformation,
   } = req.body;
 
   const product = await Product.findById(req.params.id);
@@ -160,6 +166,9 @@ const updateProduct = asyncHandler(async (req, res) => {
     product.additionalimageone = additionalimageone;
     product.additionalimagetwo = additionalimagetwo;
     product.additionalimagethree = additionalimagethree;
+    product.productVideo = productVideo;
+    product.productTutorial = productTutorial;
+    product.productImportantInformation = productImportantInformation;
 
     const updatedProduct = await product.save();
     res.json(updatedProduct);

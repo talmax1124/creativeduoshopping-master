@@ -102,7 +102,8 @@ const ProductListScreen = ({ history, match }) => {
                 <th>Special Price</th>
                 <th>CATEGORY</th>
                 <th>BRAND</th>
-                <th>Product Date Created</th>
+                <th>Created At</th>
+                <th>Updated At</th>
                 <th></th>
               </tr>
             </thead>
@@ -122,6 +123,9 @@ const ProductListScreen = ({ history, match }) => {
                   <td>{product.category}</td>
                   <td>{product.brand}</td>
                   <td>{moment(product.createdAt).format(
+                        'LLL'
+                      )}</td> 
+                      <td>{moment(product.updatedAt).format(
                         'LLL'
                       )}</td> 
                   <td>

@@ -20,6 +20,9 @@ const ProductEditScreen = ({ match, history }) => {
   const [additionalimageone, setAdditionalimageone] = useState("");
   const [additionalimagetwo, setAdditionalimagetwo] = useState("");
   const [additionalimagethree, setAdditionalimagethree] = useState("");
+  const [productVideo, setProductVideo] = useState("");
+  const [productTutorial, setProductTutorial] = useState("");
+  const [productImportantInformation, setProductImportantInformation] = useState("");
   const [brand, setBrand] = useState("");
   const [category, setCategory] = useState("");
   const [countInStock, setCountInStock] = useState(0);
@@ -61,6 +64,9 @@ const ProductEditScreen = ({ match, history }) => {
         setAdditionalimageone(product.additionalimageone);
         setAdditionalimagetwo(product.additionalimagetwo);
         setAdditionalimagethree(product.additionalimagethree);
+        setProductImportantInformation(product.productImportantInformation);
+        setProductVideo(product.productVideo);
+        setProductTutorial(product.productTutorial);
       }
     }
   }, [dispatch, history, productId, product, successUpdate]);
@@ -175,6 +181,9 @@ const ProductEditScreen = ({ match, history }) => {
           additionalimageone,
           additionalimagetwo,
           additionalimagethree,
+          productVideo,
+          productTutorial,
+          productImportantInformation,
         })
       );
     }
@@ -313,6 +322,8 @@ const ProductEditScreen = ({ match, history }) => {
               {uploading && <Loader />}
             </Form.Group>
 
+
+
             <Form.Group controlId="brand">
               <Form.Label>Brand</Form.Label>
               <Form.Control
@@ -380,6 +391,36 @@ const ProductEditScreen = ({ match, history }) => {
                 placeholder="Enter description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
+              ></Form.Control>
+            </Form.Group>
+
+            <Form.Group controlId="productVideo">
+              <Form.Label>Product Video</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter Video URL"
+                value={productVideo}
+                onChange={(e) => setProductVideo(e.target.value)}
+              ></Form.Control>
+            </Form.Group>
+
+            <Form.Group controlId="productTutorial">
+              <Form.Label>Product Tutorial</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter Video URL"
+                value={productTutorial}
+                onChange={(e) => setProductTutorial(e.target.value)}
+              ></Form.Control>
+            </Form.Group>
+
+            <Form.Group controlId="productImportantInformation">
+              <Form.Label>Product Information</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter Product Info"
+                value={productImportantInformation}
+                onChange={(e) => setProductImportantInformation(e.target.value)}
               ></Form.Control>
             </Form.Group>
 
