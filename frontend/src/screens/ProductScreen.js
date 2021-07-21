@@ -155,14 +155,13 @@ const ProductScreen = ({ history, match }) => {
               {product.additionalimageone ||
               product.additionalimagetwo ||
               product.additionalimagethree ? (
-                <ProductImageCarousel match={match} />
+                <ProductImageCarousel match={match} variant="dark" />
               ) : (
                 <Image
                   src={product.image}
                   alt={product.name}
                   fluid
                   style={{
-                    maxHeight: "400px",
                     width: "100%",
                     objectFit: "contain",
                   }}
@@ -387,17 +386,17 @@ const ProductScreen = ({ history, match }) => {
 
               {product.productImportantInformation && (
                 <>
-                <h6>
-                  Product Important Information:
-                </h6>
-                <p>
-                  {product.productImportantInformation}
-                </p>
+                  <h6>Product Important Information:</h6>
+                  <p>{product.productImportantInformation}</p>
                 </>
               )}
               {product.productVideo && (
                 <>
-                  <Button variant="primary" onClick={handleShow} className="btn btn-block">
+                  <Button
+                    variant="primary"
+                    onClick={handleShow}
+                    className="btn btn-block"
+                  >
                     Open Product Video
                   </Button>
 
@@ -430,9 +429,13 @@ const ProductScreen = ({ history, match }) => {
                 </>
               )}
 
-        {product.productTutorial && (
+              {product.productTutorial && (
                 <>
-                  <Button variant="primary" onClick={handleShow} className="btn btn-block">
+                  <Button
+                    variant="primary"
+                    onClick={handleShow}
+                    className="btn btn-block"
+                  >
                     Open Product Tutorial
                   </Button>
 
