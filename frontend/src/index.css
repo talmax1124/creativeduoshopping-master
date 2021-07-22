@@ -513,6 +513,12 @@ h2 {
   }
 }
 
+@media (max-width: 1000px) {
+  .moredeets {
+    display: none;
+  }
+}
+
 @media (min-width: 1001px) {
   .carouselProd .carousel-control-next {
     background-color: rgba(141, 141, 141, 0.801);
