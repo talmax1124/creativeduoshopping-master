@@ -3,11 +3,11 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <div class="footer-dark">
+    <div className="footer-dark">
       <footer>
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-6 col-md-3 item">
+        <div className="container">
+          <div className="row">
+            <div className="col-sm-6 col-md-3 item">
               <h3 style={{ color: "whitesmoke" }}>Links</h3>
               <ul>
                 <li>
@@ -21,7 +21,7 @@ const Footer = () => {
                 </li>
               </ul>
             </div>
-            <div class="col-sm-6 col-md-3 item">
+            <div className="col-sm-6 col-md-3 item">
               <h3 style={{ color: "whitesmoke" }}>More</h3>
               <ul>
                 <li>
@@ -30,9 +30,12 @@ const Footer = () => {
                 <li>
                   <a href="https://linktr.ee/creativeduo2020" target="blank">More Links</a>
                 </li>
+                <li>
+                  <a href="/customwork" target="blank">Custom Digital Wesbites</a>
+                </li>
               </ul>
             </div>
-            <div class="col-md-6 item text">
+            <div className="col-md-6 item text">
               <h3 style={{ color: "whitesmoke" }}>Creative Duo</h3>
               <p>
                 Creative Duo is a small business that specialises in making
@@ -41,7 +44,7 @@ const Footer = () => {
               </p>
             </div>
           </div>
-          <p class="copyright">Creative Duo © {new Date().getFullYear()}</p>
+          <p className="copyright">Creative Duo © {new Date().getFullYear()}</p>
           <br />
           <center>
             <div id="google_translate_element"></div>

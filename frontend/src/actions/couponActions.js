@@ -35,12 +35,12 @@ import axios from 'axios'
      })
 
      const {
-       userLogin: { userData },
+       userLogin: { userInfo },
      } = getState()
 
      const config = {
        headers: {
-         Authorization: `Bearer ${userData.token}`,
+         Authorization: `Bearer ${userInfo.token}`,
        },
      }
 
@@ -72,12 +72,12 @@ import axios from 'axios'
      })
 
      const {
-       userLogin: { userData },
+       userLogin: { userInfo},
      } = getState()
 
      const config = {
        headers: {
-         Authorization: `Bearer ${userData.token}`,
+         Authorization: `Bearer ${userInfo.token}`,
        },
      }
 
