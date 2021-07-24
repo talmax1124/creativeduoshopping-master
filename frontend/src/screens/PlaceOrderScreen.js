@@ -1,26 +1,39 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Button, Row, Col, ListGroup, Image, Card } from "react-bootstrap";
+import {
+  Button,
+  Row,
+  Col,
+  ListGroup,
+  Image,
+  Card,
+  Form,
+} from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import CheckoutSteps from "../components/CheckoutSteps";
 import { createOrder } from "../actions/orderActions";
 import { ORDER_CREATE_RESET } from "../constants/orderConstants";
 import { USER_DETAILS_RESET } from "../constants/userConstants";
-import { addCoupon } from "../actions/cartActions";
+import { getCoupons } from "../actions/couponActions";
 
 const PlaceOrderScreen = ({ history }) => {
   const dispatch = useDispatch();
-  const [coupon, setCoupon] = useState("");
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
   const cart = useSelector((state) => state.cart);
 
+  const { coupons } = useSelector((state) => ({ ...state.couponsList }));
+  const [couponName, setCouponName] = useState("");
+  const [Discount, setDiscount] = useState(0);
+  const [CouponNotFound, setCouponNotFound] = useState("");
+  const [totalAfterDiscount, setTotalAfterDiscount] = useState(0);
+
   if (!cart.shippingAddress.address) {
     history.push("/shipping");
-  }  else if (!cart.paymentMethod) {
+  } else if (!cart.paymentMethod) {
     history.push("/payment");
   }
 
@@ -46,6 +59,7 @@ const PlaceOrderScreen = ({ history }) => {
   const { order, success, error } = orderCreate;
 
   useEffect(() => {
+    loadAllCoupons();
     if (success) {
       history.push(`/order/${order._id}`);
       dispatch({ type: USER_DETAILS_RESET });
@@ -53,6 +67,10 @@ const PlaceOrderScreen = ({ history }) => {
     }
     // eslint-disable-next-line
   }, [history, success]);
+
+  const loadAllCoupons = async () => {
+    return await dispatch(getCoupons());
+  };
 
   const placeOrderHandler = () => {
     dispatch(
@@ -62,31 +80,39 @@ const PlaceOrderScreen = ({ history }) => {
         paymentMethod: cart.paymentMethod,
         orderNotes: cart.orderNotes,
         fileUpload: cart.fileUpload,
-        couponCode: cart.couponCode,
         itemsPrice: cart.itemsPrice,
         feePrice: cart.feePrice,
-        totalPrice: cart.totalPrice,
+        totalPrice: totalAfterDiscount ? totalAfterDiscount : cart.totalPrice,
       })
     );
+    setTotalAfterDiscount(0);
   };
-
-  if (cart.couponDiscount) {
-    var tempDisc = Number(cart.couponDiscount) * cart.totalPrice;
-    cart.totalPrice -= tempDisc;
-    cart.totalPrice = cart.totalPrice.toFixed(2);
-  }
+  const handleSubmitCoupon = (e) => {
+    e.preventDefault();
+    let foundCoupon = coupons.filter((coupon) => coupon.name === couponName);
+    if (foundCoupon.length > 0) {
+      setDiscount(foundCoupon);
+      let finalPrice = (
+        cart.totalPrice -
+        (cart.totalPrice * foundCoupon[0].discount) / 100
+      ).toFixed(2);
+      setTotalAfterDiscount(finalPrice);
+      setCouponNotFound("");
+    } else {
+      setCouponName("");
+      return setCouponNotFound({
+        Message: "Sorry but the coupon does not exist or has not been applied.",
+      });
+    }
+  };
 
   if (userInfo.ispromember) {
     cart.totalPrice -= 1;
   }
 
-  const addCouponHandler = () => {
-    dispatch(addCoupon(coupon));
-  };
-
   return (
     <>
-      <CheckoutSteps step1 step2 step3 step4 step5 step6/>
+      <CheckoutSteps step1 step2 step3 step4 step5 step6 />
       <Row>
         <Col md={8}>
           <ListGroup variant="flush">
@@ -157,7 +183,35 @@ const PlaceOrderScreen = ({ history }) => {
               )}
             </ListGroup.Item>
           </ListGroup>
+          <Col>
+             <Form className='text-end' onSubmit={handleSubmitCoupon}>
+               <Form.Group controlId='copon'>
+                 <Form.Label>Insert coupon:</Form.Label>
+                 <Form.Control
+                   type='text'
+                   className='text-end'
+                   placeholder='Coupon Code'
+                   onChange={(e) => setCouponName(e.target.value)}
+                 ></Form.Control>
+               </Form.Group>
+               <Row>
+                 <Col className='text-center text-danger' md={9}>
+                   {CouponNotFound && CouponNotFound.Message}
+                 </Col>
+                 <Col className='text-center'>
+                   <Button
+                     className='mt-4 text-center'
+                     type='submit'
+                     variant='primary'
+                   >
+                     Apply Coupon
+                   </Button>
+                 </Col>
+               </Row>
+             </Form>
+           </Col>
         </Col>
+  
         <Col md={4}>
           <Card>
             <ListGroup variant="flush">
@@ -179,48 +233,21 @@ const PlaceOrderScreen = ({ history }) => {
                 </Row>
               </ListGroup.Item>
 
+              {Discount ? (
+                 <ListGroup.Item>
+                   <Row>
+                     <Col>Discount</Col>
+                     <Col>{Discount[0].discount}%</Col>
+                   </Row>
+                 </ListGroup.Item>
+               ) : (
+                 ''
+               )}
+
               <ListGroup.Item>
                 <Row>
                   <Col>Total</Col>
-                  <Col>${cart.totalPrice}</Col>
-                </Row>
-              </ListGroup.Item>
-
-              <ListGroup.Item>
-                <Row>
-                  {/* User enters the code from the variable below. Live update on change */}
-                  <label>Enter Your Coupon Code</label>
-                  <br></br>
-                  {userInfo && userInfo.ispromember && (
-                    <p style={{ color: "red" }}>
-                      You are getting this message because you are part of the
-                      promember family. You get a dollar discount!
-                    </p>
-                  )}
-
-                  {userInfo && userInfo.isMilitary && (
-                    <>
-                    <hr/>
-                    <p style={{ color: "blue" }}>
-                      Thank you for your service, for being a military/veteran, please visit our coupons/offers page to get your discount code!
-                    </p>
-                    </>
-                  )}
-
-                  <input
-                    onChange={(e) => setCoupon(e.target.value)}
-                    className="couponvalue"
-                    placeholder="Enter Coupon Code Here"
-                  />
-
-                  <Button
-                    type="button"
-                    className="btn-block"
-                    style={{ marginTop: "5px" }}
-                    onClick={addCouponHandler}
-                  >
-                    Apply Coupon
-                  </Button>
+                  <Col>${totalAfterDiscount ? totalAfterDiscount : cart.totalPrice}</Col>
                 </Row>
               </ListGroup.Item>
 

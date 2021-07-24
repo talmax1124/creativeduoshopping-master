@@ -53,6 +53,7 @@
     "jsonwebtoken": "^8.5.1",
     "lightgallery": "^2.1.5",
     "mailgun-js": "^0.22.0",
+    "mdb-ui-kit": "^3.9.0",
     "moment": "^2.29.1",
     "mongoose": "^5.12.6",
     "morgan": "^1.10.0",

@@ -6,12 +6,8 @@ import {
   CART_SAVE_ORDERNOTES,
   CART_SAVE_FILEUPLOAD,
   CART_CLEAR_ITEMS,
-  CART_ADD_COUPON,
 } from "../constants/cartConstants";
 
-// TODO: Add a reducer for invalid coupons
-
-// TODO: Add a reducer to reset coupon
 
 export const cartReducer = (
   state = { cartItems: [], shippingAddress: {} },
@@ -66,12 +62,7 @@ export const cartReducer = (
         ...state,
         cartItems: [],
       };
-    case CART_ADD_COUPON:
-      return {
-        ...state,
-        coupon: action.payload.coupon,
-        couponDiscount: action.payload.couponDiscount,
-      };
+
     default:
       return state;
   }

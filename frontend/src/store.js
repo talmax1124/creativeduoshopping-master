@@ -2,6 +2,12 @@ import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import {
+  CreateCouponReducer,
+  RemoveCouponReducer,
+  couponsListReducer,
+} from './reducers/couponReducers'
+
+import {
   productListReducer,
   productDetailsReducer,
   productDeleteReducer,
@@ -39,6 +45,9 @@ import {
 } from "./reducers/orderReducers";
 
 const reducer = combineReducers({
+  couponsList: couponsListReducer,
+   CreateCoupon: CreateCouponReducer,
+   RemoveCoupon: RemoveCouponReducer,
   productList: productListReducer,
   productCategory: productCategoryReducer,
   productDetails: productDetailsReducer,

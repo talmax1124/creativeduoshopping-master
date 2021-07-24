@@ -4,7 +4,7 @@ import {
   CART_REMOVE_ITEM,
   CART_SAVE_SHIPPING_ADDRESS,
   CART_SAVE_PAYMENT_METHOD,
-  CART_ADD_COUPON,
+
   CART_SAVE_ORDERNOTES,
   CART_SAVE_FILEUPLOAD
 } from "../constants/cartConstants";
@@ -97,28 +97,3 @@ export const saveFileUploadMethod = (data) => (dispatch) => {
   localStorage.setItem("saveFileUploadMethod", JSON.stringify(data));
 };
 
-export const addCoupon = (coupon) => (dispatch) => {
-  let couponDiscount = 0;
-
-  // TODO: Get couponDiscount value from db
-
-  if (coupon.toLowerCase() === "creativeduoadmin") {
-    couponDiscount = 0.1;
-  }
-
-  if (coupon.toLowerCase() === "militarydiscount5") {
-    couponDiscount = 0.05;
-  }
-
-  if (coupon.toLowerCase() === "sister") {
-    couponDiscount = 0.03;
-  }
-
-  dispatch({
-    type: CART_ADD_COUPON,
-    payload: { coupon, couponDiscount },
-  });
-
-  localStorage.setItem("coupon", JSON.stringify(coupon));
-  localStorage.setItem("couponDiscount", JSON.stringify(couponDiscount));
-};

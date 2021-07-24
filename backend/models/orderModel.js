@@ -85,14 +85,12 @@ const orderSchema = mongoose.Schema(
     emailNotifier: {
       type: String,
     },
-    couponCode: {
-      type: String,
-    },
+
     orderStatus: {
       type: String,
     },
 
-    countInStock: { type: Number},
+    countInStock: { type: Number },
 
     fileUpload: {
       type: String,
@@ -108,13 +106,11 @@ const orderSchema = mongoose.Schema(
         type: Date,
       },
     },
-    couponCode: {
-      isCancelled: {
-        type: String,
-        type: Boolean,
-        required: true,
-        default: false,
-      },
+
+
+    isCancelled: {
+      type: Boolean,
+      default: false,
     },
     orderStatus: {
       type: String,

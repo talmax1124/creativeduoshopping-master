@@ -12,6 +12,9 @@ const userSchema = mongoose.Schema(
       required: true,
       unique: true,
     },
+    profileImage: {
+      type: String,
+    },
     phone: {
       type: Number,
       default: null,
@@ -30,7 +33,7 @@ const userSchema = mongoose.Schema(
     },
     isMilitary: {
       type: Boolean,
-      default: false
+      default: false,
     },
     isgoldmember: {
       type: Boolean,

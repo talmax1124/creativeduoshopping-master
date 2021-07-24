@@ -8,6 +8,9 @@ import secure from "ssl-express-www";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 import connectDB from "./config/db.js";
 
+// Coupons
+import couponRoutes from "./routes/couponRoutes.js";
+
 import * as Sentry from "@sentry/browser";
 import { Integrations } from "@sentry/tracing";
 
@@ -17,10 +20,9 @@ import orderRoutes from "./routes/orderRoutes.js";
 import uploadRoutes from "./routes/uploadRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 import passport from "./config/passport.js";
-import wishListRoutes from './routes/wishListRoutes.js'
+import wishListRoutes from "./routes/wishListRoutes.js";
 Sentry.init({
-  dsn:
-    "https://72643a64db6c448ab1c27d8403375315@o682560.ingest.sentry.io/5771014",
+  dsn: "https://72643a64db6c448ab1c27d8403375315@o682560.ingest.sentry.io/5771014",
   integrations: [new Integrations.BrowserTracing()],
 
   // Set tracesSampleRate to 1.0 to capture 100%
@@ -64,7 +66,8 @@ app.use("/api/users", userRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/upload", uploadRoutes);
 app.use("/api/auth", authRoutes);
-app.use('/api/wishlist', wishListRoutes)
+app.use("/api/wishlist", wishListRoutes);
+app.use("/api/coupons", couponRoutes);
 
 app.get("/api/config/paypal", (req, res) =>
   res.send(process.env.PAYPAL_CLIENT_ID)

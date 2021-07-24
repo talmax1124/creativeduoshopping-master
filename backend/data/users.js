@@ -4,7 +4,7 @@ const users = [
   {
     name: 'Carlitos',
     email: 'carlitosdiazplaza@gmail.com',
-    phone: 123123123,
+    phone: 4074832251,
     password: bcrypt.hashSync('carlitos', 10),
     isAdmin: true,
     ispromember: true,

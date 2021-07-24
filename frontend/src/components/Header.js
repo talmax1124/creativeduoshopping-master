@@ -16,8 +16,8 @@ const Header = () => {
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
 
-  const wishlistStore = useSelector((state) => state.productWishList)
-  const { wishlist } = wishlistStore
+  const wishlistStore = useSelector((state) => state.productWishList);
+  const { wishlist } = wishlistStore;
 
   const logoutHandler = () => {
     dispatch(logout());
@@ -71,55 +71,61 @@ const Header = () => {
                   <i className="fas fa-home"></i> Home
                 </Nav.Link>
               </LinkContainer>
-             
+
               {userInfo ? (
                 <>
-                 <LinkContainer to='/wishlist'>
-                 <Nav.Link>
-                   <div className='header__cart_icon'>
-                     <i className=' fas fa-heart' />{' '}
-                     <strong>
-                       {wishlist.length > 0 && (
-                         <span className='header__cart__count'>
-                           {wishlist.reduce((acc, item) => acc + item.qty, 0)}
-                         </span>
-                       )}
-                     </strong>
-                   </div>
-                 </Nav.Link>
-               </LinkContainer>
-                <NavDropdown title={userInfo.name} id="username">
-                  <LinkContainer to="/profile">
-                    <NavDropdown.Item>Profile</NavDropdown.Item>
-                  </LinkContainer>
                   <LinkContainer to="/wishlist">
-                    <NavDropdown.Item>WishList</NavDropdown.Item>
+                    <Nav.Link>
+                      <div className="header__cart_icon">
+                        <i className=" fas fa-heart" />{" "}
+                        <strong>
+                          {wishlist.length > 0 && (
+                            <span className="header__cart__count">
+                              {wishlist.reduce(
+                                (acc, item) => acc + item.qty,
+                                0
+                              )}
+                            </span>
+                          )}
+                        </strong>
+                      </div>
+                    </Nav.Link>
                   </LinkContainer>
-                  <LinkContainer to="/currentoffers">
-                    <NavDropdown.Item>Offers</NavDropdown.Item>
-                  </LinkContainer>
-                  <NavDropdown.Item onClick={logoutHandler}>
-                    Logout
-                  </NavDropdown.Item>
+                  <NavDropdown title={userInfo.name} id="username">
+                    <LinkContainer to="/profile">
+                      <NavDropdown.Item>Profile</NavDropdown.Item>
+                    </LinkContainer>
+                    <LinkContainer to="/wishlist">
+                      <NavDropdown.Item>WishList</NavDropdown.Item>
+                    </LinkContainer>
+                    <LinkContainer to="/currentoffers">
+                      <NavDropdown.Item>Offers</NavDropdown.Item>
+                    </LinkContainer>
+                    <NavDropdown.Item onClick={logoutHandler}>
+                      Logout
+                    </NavDropdown.Item>
 
-                  {userInfo && userInfo.isAdmin && (
-                    <>
-                      <NavDropdown.Divider
-                        style={{ backgroundColor: "pink", padding: ".8px" }}
-                      />
-                      <p style={{ textAlign: "center" }}>Admin</p>
-                      <LinkContainer to="/admin/userlist">
-                        <NavDropdown.Item>Users</NavDropdown.Item>
-                      </LinkContainer>
-                      <LinkContainer to="/admin/productlist">
-                        <NavDropdown.Item>Products</NavDropdown.Item>
-                      </LinkContainer>
-                      <LinkContainer to="/admin/orderlist">
-                        <NavDropdown.Item>Orders</NavDropdown.Item>
-                      </LinkContainer>
-                    </>
-                  )}
-                </NavDropdown>
+                    {userInfo && userInfo.isAdmin && (
+                      <>
+                        <NavDropdown.Divider
+                          style={{ backgroundColor: "pink", padding: ".8px" }}
+                        />
+                        <p style={{ textAlign: "center" }}>Admin</p>
+                        <LinkContainer to="/admin/userlist">
+                          <NavDropdown.Item>Users</NavDropdown.Item>
+                        </LinkContainer>
+                        <LinkContainer to="/admin/productlist">
+                          <NavDropdown.Item>Products</NavDropdown.Item>
+                        </LinkContainer>
+                        <LinkContainer to="/admin/orderlist">
+                          <NavDropdown.Item>Orders</NavDropdown.Item>
+                        </LinkContainer>
+                        <LinkContainer to="/admin/coupon">
+                          <NavDropdown.Item>Coupon</NavDropdown.Item>
+                        </LinkContainer>
+                      </>
+                    )}
+                  </NavDropdown>
                 </>
               ) : (
                 <LinkContainer to="/login">

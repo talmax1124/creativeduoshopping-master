@@ -1,15 +1,28 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { Card, Badge, Toast, Button } from "react-bootstrap";
+import { Card, Badge } from "react-bootstrap";
 import Rating from "./Rating";
 import Favorites from "./Favorites";
+
+import Button from '@material-ui/core/Button';
+import Tooltip from '@material-ui/core/Tooltip';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 
 const Product = ({ product }) => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
-  const [show, setShow] = useState(false);
+  const [open, setOpen] = React.useState(false);
+
+  const handleTooltipClose = () => {
+    setOpen(false);
+  };
+
+  const handleTooltipOpen = () => {
+    setOpen(true);
+  };
+
 
   return (
     <Card className="my-3 p-1 rounded cardsss">
@@ -70,23 +83,25 @@ const Product = ({ product }) => {
             </Card.Text>
           </>
         )}
-        <Button onClick={() => setShow(true)} className="btn btn-block moredeets">More Details</Button>
 
-        <Toast
-          onClose={() => setShow(false)}
-          show={show}
-          delay={10000}
-          autohide
-          style={{marginTop: "15px"}}
-        >
-          <Toast.Header>
-            <strong className="me-auto">More Info On Product</strong>
-          </Toast.Header>
-          <Toast.Body>
-          Brand: {product.brand} <br />
-          Category: {product.category}
-          </Toast.Body>
-        </Toast>
+        <ClickAwayListener onClickAway={handleTooltipClose}>
+            <div>
+              <Tooltip
+                PopperProps={{
+                  disablePortal: true,
+                }}
+                onClose={handleTooltipClose}
+                open={open}
+                disableFocusListener
+                disableHoverListener
+                disableTouchListener
+                title={product.brand}
+              >
+                <Button onClick={handleTooltipOpen}>Product Brand</Button>
+              </Tooltip>
+            </div>
+          </ClickAwayListener>
+       
       </Card.Body>
     </Card>
   );
