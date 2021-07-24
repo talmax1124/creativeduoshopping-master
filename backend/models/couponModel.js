@@ -8,7 +8,6 @@ import mongoose from 'mongoose'
        unique: true,
        uppercase: true,
        required: 'name is required',
-       maxlength: [12, 'Too long'],
      },
      expiry: {
        type: Date,

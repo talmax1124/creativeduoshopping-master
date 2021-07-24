@@ -10,7 +10,7 @@ const CurrentOffers = () => {
     <>
       <h1>Current Offers</h1>
       <Row>
-        <Col   className="colmain">
+        <Col className="colmain">
           {userInfo && userInfo.isAdmin && (
             <Card className="my-1 p-1 rounded cardsss c12">
               <Card.Img
@@ -21,7 +21,13 @@ const CurrentOffers = () => {
               <Card.Body>
                 <Card.Title as="h3">10% Discount</Card.Title>
                 <Card.Title className="boldcode">
-                  Use Code: creativeduoadmin
+                  <button
+                    onClick={() =>
+                      navigator.clipboard.writeText("CREATIVEDUOADMIN")
+                    }
+                  >
+                    Click Here To Copy Discount Code
+                  </button>
                 </Card.Title>
                 <Card.Text>
                   You can see this offer because you are a admin.
@@ -40,7 +46,13 @@ const CurrentOffers = () => {
               <Card.Body>
                 <Card.Title as="h3">5% Discount</Card.Title>
                 <Card.Title className="boldcode">
-                  Use Code: militarydiscount5
+                  <button
+                    onClick={() =>
+                      navigator.clipboard.writeText("MILITARYDISCOUNT5")
+                    }
+                  >
+                    Click Here To Copy Discount Code
+                  </button>
                 </Card.Title>
                 <Card.Text>
                   Thanks for your service! Use this on any of your orders

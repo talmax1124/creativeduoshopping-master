@@ -184,40 +184,57 @@ const PlaceOrderScreen = ({ history }) => {
             </ListGroup.Item>
           </ListGroup>
           <Col>
-             <Form className='text-end' onSubmit={handleSubmitCoupon}>
-               <Form.Group controlId='copon'>
-                 <Form.Label>Insert coupon:</Form.Label>
-                 <Form.Control
-                   type='text'
-                   className='text-end'
-                   placeholder='Coupon Code'
-                   onChange={(e) => setCouponName(e.target.value)}
-                 ></Form.Control>
-               </Form.Group>
-               <Row>
-                 <Col className='text-center text-danger' md={9}>
-                   {CouponNotFound && CouponNotFound.Message}
-                 </Col>
-                 <Col className='text-center'>
-                   <Button
-                     className='mt-4 text-center'
-                     type='submit'
-                     variant='primary'
-                   >
-                     Apply Coupon
-                   </Button>
-                 </Col>
-               </Row>
-             </Form>
-           </Col>
+            <Form className="text-end" onSubmit={handleSubmitCoupon}>
+              <Form.Group controlId="copon">
+                <Form.Label>Insert coupon code:</Form.Label>
+                <Form.Control
+                  type="text"
+                  className="text-end"
+                  placeholder="Coupon Code"
+                  onChange={(e) => setCouponName(e.target.value)}
+                ></Form.Control>
+              </Form.Group>
+              <Row>
+                <Col className="text-center text-danger" md={9}>
+                  {CouponNotFound && CouponNotFound.Message}
+                </Col>
+                <Col className="text-center">
+                  <Button
+                    className="mt-4 text-center"
+                    type="submit"
+                    variant="primary"
+                  >
+                    Apply Coupon
+                  </Button>
+                </Col>
+              </Row>
+            </Form>
+          </Col>
         </Col>
-  
+
         <Col md={4}>
           <Card>
             <ListGroup variant="flush">
               <ListGroup.Item>
                 <h2>Order Summary</h2>
               </ListGroup.Item>
+
+              {userInfo.ispromember && (
+                <ListGroup.Item>
+                  <p style={{color: "red"}}>
+                    You have been marked as a pro member. A dollar has been
+                    deducted from the total. Thank you for your support!
+                  </p>
+                </ListGroup.Item>
+              )}
+
+              {userInfo.isMilitary && (
+                <ListGroup.Item>
+                  <p style={{color: "blue"}}>
+                    You have been marked as a military. For a discount, please visit the offers page
+                  </p>
+                </ListGroup.Item>
+              )}
 
               <ListGroup.Item>
                 <Row>
@@ -234,20 +251,22 @@ const PlaceOrderScreen = ({ history }) => {
               </ListGroup.Item>
 
               {Discount ? (
-                 <ListGroup.Item>
-                   <Row>
-                     <Col>Discount</Col>
-                     <Col>{Discount[0].discount}%</Col>
-                   </Row>
-                 </ListGroup.Item>
-               ) : (
-                 ''
-               )}
+                <ListGroup.Item>
+                  <Row>
+                    <Col>Discount</Col>
+                    <Col>{Discount[0].discount}%</Col>
+                  </Row>
+                </ListGroup.Item>
+              ) : (
+                ""
+              )}
 
               <ListGroup.Item>
                 <Row>
                   <Col>Total</Col>
-                  <Col>${totalAfterDiscount ? totalAfterDiscount : cart.totalPrice}</Col>
+                  <Col>
+                    ${totalAfterDiscount ? totalAfterDiscount : cart.totalPrice}
+                  </Col>
                 </Row>
               </ListGroup.Item>
 
