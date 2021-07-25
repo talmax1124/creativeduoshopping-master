@@ -317,8 +317,8 @@ const OrderListScreen = ({ history }) => {
                   )}
                 </td>
                 <td>
-                  {order.isCancled ? (
-                    order.cancledAt.substring(0, 10)
+                  {order.isCancelled ? (
+                    moment(order.cancelledAt).format("LLL")
                   ) : (
                     <i className="fas fa-times" style={{ color: "red" }}></i>
                   )}

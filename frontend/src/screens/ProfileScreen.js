@@ -8,6 +8,8 @@ import { getUserDetails, updateUserProfile } from "../actions/userActions";
 import { listMyOrders } from "../actions/orderActions";
 import { USER_UPDATE_PROFILE_RESET } from "../constants/userConstants";
 
+import moment from "moment";
+
 const ProfileScreen = ({ location, history }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -153,7 +155,6 @@ const ProfileScreen = ({ location, history }) => {
                   <th>Packed</th>
                   <th>Dispatched</th>
                   <th>Order Canceled</th>
-                  <th>Order Status</th>
                   <th></th>
                 </tr>
               </thead>
@@ -203,9 +204,15 @@ const ProfileScreen = ({ location, history }) => {
                         ></i>
                       )}
                     </td>
+                    {/* 
+                     "Canceled",
+                    order.isCancelled
+                      ? moment(order.cancelledAt).format("LLL")
+                      : "Order is Not Cancelled",
+                     */}
                     <td>
-                      {order.isCancled ? (
-                        order.cancledAt.substring(0, 10)
+                      {order.isCancelled ? (
+                        moment(order.cancelledAt).format("LLL")
                       ) : (
                         <i
                           className="fas fa-times"
@@ -213,7 +220,6 @@ const ProfileScreen = ({ location, history }) => {
                         ></i>
                       )}
                     </td>
-                    <td>Order Status {order.orderStatus}</td>
                     <td>
                       <LinkContainer to={`/order/${order._id}`}>
                         <Button className="btn-sm" variant="dark">

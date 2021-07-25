@@ -334,6 +334,12 @@ const OrderScreen = ({ match, history }) => {
                       : "Order is Not Packed Yet",
                   ],
                   [
+                    "Canceled",
+                    order.isCancelled
+                      ? moment(order.cancelledAt).format("LLL")
+                      : "Order is Not Cancelled",
+                  ],
+                  [
                     "Dispatched",
                     order.isDispatched
                       ? "Order is Dispatched"
@@ -478,7 +484,7 @@ const OrderScreen = ({ match, history }) => {
 
               {order.isCancelled && (
                 <Message variant="danger">
-                  Order is Cancelled at date {order.canceldAt}
+                  Order is Cancelled
                 </Message>
               )}
 
@@ -652,7 +658,7 @@ const OrderScreen = ({ match, history }) => {
               )}
 
               <ListGroup.Item>
-                {userInfo && userInfo.isAdmin && !order.isDelivered && (
+                {userInfo && userInfo.isAdmin &&  !order.isCancelled && !order.isDelivered  && (
                   <Button
                     type="button"
                     className="btn btn-block"
@@ -662,7 +668,7 @@ const OrderScreen = ({ match, history }) => {
                   </Button>
                 )}
 
-                {userInfo && userInfo.isAdmin && !order.isPaid && (
+                {userInfo && userInfo.isAdmin && !order.isCancelled && !order.isPaid && (
                   <Button
                     type="button"
                     className="btn btn-block"
@@ -723,7 +729,7 @@ const OrderScreen = ({ match, history }) => {
                       type="button"
                       className="btn btn-block"
                       onClick={cancelHandler}
-                      disabled
+                      // disabled
                     >
                       Cancel Order
                     </Button>
