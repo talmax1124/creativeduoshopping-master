@@ -1,6 +1,16 @@
 import React, { useEffect } from "react";
+
+import { withStyles, makeStyles } from "@material-ui/core/styles";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import Paper from "@material-ui/core/Paper";
+
 import { LinkContainer } from "react-router-bootstrap";
-import { Table, Button } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
@@ -12,6 +22,32 @@ import pdfFonts from "pdfmake/build/vfs_fonts";
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 const OrderListScreen = ({ history }) => {
+  const StyledTableCell = withStyles((theme) => ({
+    head: {
+      backgroundColor: theme.palette.common.black,
+      color: theme.palette.common.white,
+    },
+    body: {
+      fontSize: 14,
+    },
+  }))(TableCell);
+
+  const StyledTableRow = withStyles((theme) => ({
+    root: {
+      "&:nth-of-type(odd)": {
+        backgroundColor: theme.palette.action.hover,
+      },
+    },
+  }))(TableRow);
+
+  const useStyles = makeStyles({
+    table: {
+      minWidth: 700,
+    },
+  });
+
+  const classes = useStyles();
+
   const dispatch = useDispatch();
 
   const orderList = useSelector((state) => state.orderList);
@@ -265,83 +301,92 @@ const OrderListScreen = ({ history }) => {
       ) : error ? (
         <Message variant="danger">{error}</Message>
       ) : (
-        <Table striped bordered hover responsive className="table-sm">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>USER</th>
-              <th>DATE</th>
-              <th>TOTAL</th>
-              <th>PAID</th>
-              <th>DELIVERED</th>
-              <th>Packed</th>
-              <th>Dispatched</th>
-              <th>Cancled</th>
-              <th>Order Status</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {orders.map((order) => (
-              <tr key={order._id}>
-                <td>{order._id}</td>
-                <td>{order.user && order.user.name}</td>
-                <td>{order.createdAt.substring(0, 10)}</td>
-                <td>${order.totalPrice}</td>
-                <td>
-                  {order.isPaid ? (
-                    order.paidAt.substring(0, 10)
-                  ) : (
-                    <i className="fas fa-times" style={{ color: "red" }}></i>
-                  )}
-                </td>
-                <td>
-                  {order.isDelivered ? (
-                    order.deliveredAt.substring(0, 10)
-                  ) : (
-                    <i className="fas fa-times" style={{ color: "red" }}></i>
-                  )}
-                </td>
-                <td>
-                  {order.isPacked ? (
-                    order.packedAt.substring(0, 10)
-                  ) : (
-                    <i className="fas fa-times" style={{ color: "red" }}></i>
-                  )}
-                </td>
-                <td>
-                  {order.isDispatched ? (
-                    <i className="fas fa-check" style={{ color: "red" }}></i>
-                  ) : (
-                    <i className="fas fa-times" style={{ color: "red" }}></i>
-                  )}
-                </td>
-                <td>
-                  {order.isCancelled ? (
-                    moment(order.cancelledAt).format("LLL")
-                  ) : (
-                    <i className="fas fa-times" style={{ color: "red" }}></i>
-                  )}
-                </td>
-                <td>Order Status: {order.orderStatus}</td>
-                <td>
-                  <LinkContainer to={`/order/${order._id}`}>
-                    <Button variant="dark" className="btn-sm">
-                      Details
+        <TableContainer component={Paper}>
+          <Table
+            className={classes.table}
+            aria-label="customized table"
+            stickyHeader
+          >
+            <TableHead>
+              <TableRow>
+                <StyledTableCell>ID</StyledTableCell>
+                <StyledTableCell align="right">Date</StyledTableCell>
+                <StyledTableCell align="right">Total</StyledTableCell>
+                <StyledTableCell align="right">Paid</StyledTableCell>
+                <StyledTableCell align="right">Delivered</StyledTableCell>
+                <StyledTableCell align="right">Packed</StyledTableCell>
+                <StyledTableCell align="right">Dispatched</StyledTableCell>
+                <StyledTableCell align="right">Order Cancelled</StyledTableCell>
+                <StyledTableCell align="right">Action</StyledTableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {orders.map((order) => (
+                <StyledTableRow key={order._id}>
+                  <StyledTableCell component="th" scope="row">
+                    {order._id}
+                  </StyledTableCell>
+                  <StyledTableCell align="right">
+                    {order.createdAt && moment(order.createdAt).format("LLL")}
+                  </StyledTableCell>
+                  <StyledTableCell align="right">
+                    {order.totalPrice}
+                  </StyledTableCell>
+                  <StyledTableCell align="right">
+                    {" "}
+                    {order.isPaid ? (
+                      order.paidAt.substring(0, 10)
+                    ) : (
+                      <i className="fas fa-times" style={{ color: "red" }}></i>
+                    )}
+                  </StyledTableCell>
+                  <StyledTableCell align="right">
+                    {order.isDelivered ? (
+                      order.deliveredAt.substring(0, 10)
+                    ) : (
+                      <i className="fas fa-times" style={{ color: "red" }}></i>
+                    )}
+                  </StyledTableCell>
+                  <StyledTableCell align="right">
+                    {order.isPacked ? (
+                      order.packedAt.substring(0, 10)
+                    ) : (
+                      <i className="fas fa-times" style={{ color: "red" }}></i>
+                    )}
+                  </StyledTableCell>
+                  <StyledTableCell align="right">
+                    {order.isDispatched ? (
+                      <i className="fas fa-check" style={{ color: "red" }}></i>
+                    ) : (
+                      <i className="fas fa-times" style={{ color: "red" }}></i>
+                    )}
+                  </StyledTableCell>
+                  <StyledTableCell align="right">
+                    {order.isCancelled ? (
+                      moment(order.cancelledAt).format("LLL")
+                    ) : (
+                      <i className="fas fa-times" style={{ color: "red" }}></i>
+                    )}
+                  </StyledTableCell>
+                  <StyledTableCell align="right">
+                    <LinkContainer to={`/order/${order._id}`}>
+                      <Button className="btn-sm" variant="dark">
+                        Details
+                      </Button>
+                    </LinkContainer>
+                    <Button
+                      variant="danger"
+                      className="btn-sm"
+                      onClick={() => deleteHandler(order._id)}
+                    >
+                      <i className="fas fa-trash"></i>Delete
                     </Button>
-                  </LinkContainer>
-                  <Button
-                    variant="danger"
-                    className="btn-sm"
-                    onClick={() => deleteHandler(order._id)}
-                  >
-                    <i className="fas fa-trash"></i>Delete
-                  </Button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </Table>
+                  </StyledTableCell>
+                </StyledTableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
       )}
     </>
   );

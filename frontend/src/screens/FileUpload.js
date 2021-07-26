@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import FormContainer from "../components/FormContainer";
 import CheckoutSteps from "../components/CheckoutSteps";
 import { saveFileUploadMethod } from "../actions/cartActions";
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import { Widget } from "@uploadcare/react-widget";
 
@@ -71,7 +71,13 @@ const fileUpload = ({ history }) => {
           ></Form.Control>
         </Form.Group>
 
-        <Button type="submit" variant="primary" className="btn btn-block">
+        <Link to="/ordernotes">
+          <Button variant="info" style={{ marginRight: "5px" }}>
+            Go Back
+          </Button>
+        </Link>
+
+        <Button type="submit" variant="primary">
           Continue / Proceed
         </Button>
       </Form>

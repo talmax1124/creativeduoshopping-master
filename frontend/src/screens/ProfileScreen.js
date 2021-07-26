@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Table, Form, Button, Row, Col } from "react-bootstrap";
+import { Form, Button, Row, Col } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
@@ -8,9 +8,50 @@ import { getUserDetails, updateUserProfile } from "../actions/userActions";
 import { listMyOrders } from "../actions/orderActions";
 import { USER_UPDATE_PROFILE_RESET } from "../constants/userConstants";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
+
+import Grid from "@material-ui/core/Grid";
+import TextField from "@material-ui/core/TextField";
+
 import moment from "moment";
 
+import { withStyles, makeStyles } from "@material-ui/core/styles";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import Paper from "@material-ui/core/Paper";
+
 const ProfileScreen = ({ location, history }) => {
+  const StyledTableCell = withStyles((theme) => ({
+    head: {
+      backgroundColor: theme.palette.common.black,
+      color: theme.palette.common.white,
+    },
+    body: {
+      fontSize: 14,
+    },
+  }))(TableCell);
+
+  const StyledTableRow = withStyles((theme) => ({
+    root: {
+      "&:nth-of-type(odd)": {
+        backgroundColor: theme.palette.action.hover,
+      },
+    },
+  }))(TableRow);
+
+  const useStyles = makeStyles({
+    table: {
+      minWidth: 700,
+    },
+  });
+
+  const classes = useStyles();
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -31,6 +72,21 @@ const ProfileScreen = ({ location, history }) => {
 
   const orderListMy = useSelector((state) => state.orderListMy);
   const { loading: loadingOrders, error: errorOrders, orders } = orderListMy;
+
+  const eye = <FontAwesomeIcon icon={faEye} />;
+  const eye2 = <FontAwesomeIcon icon={faEye} />;
+
+  const [passwordShown, setPasswordShown] = useState(false);
+  const togglePasswordVisiblity = () => {
+    setPasswordShown(passwordShown ? false : true);
+  };
+
+  // For Confirm Password
+
+  const [confirmpasswordShown, setconfirmPasswordShown] = useState(false);
+  const togglePasswordVisiblity2 = () => {
+    setconfirmPasswordShown(confirmpasswordShown ? false : true);
+  };
 
   useEffect(() => {
     if (!userInfo) {
@@ -60,111 +116,160 @@ const ProfileScreen = ({ location, history }) => {
   };
 
   return (
-    <Row>
-      <>
-        <Col md={3}>
-          <h2>User Profile</h2>
+    <>
+      <Row>
+        <>
+          <Col>
+            <h2>User Profile</h2>
 
-          {userInfo && userInfo.isMilitary && (
-            <p style={{ color: "blue" }}>
-              Thank you for your service! Your profile has been marked as a
-              Military Member. Check offers page for your discount code
-            </p>
-          )}
+            {userInfo && userInfo.isMilitary && (
+              <p style={{ color: "blue" }}>
+                Thank you for your service! Your profile has been marked as a
+                Military Member. Check offers page for your discount code
+              </p>
+            )}
 
-          {message && <Message variant="danger">{message}</Message>}
-          {}
-          {success && <Message variant="success">Profile Updated</Message>}
-          {loading ? (
-            <Loader />
-          ) : error ? (
-            <Message variant="danger">{error}</Message>
-          ) : (
-            <Form onSubmit={submitHandler}>
-              <Form.Group controlId="name">
-                <Form.Label>Name</Form.Label>
-                <Form.Control
-                  type="name"
-                  placeholder="Enter name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                ></Form.Control>
-              </Form.Group>
+            {message && <Message variant="danger">{message}</Message>}
+            {}
+            {success && <Message variant="success">Profile Updated</Message>}
+            {loading ? (
+              <Loader />
+            ) : error ? (
+              <Message variant="danger">{error}</Message>
+            ) : (
+              <Form onSubmit={submitHandler}>
+                <Grid container spacing={2}>
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                      type="name"
+                      variant="outlined"
+                      fullWidth
+                      id="name"
+                      label="Name"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      autoFocus
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                      variant="outlined"
+                      type="tel"
+                      fullWidth
+                      id="phone"
+                      label="Phone Number"
+                      name="phone"
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      variant="outlined"
+                      fullWidth
+                      id="email"
+                      label="Email Address"
+                      name="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                      variant="outlined"
+                      fullWidth
+                      name="password"
+                      label="Password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      type={passwordShown ? "text" : "password"}
+                      id="password"
+                    />
+                    <br />
 
-              <Form.Group controlId="email">
-                <Form.Label>Email Address</Form.Label>
-                <Form.Control
-                  type="email"
-                  placeholder="Enter email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                ></Form.Control>
-              </Form.Group>
+                    <Button
+                      onClick={togglePasswordVisiblity}
+                      className="btn mt-1 mb-1 btn-block"
+                    >
+                      <i>{eye}</i>
+                      Show/Hide Password
+                    </Button>
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                      variant="outlined"
+                      fullWidth
+                      name="currentPassword"
+                      label="Confirm Password"
+                      type={confirmpasswordShown ? "text" : "password"}
+                      id="confirmPassword"
+                      value={confirmPassword}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                    />
+                    <br />
+                    <Button
+                      onClick={togglePasswordVisiblity2}
+                      className="btn mt-1 mb-1 btn-block"
+                    >
+                      <i>{eye2}</i>
+                      Show/Hide Password
+                    </Button>
+                  </Grid>
+                </Grid>
 
-              <Form.Group controlId="phone">
-                <Form.Label>Phone Number</Form.Label>
-                <Form.Control
-                  type="tel"
-                  placeholder="Enter Phone Number"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                ></Form.Control>
-              </Form.Group>
+                <Button
+                  type="submit"
+                  variant="primary"
+                  className="btn btn-block mt-1"
+                >
+                  Update Profile Information
+                </Button>
+              </Form>
+            )}
+          </Col>
+        </>
+      </Row>
 
-              <Form.Group controlId="password">
-                <Form.Label>Password</Form.Label>
-                <Form.Control
-                  type="password"
-                  placeholder="Enter password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                ></Form.Control>
-              </Form.Group>
-
-              <Form.Group controlId="confirmPassword">
-                <Form.Label>Confirm Password</Form.Label>
-                <Form.Control
-                  type="password"
-                  placeholder="Confirm password"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                ></Form.Control>
-              </Form.Group>
-
-              <Button type="submit" variant="primary" className="btn btn-block">
-                Update
-              </Button>
-            </Form>
-          )}
-        </Col>
-        <Col md={9}>
-          <h2>My Orders</h2>
-          {loadingOrders ? (
-            <Loader />
-          ) : errorOrders ? (
-            <Message variant="danger">{errorOrders}</Message>
-          ) : (
-            <Table striped bordered hover responsive className="table-sm">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>DATE</th>
-                  <th>TOTAL</th>
-                  <th>PAID</th>
-                  <th>DELIVERED</th>
-                  <th>Packed</th>
-                  <th>Dispatched</th>
-                  <th>Order Canceled</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
+      <Col>
+        <h2>My Orders</h2>
+        {loadingOrders ? (
+          <Loader />
+        ) : errorOrders ? (
+          <Message variant="danger">{errorOrders}</Message>
+        ) : (
+          <TableContainer component={Paper}>
+            <Table className={classes.table} aria-label="customized table" stickyHeader>
+              <TableHead>
+                <TableRow>
+                  <StyledTableCell>ID</StyledTableCell>
+                  <StyledTableCell align="right">Date</StyledTableCell>
+                  <StyledTableCell align="right">Total</StyledTableCell>
+                  <StyledTableCell align="right">Paid</StyledTableCell>
+                  <StyledTableCell align="right">Delivered</StyledTableCell>
+                  <StyledTableCell align="right">Packed</StyledTableCell>
+                  <StyledTableCell align="right">Dispatched</StyledTableCell>
+                  <StyledTableCell align="right">
+                    Order Cancelled
+                  </StyledTableCell>
+                  <StyledTableCell align="right">Action</StyledTableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
                 {orders.map((order) => (
-                  <tr key={order._id}>
-                    <td>{order._id}</td>
-                    <td>{order.createdAt.substring(0, 10)}</td>
-                    <td>{order.totalPrice}</td>
-                    <td>
+                  <StyledTableRow key={order._id}>
+                    <StyledTableCell component="th" scope="row">
+                      {order._id}
+                    </StyledTableCell>
+                    <StyledTableCell align="right">
+                    {order.createdAt && (
+                      moment(order.createdAt).format("LLL")
+                    )}
+                    </StyledTableCell>
+                    <StyledTableCell align="right">
+                      {order.totalPrice}
+                    </StyledTableCell>
+                    <StyledTableCell align="right">
+                      {" "}
                       {order.isPaid ? (
                         order.paidAt.substring(0, 10)
                       ) : (
@@ -173,8 +278,8 @@ const ProfileScreen = ({ location, history }) => {
                           style={{ color: "red" }}
                         ></i>
                       )}
-                    </td>
-                    <td>
+                    </StyledTableCell>
+                    <StyledTableCell align="right">
                       {order.isDelivered ? (
                         order.deliveredAt.substring(0, 10)
                       ) : (
@@ -183,8 +288,8 @@ const ProfileScreen = ({ location, history }) => {
                           style={{ color: "red" }}
                         ></i>
                       )}
-                    </td>
-                    <td>
+                    </StyledTableCell>
+                    <StyledTableCell align="right">
                       {order.isPacked ? (
                         order.packedAt.substring(0, 10)
                       ) : (
@@ -193,24 +298,21 @@ const ProfileScreen = ({ location, history }) => {
                           style={{ color: "red" }}
                         ></i>
                       )}
-                    </td>
-                    <td>
+                    </StyledTableCell>
+                    <StyledTableCell align="right">
                       {order.isDispatched ? (
-                        <i className="fas fa-check" style={{ color: "red" }}></i>
+                        <i
+                          className="fas fa-check"
+                          style={{ color: "red" }}
+                        ></i>
                       ) : (
                         <i
                           className="fas fa-times"
                           style={{ color: "red" }}
                         ></i>
                       )}
-                    </td>
-                    {/* 
-                     "Canceled",
-                    order.isCancelled
-                      ? moment(order.cancelledAt).format("LLL")
-                      : "Order is Not Cancelled",
-                     */}
-                    <td>
+                    </StyledTableCell>
+                    <StyledTableCell align="right">
                       {order.isCancelled ? (
                         moment(order.cancelledAt).format("LLL")
                       ) : (
@@ -219,22 +321,22 @@ const ProfileScreen = ({ location, history }) => {
                           style={{ color: "red" }}
                         ></i>
                       )}
-                    </td>
-                    <td>
+                    </StyledTableCell>
+                    <StyledTableCell align="right">
                       <LinkContainer to={`/order/${order._id}`}>
                         <Button className="btn-sm" variant="dark">
                           Details
                         </Button>
                       </LinkContainer>
-                    </td>
-                  </tr>
+                    </StyledTableCell>
+                  </StyledTableRow>
                 ))}
-              </tbody>
+              </TableBody>
             </Table>
-          )}
-        </Col>
-      </>
-    </Row>
+          </TableContainer>
+        )}
+      </Col>
+    </>
   );
 };
 

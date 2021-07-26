@@ -113,8 +113,14 @@ const PlaceOrderScreen = ({ history }) => {
   return (
     <>
       <CheckoutSteps step1 step2 step3 step4 step5 step6 />
+
       <Row>
         <Col md={8}>
+          <Link to="/payment">
+            <Button variant="info" style={{ marginRight: "5px" }}>
+              Go Back
+            </Button>
+          </Link>
           <ListGroup variant="flush">
             <ListGroup.Item>
               <h2>Shipping</h2>
@@ -221,7 +227,7 @@ const PlaceOrderScreen = ({ history }) => {
 
               {userInfo.ispromember && (
                 <ListGroup.Item>
-                  <p style={{color: "red"}}>
+                  <p style={{ color: "red" }}>
                     You have been marked as a pro member. A dollar has been
                     deducted from the total. Thank you for your support!
                   </p>
@@ -230,8 +236,9 @@ const PlaceOrderScreen = ({ history }) => {
 
               {userInfo.isMilitary && (
                 <ListGroup.Item>
-                  <p style={{color: "blue"}}>
-                    You have been marked as a military. For a discount, please visit the offers page
+                  <p style={{ color: "blue" }}>
+                    You have been marked as a military. For a discount, please
+                    visit the offers page
                   </p>
                 </ListGroup.Item>
               )}
