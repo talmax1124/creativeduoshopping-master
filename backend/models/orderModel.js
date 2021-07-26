@@ -85,7 +85,14 @@ const orderSchema = mongoose.Schema(
     emailNotifier: {
       type: String,
     },
-
+    numOrders: {
+      type: Number,
+      default: 0,
+    },
+    numIncome: {
+      type: Number,
+      default: 0,
+    },
     orderStatus: {
       type: String,
     },

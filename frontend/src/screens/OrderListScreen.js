@@ -321,13 +321,14 @@ const OrderListScreen = ({ history }) => {
               </TableRow>
             </TableHead>
             <TableBody>
+            
               {orders.map((order) => (
                 <StyledTableRow key={order._id}>
                   <StyledTableCell component="th" scope="row">
                     {order._id}
                   </StyledTableCell>
                   <StyledTableCell align="right">
-                    {order.createdAt && moment(order.createdAt).format("LLL")}
+                    {order.createdAt && moment(order.createdAt).format("LLL")} 
                   </StyledTableCell>
                   <StyledTableCell align="right">
                     {order.totalPrice}
