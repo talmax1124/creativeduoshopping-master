@@ -12,7 +12,7 @@ import LatestProducts from "../components/LatestProducts";
 import ShopByCategory from "../components/ShopByCategory";
 import ShopByBrand from "../components/ShopByBrand";
 import Sort from "../components/Sort";
-// import Hero from "../components/Hero";
+import Hero from "../components/Hero";
 import { listProducts } from "../actions/productActions";
 import { addToWishList } from "../actions/wishListActions";
 const HomeScreen = ({ match, history, location }) => {
@@ -50,18 +50,10 @@ const HomeScreen = ({ match, history, location }) => {
   return (
     <>
       <Meta />
-      {/* <Hero /> */}
-
-      {/* {!keyword ? (
-        <ProductCarousel />
-      ) : (
-        <Link to="/" className="btn btn-dark">
-          Go Back
-        </Link>
-      )} */}
+      {(pageNumber === 1 || pageNumber === 2 || pageNumber === 3 || pageNumber === 4) && <Hero />}
 
       <ShopByCategory products={products} />
-      <br/>
+      <br />
       {!keyword && pageNumber === 1 ? (
         <>
           <h3>
@@ -74,7 +66,7 @@ const HomeScreen = ({ match, history, location }) => {
         </>
       ) : (
         <Link to="/" className="btn btn-dark">
-           <i className="fas fa-arrow-left"></i> Go Back
+          <i className="fas fa-arrow-left"></i> Go Back
         </Link>
       )}
       {/* <h1 className="titprd">Products</h1> */}

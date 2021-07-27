@@ -60,6 +60,7 @@ const RegisterScreen = ({ location, history }) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState(null);
+  const [profileImage, setprofileImage] = useState("");
 
   const eye = <FontAwesomeIcon icon={faEye} />;
   const eye2 = <FontAwesomeIcon icon={faEye} />;
@@ -102,7 +103,7 @@ const RegisterScreen = ({ location, history }) => {
     if (password !== confirmPassword) {
       setMessage("Passwords do not match");
     } else {
-      dispatch(verify(name, email, password, phone));
+      dispatch(verify(name, email, password, phone, profileImage));
     }
   };
 
@@ -174,7 +175,21 @@ const RegisterScreen = ({ location, history }) => {
                 onChange={(e) => setEmail(e.target.value)}
               />
             </Grid>
+
             <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="profileImage"
+                label="Profile Image URL"
+                name="profileImage"
+                value={profileImage}
+                onChange={(e) => setprofileImage(e.target.value)}
+              />
+            </Grid>
+
+            <Grid item xs={12} >
               <TextField
                 variant="outlined"
                 required
@@ -192,12 +207,13 @@ const RegisterScreen = ({ location, history }) => {
                 onClick={togglePasswordVisiblity}
                 variant="contained"
                 color="primary"
+                className="mt-1 mb-1"
               >
                 <i>{eye}</i>
                 Show/Hide Password
               </Button>
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} >
               <TextField
                 variant="outlined"
                 required
@@ -214,6 +230,7 @@ const RegisterScreen = ({ location, history }) => {
                 onClick={togglePasswordVisiblity2}
                 variant="contained"
                 color="primary"
+                className="mt-1 mb-1"
               >
                 <i>{eye2}</i>
                 Show/Hide Password

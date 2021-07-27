@@ -8,6 +8,8 @@ import { getUserDetails, updateUserProfile } from "../actions/userActions";
 import { listMyOrders } from "../actions/orderActions";
 import { USER_UPDATE_PROFILE_RESET } from "../constants/userConstants";
 
+import Avatar from "@material-ui/core/Avatar";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 
@@ -44,11 +46,15 @@ const ProfileScreen = ({ location, history }) => {
     },
   }))(TableRow);
 
-  const useStyles = makeStyles({
+  const useStyles = makeStyles((theme) => ({
     table: {
       minWidth: 700,
     },
-  });
+    large: {
+      width: theme.spacing(10),
+      height: theme.spacing(10),
+    },
+  }));
 
   const classes = useStyles();
 
@@ -58,6 +64,8 @@ const ProfileScreen = ({ location, history }) => {
   const [phone, setPhone] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState(null);
+  const [profileImage, setProfileImage] = useState("");
+  const [profileBackground, setProfileBackground] = useState("");
 
   const dispatch = useDispatch();
 
@@ -100,6 +108,8 @@ const ProfileScreen = ({ location, history }) => {
         setName(user.name);
         setEmail(user.email);
         setPhone(user.phone);
+        setProfileImage(user.profileImage);
+        setProfileBackground(user.profileBackground);
       }
     }
   }, [dispatch, history, userInfo, user, success]);
@@ -110,7 +120,15 @@ const ProfileScreen = ({ location, history }) => {
       setMessage("Passwords do not match");
     } else {
       dispatch(
-        updateUserProfile({ id: user._id, name, email, password, phone })
+        updateUserProfile({
+          id: user._id,
+          name,
+          email,
+          password,
+          phone,
+          profileImage,
+          profileBackground,
+        })
       );
     }
   };
@@ -122,11 +140,25 @@ const ProfileScreen = ({ location, history }) => {
           <Col>
             <h2>User Profile</h2>
 
+            {user.profileImage && (
+              <Avatar
+                alt={user.profileImage}
+                src={user.profileImage}
+                className={classes.large}
+              />
+            )}
+
+            <br />
+
             {userInfo && userInfo.isMilitary && (
-              <p style={{ color: "blue" }}>
-                Thank you for your service! Your profile has been marked as a
-                Military Member. Check offers page for your discount code
-              </p>
+              <>
+                <br></br>
+                <h6 style={{ color: "blue" }}>
+                  Thank you for your service! Your profile has been marked as a
+                  Military Member. Check offers page for your discount code
+                </h6>{" "}
+                <br></br>
+              </>
             )}
 
             {message && <Message variant="danger">{message}</Message>}
@@ -174,6 +206,33 @@ const ProfileScreen = ({ location, history }) => {
                       onChange={(e) => setEmail(e.target.value)}
                     />
                   </Grid>
+
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                      variant="outlined"
+                      fullWidth
+                      name="profileImage"
+                      label="Profile Image"
+                      value={profileImage}
+                      onChange={(e) => setProfileImage(e.target.value)}
+                      type="text"
+                      id="profileImage"
+                    />
+                  </Grid>
+
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                      variant="outlined"
+                      fullWidth
+                      name="profileBackground"
+                      label="Profile Background"
+                      value={profileBackground}
+                      onChange={(e) => setProfileBackground(e.target.value)}
+                      type="text"
+                      id="profileBackground"
+                    />
+                  </Grid>
+
                   <Grid item xs={12} sm={6}>
                     <TextField
                       variant="outlined"
@@ -238,7 +297,11 @@ const ProfileScreen = ({ location, history }) => {
           <Message variant="danger">{errorOrders}</Message>
         ) : (
           <TableContainer component={Paper}>
-            <Table className={classes.table} aria-label="customized table" stickyHeader>
+            <Table
+              className={classes.table}
+              aria-label="customized table"
+              stickyHeader
+            >
               <TableHead>
                 <TableRow>
                   <StyledTableCell>ID</StyledTableCell>
@@ -261,9 +324,7 @@ const ProfileScreen = ({ location, history }) => {
                       {order._id}
                     </StyledTableCell>
                     <StyledTableCell align="right">
-                    {order.createdAt && (
-                      moment(order.createdAt).format("LLL")
-                    )}
+                      {order.createdAt && moment(order.createdAt).format("LLL")}
                     </StyledTableCell>
                     <StyledTableCell align="right">
                       {order.totalPrice}

@@ -21,6 +21,8 @@ const authUser = asyncHandler(async (req, res) => {
       isAdmin: user.isAdmin,
       ispromember: user.ispromember,
       isMilitary: user.isMilitary,
+      profileImage: user.profileImage,
+      profileBackground: user.profileBackground,
       token: generateToken(user._id),
     });
   } else {
@@ -42,9 +44,9 @@ const verificationLink = asyncHandler(async (req, res) => {
   const validatepassword = password.length;
   // console.log(validatepassword)
 
-  if (validatename < 3) {
+  if (validatename < 2) {
     res.status(400);
-    throw new Error("Name must be of 3 characters  or more length ");
+    throw new Error("Name must be of 2 characters  or more length ");
   }
   if (validatepassword < 6) {
     res.status(400);
@@ -54,7 +56,7 @@ const verificationLink = asyncHandler(async (req, res) => {
   const tokengenerate = jwt.sign(
     { name, email, password, phone },
     process.env.JWT_SECRET,
-    { expiresIn: "10m" }
+    { expiresIn: "15m" }
   );
   //send email to regitering user
   var mailgun = new Mailgun({
@@ -117,13 +119,14 @@ const registerUser = asyncHandler(async (req, res) => {
         }
       };
 
-    const { name, email, password, phone } = jwt.decode(token);
+    const { name, email, password, phone, profileImage } = jwt.decode(token);
 
     const user = await User.create({
       name,
       email,
       password,
       phone,
+      profileImage,
     });
 
     if (user) {
@@ -135,6 +138,7 @@ const registerUser = asyncHandler(async (req, res) => {
         ispromember: user.ispromember,
         isMilitary: user.isMilitary,
         phone: user.phone,
+        profileImage: user.profileImage,
         token: generateToken(user._id),
       });
     } else {
@@ -159,6 +163,8 @@ const getUserProfile = asyncHandler(async (req, res) => {
       isAdmin: user.isAdmin,
       ispromember: user.ispromember,
       isMilitary: user.isMilitary,
+      profileImage: user.profileImage,
+      profileBackground: user.profileBackground,
     };
 
     if (user.googleId) {
@@ -181,6 +187,8 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     user.name = req.body.name || user.name;
     user.email = req.body.email || user.email;
     user.phone = req.body.phone || user.phone;
+    user.profileImage = req.body.profileImage || user.profileImage;
+    user.profileBackground = req.body.profileBackground || user.profileBackground;
     if (req.body.password) {
       user.password = req.body.password;
     }
@@ -195,6 +203,8 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       ispromember: updateUser.ispromember,
       isMilitary: updateUser.isMilitary,
       phone: updatedUser.phone,
+      profileImage: updatedUser.profileImage,
+      profileBackground: updatedUser.profileBackground,
       token: generateToken(updatedUser._id),
     };
 
@@ -264,6 +274,8 @@ const updateUser = asyncHandler(async (req, res) => {
     user.ispromember = req.body.ispromember;
     user.isMilitary = req.body.isMilitary,
     user.phone = req.body.phone || user.phone;
+    user.profileImage = req.body.profileImage || user.profileImage;
+    user.profileBackground = req.body.profileBackground || user.profileBackground;
 
     const updatedUser = await user.save();
 
@@ -275,6 +287,8 @@ const updateUser = asyncHandler(async (req, res) => {
       isAdmin: updatedUser.isAdmin,
       ispromember: updatedUser.ispromember,
       isMilitary: updatedUser.isMilitary,
+      profileImage: updatedUser.profileImage,
+      profileBackground: updatedUser.profileBackground,
     };
 
     if (updatedUser.googleId) {

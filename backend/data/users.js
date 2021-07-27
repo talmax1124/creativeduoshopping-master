@@ -9,6 +9,7 @@ const users = [
     isAdmin: true,
     ispromember: true,
     isMilitary: true,
+    profileImage: 'https://static-cdn.jtvnw.net/jtv_user_pictures/0520d6da-3b70-4bd5-82e7-541c168d3199-profile_image-300x300.png'
   },
   {
     name: 'Anaid',
