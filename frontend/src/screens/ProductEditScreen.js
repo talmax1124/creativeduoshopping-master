@@ -22,7 +22,8 @@ const ProductEditScreen = ({ match, history }) => {
   const [additionalimagethree, setAdditionalimagethree] = useState("");
   const [productVideo, setProductVideo] = useState("");
   const [productTutorial, setProductTutorial] = useState("");
-  const [productImportantInformation, setProductImportantInformation] = useState("");
+  const [productImportantInformation, setProductImportantInformation] =
+    useState("");
   const [brand, setBrand] = useState("");
   const [category, setCategory] = useState("");
   const [countInStock, setCountInStock] = useState(0);
@@ -321,8 +322,6 @@ const ProductEditScreen = ({ match, history }) => {
               ></Form.File>
               {uploading && <Loader />}
             </Form.Group>
-
-
 
             <Form.Group controlId="brand">
               <Form.Label>Brand</Form.Label>

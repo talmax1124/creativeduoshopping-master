@@ -18,6 +18,12 @@ import productRoutes from "./routes/productRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
 import uploadRoutes from "./routes/uploadRoutes.js";
+
+// Upload Route for Profile Picture
+import uploadRoutesProfilePicture from "./routes/uploadRoutesProfilePicture.js";
+// Upload Route For Profile Background
+import uploadRoutesProfileBackgroundfrom from "./routes/uploadRoutesProfileBackground.js";
+
 import authRoutes from "./routes/authRoutes.js";
 import passport from "./config/passport.js";
 import wishListRoutes from "./routes/wishListRoutes.js";
@@ -65,6 +71,8 @@ app.use("/api/products", productRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/upload", uploadRoutes);
+app.use("/api/uploadprofilepicture", uploadRoutesProfilePicture);
+app.use("/api/uploadprofilebackground", uploadRoutesProfileBackgroundfrom);
 app.use("/api/auth", authRoutes);
 app.use("/api/wishlist", wishListRoutes);
 app.use("/api/coupons", couponRoutes);

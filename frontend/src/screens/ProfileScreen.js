@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -67,6 +68,67 @@ const ProfileScreen = ({ location, history }) => {
   const [message, setMessage] = useState(null);
   const [profileImage, setProfileImage] = useState("");
   const [profileBackground, setProfileBackground] = useState("");
+
+  const [uploadingProfilePicture, setUploadingProfilePicture] = useState(false);
+
+  const [uploadingProfileBackground, setUploadingProfileBackground] =
+    useState(false);
+
+  const uploadFileHandler = async (e) => {
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append("image", file);
+    setUploadingProfileBackground(true);
+
+    const token = userInfo && userInfo.token;
+
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
+      const { data } = await axios.post(
+        "/api/uploadprofilebackground",
+        formData,
+        config
+      );
+
+      setProfileBackground(data);
+      setUploadingProfileBackground(false);
+    } catch (error) {
+      console.error(error);
+      setUploadingProfileBackground(false);
+    }
+  };
+
+  const uploadFileHandlerone = async (e) => {
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append("image", file);
+    setUploadingProfilePicture(true);
+
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      };
+
+      const { data } = await axios.post(
+        "/api/uploadprofilepicture",
+        formData,
+        config
+      );
+      setProfileImage(data);
+      setUploadingProfilePicture(false);
+    } catch (error) {
+      console.log(error);
+      setUploadingProfilePicture(false);
+    }
+  };
 
   const dispatch = useDispatch();
 
@@ -163,8 +225,6 @@ const ProfileScreen = ({ location, history }) => {
               </>
             )}
 
-          
-
             {userInfo && userInfo.isMilitary && (
               <>
                 <br></br>
@@ -233,6 +293,13 @@ const ProfileScreen = ({ location, history }) => {
                       type="text"
                       id="profileImage"
                     />
+                    <Form.File
+                      id="image-file"
+                      label="Choose File"
+                      custom
+                      onChange={uploadFileHandlerone}
+                    ></Form.File>
+                    {uploadingProfilePicture && <Loader />}
                   </Grid>
 
                   <Grid item xs={12} sm={6}>
@@ -246,6 +313,13 @@ const ProfileScreen = ({ location, history }) => {
                       type="text"
                       id="profileBackground"
                     />
+                    <Form.File
+                      id="image-file"
+                      label="Choose File"
+                      custom
+                      onChange={uploadFileHandler}
+                    ></Form.File>
+                    {uploadingProfileBackground && <Loader />}
                   </Grid>
 
                   <Grid item xs={12} sm={6}>
