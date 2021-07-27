@@ -51,8 +51,9 @@ const ProfileScreen = ({ location, history }) => {
       minWidth: 700,
     },
     large: {
-      width: theme.spacing(10),
-      height: theme.spacing(10),
+      width: theme.spacing(15),
+      height: theme.spacing(15),
+      marginTop: "-2.5em",
     },
   }));
 
@@ -140,15 +141,29 @@ const ProfileScreen = ({ location, history }) => {
           <Col>
             <h2>User Profile</h2>
 
-            {user.profileImage && (
-              <Avatar
-                alt={user.profileImage}
-                src={user.profileImage}
-                className={classes.large}
+            {user.profileBackground && (
+              <img
+                alt={user.profileBackground}
+                src={user.profileBackground}
+                style={{ width: "100%" }}
               />
             )}
 
-            <br />
+            {user.profileImage && (
+              <>
+                <center>
+                  <Avatar
+                    alt={user.profileImage}
+                    src={user.profileImage}
+                    className={classes.large}
+                  />
+                </center>
+                <br></br>
+                <br />
+              </>
+            )}
+
+          
 
             {userInfo && userInfo.isMilitary && (
               <>

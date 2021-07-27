@@ -12,7 +12,7 @@ import LatestProducts from "../components/LatestProducts";
 import ShopByCategory from "../components/ShopByCategory";
 import ShopByBrand from "../components/ShopByBrand";
 import Sort from "../components/Sort";
-// import Hero from "../components/Hero";
+import Hero from "../components/Hero";
 import { listProducts } from "../actions/productActions";
 import { addToWishList } from "../actions/wishListActions";
 const HomeScreen = ({ match, history, location }) => {
@@ -50,7 +50,10 @@ const HomeScreen = ({ match, history, location }) => {
   return (
     <>
       <Meta />
-      {/* {(pageNumber === 1 || pageNumber === 2 || pageNumber === 3 || pageNumber === 4) && <Hero />} */}
+      {(pageNumber === 1 ||
+        pageNumber === 2 ||
+        pageNumber === 3 ||
+        pageNumber === 4) && <Hero />}
 
       <ShopByCategory products={products} />
       <br />
@@ -79,7 +82,7 @@ const HomeScreen = ({ match, history, location }) => {
         <>
           {!keyword && pageNumber === 1 && <LatestProducts />}
 
-          <h1>All products</h1>
+          <h1 id="prod">All products</h1>
 
           <Row>
             <Col md={3}>
