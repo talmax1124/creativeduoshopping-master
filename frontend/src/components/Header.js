@@ -7,7 +7,37 @@ import SearchBox from "./SearchBox";
 import { logout } from "../actions/userActions";
 import { ReactComponent as ShoppingIcon } from "../data/shoppingbag.svg";
 
+import { makeStyles } from "@material-ui/core/styles";
+import Modal from "@material-ui/core/Modal";
+import Backdrop from "@material-ui/core/Backdrop";
+import Fade from "@material-ui/core/Fade";
+
 const Header = () => {
+  const useStyles = makeStyles((theme) => ({
+    modal: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    paper: {
+      backgroundColor: theme.palette.background.paper,
+      border: "2px solid #000",
+      boxShadow: theme.shadows[5],
+      padding: theme.spacing(2, 4, 3),
+    },
+  }));
+
+  const classes = useStyles();
+  const [open, setOpen] = React.useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const dispatch = useDispatch();
 
   const userLogin = useSelector((state) => state.userLogin);
@@ -28,12 +58,32 @@ const Header = () => {
       <div>
         <h6 className="headertitle">
           Shipping Available To The United States Of America & Puerto Rico (PR)
+          {/* eslint-disable-next-line */}
+          ~ <a onClick={handleOpen} style={{textDecoration: "underline", cursor: "pointer"}}>Learn More</a>
         </h6>
-        {/* eslint-disable-next-line */}
-        {/* <marquee className="marq">
-          Sign In With Google Now Available! Privacy Policy Link & Terms are Now
-          Updated!
-        </marquee> */}
+        <div>
+          <Modal
+            aria-labelledby="transition-modal-title"
+            aria-describedby="transition-modal-description"
+            className={classes.modal}
+            open={open}
+            onClose={handleClose}
+            closeAfterTransition
+            BackdropComponent={Backdrop}
+            BackdropProps={{
+              timeout: 500,
+            }}
+          >
+            <Fade in={open}>
+              <div className={classes.paper}>
+                <h2 id="transition-modal-title">Shipping</h2>
+                <p id="transition-modal-description">
+                  Shipping for US addresses is available for the US and PR. Charges are based on the total weight of the items in the cart. Starting Shipping Rate is $8.50.
+                </p>
+              </div>
+            </Fade>
+          </Modal>
+        </div>
       </div>
       <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
         <Container>

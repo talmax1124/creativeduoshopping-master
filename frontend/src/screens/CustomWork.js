@@ -17,7 +17,7 @@ const CustomWork = () => {
                   <h1 class="h6 text-uppercase font-weight-bold mb-4">
                     Basic E-Commerce
                   </h1>
-                  <h2 class="h1 font-weight-bold">$175</h2>
+                  <h2 class="h1 font-weight-bold">$600 or more</h2>
 
                   <div class="custom-separator my-4 mx-auto bg-primary"></div>
 
@@ -65,7 +65,7 @@ const CustomWork = () => {
                   <h1 class="h6 text-uppercase font-weight-bold mb-4">
                     Pro E-Commerce
                   </h1>
-                  <h2 class="h1 font-weight-bold">$400</h2>
+                  <h2 class="h1 font-weight-bold">$800 or more</h2>
 
                   <div class="custom-separator my-4 mx-auto bg-primary"></div>
 
@@ -113,7 +113,7 @@ const CustomWork = () => {
                   <h1 class="h6 text-uppercase font-weight-bold mb-4">
                     Enterprise E-Commerce
                   </h1>
-                  <h2 class="h1 font-weight-bold">$1000</h2>
+                  <h2 class="h1 font-weight-bold">$1500 or more</h2>
 
                   <div class="custom-separator my-4 mx-auto bg-primary"></div>
 
@@ -171,7 +171,7 @@ const CustomWork = () => {
                   <h1 class="h6 text-uppercase font-weight-bold mb-4">
                     Basic Static
                   </h1>
-                  <h2 class="h1 font-weight-bold">$100</h2>
+                  <h2 class="h1 font-weight-bold">$300 or more</h2>
 
                   <div class="custom-separator my-4 mx-auto bg-primary"></div>
 
@@ -204,7 +204,7 @@ const CustomWork = () => {
                   <h1 class="h6 text-uppercase font-weight-bold mb-4">
                     Pro Static
                   </h1>
-                  <h2 class="h1 font-weight-bold">$250</h2>
+                  <h2 class="h1 font-weight-bold">$450 or more</h2>
 
                   <div class="custom-separator my-4 mx-auto bg-primary"></div>
 
@@ -235,7 +235,7 @@ const CustomWork = () => {
                   <h1 class="h6 text-uppercase font-weight-bold mb-4">
                     Enterprise Static
                   </h1>
-                  <h2 class="h1 font-weight-bold">$500</h2>
+                  <h2 class="h1 font-weight-bold">$700 or more</h2>
 
                   <div class="custom-separator my-4 mx-auto bg-primary"></div>
 

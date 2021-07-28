@@ -52,9 +52,10 @@ const ProfileScreen = ({ location, history }) => {
       minWidth: 700,
     },
     large: {
-      width: theme.spacing(15),
-      height: theme.spacing(15),
+      width: theme.spacing(18),
+      height: theme.spacing(18),
       marginTop: "-2.5em",
+      border: "5px solid #000",
     },
   }));
 
@@ -204,11 +205,15 @@ const ProfileScreen = ({ location, history }) => {
             <h2>User Profile</h2>
 
             {user.profileBackground && (
+              <>
               <img
                 alt={user.profileBackground}
                 src={user.profileBackground}
                 style={{ width: "100%" }}
+                draggable="false"
               />
+               <br></br>
+               </>
             )}
 
             {user.profileImage && (
@@ -218,6 +223,7 @@ const ProfileScreen = ({ location, history }) => {
                     alt={user.profileImage}
                     src={user.profileImage}
                     className={classes.large}
+                    draggable="false"
                   />
                 </center>
                 <br></br>
@@ -298,6 +304,7 @@ const ProfileScreen = ({ location, history }) => {
                       label="Choose File"
                       custom
                       onChange={uploadFileHandlerone}
+                      className="mb-1 mt-1"
                     ></Form.File>
                     {uploadingProfilePicture && <Loader />}
                   </Grid>
@@ -318,6 +325,7 @@ const ProfileScreen = ({ location, history }) => {
                       label="Choose File"
                       custom
                       onChange={uploadFileHandler}
+                      className="mb-1 mt-1"
                     ></Form.File>
                     {uploadingProfileBackground && <Loader />}
                   </Grid>
