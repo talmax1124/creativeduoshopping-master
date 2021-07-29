@@ -49,8 +49,8 @@ const App = () => {
     <Router>
       <Header />
       <main className="py-3">
-        <Route path="/contactus" component={contactus} />
         <Container>
+          <Route path="/contactus" component={contactus} />
           <Route path="/forgotpassword" component={forgotPassword} />
           <Route path="/privacypolicy" component={PrivacyPolicy} />
           <Route path="/order/:id" component={OrderScreen} />

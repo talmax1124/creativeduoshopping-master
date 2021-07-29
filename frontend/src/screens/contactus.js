@@ -1,97 +1,52 @@
 import React from "react";
 
+
 const contactus = () => {
+
+
   return (
     <>
-      <section
-        class="section-bg"
-        style={{
-          backgroundImage: `url("https://i.ibb.co/9p3Cnk9/slider-2.jpg")`,
-        }}
-        data-scroll-index="7"
-      >
-        <div class="overlay pt-100 pb-100 ">
-          <div class="container">
-            <div class="row">
-              <div class="col-lg-6 d-flex align-items-center">
-                <div class="contact-info">
-                  <h2 class="contact-title">Have Any Questions?</h2>
-                  <p>
-                   If you have any questions, please feel free to contact us. We are always more than happy to help.
-                  </p>
-                  <ul class="contact-info">
-                    <li>
-                      <div class="info-left">
-                        <i class="fas fa-mobile-alt"></i>
-                      </div>
-                      <div class="info-right">
-                        <h4>+4075368743</h4>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="info-left">
-                        <i class="fas fa-at"></i>
-                      </div>
-                      <div class="info-right">
-                        <h4>support@creativeduo.net</h4>
-                      </div>
-                    </li>
-                   
-                  </ul>
-                </div>
-              </div>
-              <div class="col-lg-6 d-flex align-items-center">
-                <div class="contact-form">
-                  <form id="contact-form" action="https://formsubmit.co/carlitosdiazplaza@gmail.com" method="POST">
-                    <input type="hidden" name="form-name" value="contactForm" />
-                    <div class="row">
-                      <div class="col-md-12">
-                        <div class="form-group">
-                          <input
-                            type="text"
-                            name="name"
-                            class="form-control"
-                            id="first-name"
-                            placeholder="Enter Your Name *"
-                          />
-                        </div>
-                      </div>
-                      <div class="col-md-12">
-                        <div class="form-group">
-                          <input
-                            type="email"
-                            name="email"
-                            class="form-control"
-                            id="email"
-                            placeholder="Enter Your Email *"
-                          />
-                        </div>
-                      </div>
-
-                      <div class="col-md-12">
-                        <div class="form-group">
-                          <textarea
-                            rows="4"
-                            name="message"
-                            class="form-control"
-                            id="description"
-                            placeholder="Enter Your Message *"
-                          ></textarea>
-                        </div>
-                      </div>
-                      <div class="col-md-12">
-                        <button class="btn-big btn btn-bg">
-                          Send Us <i class="fas fa-arrow-right"></i>
-                        </button>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+        <h1>Support / Contact</h1>
+<form class="w-full max-w-lg" action="https://formsubmit.co/carlitosdiazplaza@gmail.com" method="POST">
+  <div class="flex flex-wrap -mx-3 mb-6">
+    <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+        First Name
+      </label>
+      <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Jane"/>
+    </div>
+    <div class="w-full md:w-1/2 px-3">
+      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+        Last Name
+      </label>
+      <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Doe"/>
+    </div>
+  </div>
+  <div class="flex flex-wrap -mx-3 mb-6">
+    <div class="w-full px-3">
+      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
+        E-mail
+      </label>
+      <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="email" type="email"/>
+    </div>
+  </div>
+  <div class="flex flex-wrap -mx-3 mb-6">
+    <div class="w-full px-3">
+      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
+        Message
+      </label>
+      <textarea class=" no-resize appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 h-48 resize-none" id="message"></textarea>
+    </div>
+  </div>
+  <div class="md:flex md:items-center">
+    <div class="md:w-1/3">
+      <button className="btn btn-block"  variant="dark" style={{backgroundColor: "black", color: "whitesmoke"}} type="button submit">
+        Send
+      </button>
+    </div>
+    <div class="md:w-2/3"></div>
+  </div>
+</form>
     </>
   );
 };
