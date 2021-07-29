@@ -3,6 +3,10 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../actions/userActions";
 
+// Search Bar
+import SearchBox from "./SearchBox";
+import { Route } from "react-router-dom";
+
 // Material-UI Header Message
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
@@ -124,6 +128,16 @@ const Header = () => {
             class="hidden top-navbar w-full lg:inline-flex lg:flex-grow lg:w-auto"
             id="navigation"
           >
+            <div class="lg:inline-flex lg:flex-row lg:mr-auto lg:w-auto w-full lg:items-center items-start  flex flex-col lg:h-auto srchhh">
+              <Route
+                render={({ history }) => (
+                  <SearchBox
+                    history={history}
+                    className="ml-auto mr-auto w-full"
+                  />
+                )}
+              />
+            </div>
             <div class="lg:inline-flex lg:flex-row lg:ml-auto lg:w-auto w-full lg:items-center items-start  flex flex-col lg:h-auto">
               <a
                 href="/cart"

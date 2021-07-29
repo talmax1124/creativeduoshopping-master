@@ -41,11 +41,15 @@ import CurrentOffers from "./screens/CurrentCoupons";
 import CreateCouponPage from "./screens/CreateCouponPage";
 import CustomWork from "./screens/CustomWork";
 
+// Support
+import contactus from "./screens/contactus";
+
 const App = () => {
   return (
     <Router>
       <Header />
       <main className="py-3">
+        <Route path="/contactus" component={contactus} />
         <Container>
           <Route path="/forgotpassword" component={forgotPassword} />
           <Route path="/privacypolicy" component={PrivacyPolicy} />

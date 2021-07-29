@@ -33,6 +33,9 @@ const Footer = () => {
                 <li>
                   <a href="/customwork" target="blank">Custom Digital Wesbites</a>
                 </li>
+                <li>
+                  <a href="/contactus" target="blank">Contact Us</a>
+                </li>
               </ul>
             </div>
             <div className="col-md-6 item text">
