@@ -622,3 +622,25 @@ h2 {
   font-size: 13px;
   margin-bottom: 0;
 }
+
+@media (min-width: 1024px) {
+  .top-navbar {
+    display: inline-flex !important;
+  }
+}
+
+@media (max-width: 999px) {
+  .us {
+    display: inline-flex !important;
+    width: 100%;
+    justify-content: left;
+  }
+}
+
+.navv a:hover {
+  text-decoration: none;
+}
+
+.menudrop a:hover {
+  text-decoration: none;
+}

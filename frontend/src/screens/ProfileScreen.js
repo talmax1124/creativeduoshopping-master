@@ -54,7 +54,7 @@ const ProfileScreen = ({ location, history }) => {
     large: {
       width: theme.spacing(18),
       height: theme.spacing(18),
-      marginTop: "-2.5em",
+      marginTop: "-3em",
       border: "5px solid #000",
     },
   }));
