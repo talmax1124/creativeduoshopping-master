@@ -218,6 +218,7 @@ const ProfileScreen = ({ location, history }) => {
 
             {user.profileImage && (
               <>
+              <br></br>
                 <center>
                   <Avatar
                     alt={user.profileImage}

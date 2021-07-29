@@ -28,6 +28,7 @@
     "cloudinary-core": "^2.11.3",
     "framer-motion": "^4.1.17",
     "i": "^0.3.6",
+    "jodit-react": "^1.1.1",
     "lightgallery": "^2.1.5",
     "mdb-ui-kit": "^3.9.0",
     "moment": "^2.29.1",

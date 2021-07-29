@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,9 +8,17 @@ import Loader from "../components/Loader";
 import FormContainer from "../components/FormContainer";
 import { listProductDetails, updateProduct } from "../actions/productActions";
 import { PRODUCT_UPDATE_RESET } from "../constants/productConstants";
+import JoditEditor from "jodit-react";
 
 const ProductEditScreen = ({ match, history }) => {
   const productId = match.params.id;
+
+  const editor = useRef(null);
+  const config = {
+    readonly: false,
+    placeholder: "Write product description...",
+    askBeforePasteHTML: false,
+  };
 
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
@@ -385,12 +393,20 @@ const ProductEditScreen = ({ match, history }) => {
 
             <Form.Group controlId="description">
               <Form.Label>Description</Form.Label>
-              <Form.Control
+              <JoditEditor
+                id="description"
+                ref={editor}
+                value={description}
+                config={config}
+                tabIndex={1}
+                onBlur={(e) => setDescription(e)}
+              />
+              {/* <Form.Control
                 as="textarea"
                 placeholder="Enter description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-              ></Form.Control>
+              ></Form.Control> */}
             </Form.Group>
 
             <Form.Group controlId="productVideo">
@@ -415,12 +431,20 @@ const ProductEditScreen = ({ match, history }) => {
 
             <Form.Group controlId="productImportantInformation">
               <Form.Label>Product Information</Form.Label>
-              <Form.Control
+              <JoditEditor
+                id="productImportantInformation"
+                ref={editor}
+                value={productImportantInformation}
+                config={config}
+                tabIndex={1}
+                onBlur={(e) => setProductImportantInformation(e)}
+              />
+              {/* <Form.Control
                 type="text"
                 placeholder="Enter Product Info"
                 value={productImportantInformation}
                 onChange={(e) => setProductImportantInformation(e.target.value)}
-              ></Form.Control>
+              ></Form.Control> */}
             </Form.Group>
 
             <Button type="submit" variant="primary" className="btn btn-block">

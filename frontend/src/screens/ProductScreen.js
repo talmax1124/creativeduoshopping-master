@@ -17,6 +17,8 @@ import Message from "../components/Message";
 import Loader from "../components/Loader";
 import Meta from "../components/Meta";
 import moment from "moment";
+import ProductDescription from "../components/ProductDescription";
+import ProductInformation from "../components/ProductInformation";
 
 import ProductImageCarousel from "../components/ProductImageCarousel";
 
@@ -235,10 +237,6 @@ const ProductScreen = ({ history, match }) => {
                   Category: <br></br>
                   <br></br> <h5>{product.category}</h5>
                 </ListGroup.Item>
-                <ListGroup.Item className="desc1">
-                  Description: <br></br>
-                  <br></br> {product.description}
-                </ListGroup.Item>
               </ListGroup>
             </Col>
             <Col md={3}>
@@ -354,7 +352,7 @@ const ProductScreen = ({ history, match }) => {
               alignItems: "center",
             }}
           >
-            <ListGroup.Item style={{ minWidth: "100%" }} className="desc2">
+            <ListGroup.Item style={{ minWidth: "100%" }} >
               <Row
                 style={{
                   display: "flex",
@@ -374,7 +372,7 @@ const ProductScreen = ({ history, match }) => {
                 }}
               >
                 <Col md={6}>
-                  <p>{product.description}</p>
+                  <ProductDescription Product={product} />
                 </Col>
               </Row>
             </ListGroup.Item>
@@ -387,7 +385,7 @@ const ProductScreen = ({ history, match }) => {
               {product.productImportantInformation && (
                 <>
                   <h6>Product Important Information:</h6>
-                  <p>{product.productImportantInformation}</p>
+                  <ProductInformation Product={product} />
                 </>
               )}
               {product.productVideo && (
