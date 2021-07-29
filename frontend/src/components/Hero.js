@@ -13,7 +13,7 @@ const Hero = () => {
       height: "80vh",
       position: "relative",
       "& video": {
-        objectFit: "cover",
+        objectFit: "contain",
       },
     },
     overlay: {
