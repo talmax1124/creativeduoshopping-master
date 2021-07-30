@@ -352,7 +352,7 @@ const ProductScreen = ({ history, match }) => {
               alignItems: "center",
             }}
           >
-            <ListGroup.Item style={{ minWidth: "100%" }} >
+            <ListGroup.Item style={{ minWidth: "100%" }}>
               <Row
                 style={{
                   display: "flex",
@@ -474,20 +474,45 @@ const ProductScreen = ({ history, match }) => {
               {product.reviews.length === 0 && <Message>No Reviews</Message>}
               <ListGroup variant="flush">
                 {product.reviews.map((review) => (
-                  <ListGroup.Item key={review._id}>
-                    <strong className="bold">{review.name}</strong>
-                    <Rating value={review.rating} />
-                    <p>{review.createdAt.substring(0, 10)}</p>
-                    <p>{review.comment}</p>
-                    {userInfo.isAdmin && (
-                      <Button
-                        className="btn btn-danger btn-block"
-                        onClick={deleteReviewHandler(review._id)}
-                      >
-                        <i className="fas fa-trash"></i> Delete Comment
-                      </Button>
-                    )}
-                  </ListGroup.Item>
+                  <>
+                    <div style={{marginBottom: "1em"}}>
+                      <div class="bs-example">
+                        <div class="card" style={{ maxWidth: "500px" }}>
+                          <div class="row no-gutters">
+                            {review.profileImage && (
+                              <div
+                                class="col-sm-5"
+                                style={{ backgroundColor: "#868e96" }}
+                              >
+                                <img
+                                  src={review.profileImage}
+                                  class="card-img-top"
+                                  alt="..."
+                                />
+                              </div>
+                            )}
+                            <div class="col-sm-7">
+                              <div class="card-body">
+                                <h5 class="card-title">{review.name}</h5>
+                                <Rating value={review.rating} />
+                                <p>{review.createdAt.substring(0, 10)}</p>
+                                <p class="card-text">{review.comment}</p>
+                                {userInfo.isAdmin && (
+                                  <Button
+                                    className="btn btn-danger btn-block"
+                                    onClick={deleteReviewHandler(review._id)}
+                                  >
+                                    <i className="fas fa-trash"></i> Delete
+                                    Comment
+                                  </Button>
+                                )}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </>
                 ))}
                 <ListGroup.Item>
                   <h2>Write a Customer Review</h2>

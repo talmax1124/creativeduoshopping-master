@@ -47,6 +47,7 @@
     "express-async-handler": "^1.1.4",
     "express-session": "^1.17.1",
     "express-validator": "^6.11.1",
+    "fsevents": "^2.3.2",
     "google-translate": "^3.0.0",
     "heroku-cli": "^7.0.9",
     "http-proxy-middleware": "^0.19.1",
