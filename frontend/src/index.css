@@ -657,4 +657,16 @@ h2 {
 }
 
 
+/* @media (min-width: 1005px ){
+  .dividerrrprofile{
+    display: none;
+  }
+}
+
+@media (max-width: 999px) {
+  .dividerrrprofile{
+    display: block;
+    margin-top: 5em;
+  }
+} */
 

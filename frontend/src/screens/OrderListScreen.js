@@ -281,7 +281,7 @@ const OrderListScreen = ({ history }) => {
   function deleteWindow() {
     window.location.reload();
     alert(
-      "Order Has Been Deleted. Reload the page if it hasn't done so already. If you still see the order, do it on desktop if using mobile."
+      "Order Has Been Deleted"
     );
   }
 

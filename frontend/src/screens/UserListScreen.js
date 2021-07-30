@@ -1,13 +1,48 @@
 import React, { useEffect } from "react";
 import { LinkContainer } from "react-router-bootstrap";
-import { Table, Button } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 import { listUsers, deleteUser } from "../actions/userActions";
 
+import { withStyles, makeStyles } from "@material-ui/core/styles";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import Paper from "@material-ui/core/Paper";
+
 const UserListScreen = ({ history }) => {
   const dispatch = useDispatch();
+
+  const StyledTableCell = withStyles((theme) => ({
+    head: {
+      backgroundColor: theme.palette.common.black,
+      color: theme.palette.common.white,
+    },
+    body: {
+      fontSize: 14,
+    },
+  }))(TableCell);
+
+  const StyledTableRow = withStyles((theme) => ({
+    root: {
+      "&:nth-of-type(odd)": {
+        backgroundColor: theme.palette.action.hover,
+      },
+    },
+  }))(TableRow);
+
+  const useStyles = makeStyles({
+    table: {
+      minWidth: 700,
+    },
+  });
+
+  const classes = useStyles();
 
   const userList = useSelector((state) => state.userList);
   const { loading, error, users } = userList;
@@ -40,79 +75,100 @@ const UserListScreen = ({ history }) => {
       ) : error ? (
         <Message variant="danger">{error}</Message>
       ) : (
-        <Table striped bordered hover responsive className="table-sm">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>NAME</th>
-              <th>EMAIL</th>
-              <th>PHONE #</th>
-              <th>Google ID</th>
-              <th>ADMIN</th>
-              <th>Pro Member</th>
-              <th>Military/Veteran</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {users.map((user) => (
-              <tr key={user._id}>
-                <td>{user._id}</td>
-                <td>{user.name}</td>
-                <td>
-                  <a href={`mailto:${user.email}`}>{user.email}</a>
-                </td>
-                <td>
-                  <a href={`tel: ${user.phone}`}>{user.phone}</a>
-                </td>
-                <td>
-                {user.googleId ? (
-                    user.googleId
-                  ) : (
-                    <>
-                    <i className="fas fa-times" style={{ color: "red" }}> No Google Account</i>
-                    </>
-                  )}
-                </td>
-                <td>
-                  {user.isAdmin ? (
-                    <i className="fas fa-check" style={{ color: "green" }}></i>
-                  ) : (
-                    <i className="fas fa-times" style={{ color: "red" }}></i>
-                  )}
-                </td>
-                <td>
-                  {user.ispromember ? (
-                    <i className="fas fa-check" style={{ color: "green" }}></i>
-                  ) : (
-                    <i className="fas fa-times" style={{ color: "red" }}></i>
-                  )}
-                </td>
-                <td>
-                  {user.isMilitary ? (
-                    <i className="fas fa-check" style={{ color: "green" }}></i>
-                  ) : (
-                    <i className="fas fa-times" style={{ color: "red" }}></i>
-                  )}
-                </td>
-                <td>
-                  <LinkContainer to={`/admin/user/${user._id}/edit`}>
-                    <Button variant="dark" className="btn-sm">
+        <TableContainer component={Paper}>
+          <Table
+            className={classes.table}
+            aria-label="customized table"
+            stickyHeader
+          >
+            <TableHead>
+              <TableRow>
+                <StyledTableCell>ID</StyledTableCell>
+                <StyledTableCell align="right">Name</StyledTableCell>
+                <StyledTableCell align="right">Email</StyledTableCell>
+                <StyledTableCell align="right">Phone #</StyledTableCell>
+                <StyledTableCell align="right">Google ID</StyledTableCell>
+                <StyledTableCell align="right">Admin</StyledTableCell>
+                <StyledTableCell align="right">Pro-Member</StyledTableCell>
+                <StyledTableCell align="right">Military</StyledTableCell>
+                <StyledTableCell align="right">Action</StyledTableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {users.map((user) => (
+                <StyledTableRow key={user._id}>
+                  <StyledTableCell component="th" scope="row">
+                    {user._id}
+                  </StyledTableCell>
+                  <StyledTableCell align="right">{user.name}</StyledTableCell>
+                  <StyledTableCell align="right">
+                    <a href={`mailto:${user.email}`}>{user.email}</a>
+                  </StyledTableCell>
+                  <StyledTableCell align="right">
+                    {" "}
+                    <a href={`tel: ${user.phone}`}>{user.phone}</a>
+                  </StyledTableCell>
+                  <StyledTableCell align="right">
+                    {user.googleId ? (
+                      user.googleId
+                    ) : (
+                      <>
+                        <i className="fas fa-times" style={{ color: "red" }}>
+                          {" "}
+                          No Google Account
+                        </i>
+                      </>
+                    )}
+                  </StyledTableCell>
+                  <StyledTableCell align="right">
+                    {user.isAdmin ? (
+                      <i
+                        className="fas fa-check"
+                        style={{ color: "green" }}
+                      ></i>
+                    ) : (
+                      <i className="fas fa-times" style={{ color: "red" }}></i>
+                    )}
+                  </StyledTableCell>
+                  <StyledTableCell align="right">
+                    {user.ispromember ? (
+                      <i
+                        className="fas fa-check"
+                        style={{ color: "green" }}
+                      ></i>
+                    ) : (
+                      <i className="fas fa-times" style={{ color: "red" }}></i>
+                    )}
+                  </StyledTableCell>
+                  <StyledTableCell align="right">
+                    {user.isMilitary ? (
+                      <i
+                        className="fas fa-check"
+                        style={{ color: "green" }}
+                      ></i>
+                    ) : (
+                      <i className="fas fa-times" style={{ color: "red" }}></i>
+                    )}
+                  </StyledTableCell>
+                  <StyledTableCell align="right">
+                    <LinkContainer to={`/admin/user/${user._id}/edit`}>
+                      <Button className="btn-sm" variant="dark">
                       <i className="fas fa-edit"></i>
+                      </Button>
+                    </LinkContainer>
+                    <Button
+                      variant="danger"
+                      className="btn-sm"
+                      onClick={() => deleteHandler(user._id)}
+                    >
+                      <i className="fas fa-trash"></i>
                     </Button>
-                  </LinkContainer>
-                  <Button
-                    variant="danger"
-                    className="btn-sm"
-                    onClick={() => deleteHandler(user._id)}
-                  >
-                    <i className="fas fa-trash"></i>
-                  </Button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </Table>
+                  </StyledTableCell>
+                </StyledTableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
       )}
     </>
   );

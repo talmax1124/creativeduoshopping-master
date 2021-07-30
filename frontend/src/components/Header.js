@@ -112,23 +112,23 @@ const Header = () => {
           </div>
         </div>
 
-        <nav class="flex items-center bg-gray-800 p-3 flex-wrap navv">
-          <a href="/" class="p-2 mr-4 inline-flex items-center">
-            <span class="text-xl text-white font-bold uppercase tracking-wide">
+        <nav className="flex items-center bg-gray-800 p-3 flex-wrap navv">
+          <a href="/" className="p-2 mr-4 inline-flex items-center">
+            <span className="text-xl text-white font-bold uppercase tracking-wide">
               Creative Duo
             </span>
           </a>
           <button
-            class="text-white inline-flex p-3 hover:bg-gray-900 rounded lg:hidden ml-auto hover:text-white outline-none nav-toggler"
+            className="text-white inline-flex p-3 hover:bg-gray-900 rounded lg:hidden ml-auto hover:text-white outline-none nav-toggler"
             data-target="#navigation"
           >
-            <i class="material-icons">menu</i>
+            <i className="material-icons">menu</i>
           </button>
           <div
-            class="hidden top-navbar w-full lg:inline-flex lg:flex-grow lg:w-auto"
+            className="hidden top-navbar w-full lg:inline-flex lg:flex-grow lg:w-auto"
             id="navigation"
           >
-            <div class="lg:inline-flex lg:flex-row lg:mr-auto lg:w-auto w-full lg:items-center items-start  flex flex-col lg:h-auto srchhh">
+            <div className="lg:inline-flex lg:flex-row lg:mr-auto lg:w-auto w-full lg:items-center items-start  flex flex-col lg:h-auto srchhh">
               <Route
                 render={({ history }) => (
                   <SearchBox
@@ -138,10 +138,10 @@ const Header = () => {
                 )}
               />
             </div>
-            <div class="lg:inline-flex lg:flex-row lg:ml-auto lg:w-auto w-full lg:items-center items-start  flex flex-col lg:h-auto">
+            <div className="lg:inline-flex lg:flex-row lg:ml-auto lg:w-auto w-full lg:items-center items-start  flex flex-col lg:h-auto">
               <a
                 href="/cart"
-                class="lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-gray-400 items-center justify-center hover:bg-gray-900 hover:text-white"
+                className="lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-gray-400 items-center justify-center hover:bg-gray-900 hover:text-white"
               >
                 <span>
                   Cart ({cartItems.reduce((acc, item) => acc + item.qty, 0)})
@@ -151,20 +151,20 @@ const Header = () => {
                 <>
                   <a
                     href="/wishlist"
-                    class="lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-gray-400 items-center justify-center hover:bg-gray-900 hover:text-white"
+                    className="lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-gray-400 items-center justify-center hover:bg-gray-900 hover:text-white"
                   >
                     <span>Wishlist ({wishlist.length})</span>
                   </a>
                   <a
                     href="/currentoffers"
-                    class="lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-gray-400 items-center justify-center hover:bg-gray-900 hover:text-white"
+                    className="lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-gray-400 items-center justify-center hover:bg-gray-900 hover:text-white"
                   >
                     <span>Offers</span>
                   </a>
 
                   <a
                     href="#"
-                    class="lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-gray-400 items-center justify-center hover:bg-gray-900 hover:text-white us"
+                    className="lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-gray-400 items-center justify-center hover:bg-gray-900 hover:text-white us"
                     aria-controls="simple-menu"
                     aria-haspopup="true"
                     onClick={handleClickr}
@@ -178,7 +178,7 @@ const Header = () => {
                     <span id="username">{userInfo.name} </span>{" "}
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      class="h-5 w-5"
+                      className="h-5 w-5"
                       viewBox="0 0 20 20"
                       fill="currentColor"
                     >
@@ -194,13 +194,13 @@ const Header = () => {
                 <>
                   <a
                     href="/login"
-                    class="lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-gray-400 items-center justify-center hover:bg-gray-900 hover:text-white"
+                    className="lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-gray-400 items-center justify-center hover:bg-gray-900 hover:text-white"
                   >
                     <span>Sign In</span>
                   </a>
                   <a
                     href="/register"
-                    class="lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-gray-400 items-center justify-center hover:bg-gray-900 hover:text-white"
+                    className="lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-gray-400 items-center justify-center hover:bg-gray-900 hover:text-white"
                   >
                     <span>Register</span>
                   </a>
@@ -226,7 +226,7 @@ const Header = () => {
               <MenuItem>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="h-6 w-6"
+                  className="h-6 w-6"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -245,7 +245,7 @@ const Header = () => {
             <MenuItem onClick={logoutHandler}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-6 w-6"
+                className="h-6 w-6"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -267,7 +267,7 @@ const Header = () => {
                   <MenuItem>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      class="h-6 w-6"
+                      className="h-6 w-6"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -287,7 +287,7 @@ const Header = () => {
                   <MenuItem>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      class="h-6 w-6"
+                      className="h-6 w-6"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -307,7 +307,7 @@ const Header = () => {
                   <MenuItem>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      class="h-6 w-6"
+                      className="h-6 w-6"
                       fill="none"
                       viewBox="0 0 24 24"
                       style={{ marginRight: "10px" }}
@@ -327,7 +327,7 @@ const Header = () => {
                   <MenuItem>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      class="h-6 w-6"
+                      className="h-6 w-6"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"

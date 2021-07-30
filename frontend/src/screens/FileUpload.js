@@ -4,11 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import FormContainer from "../components/FormContainer";
 import CheckoutSteps from "../components/CheckoutSteps";
 import { saveFileUploadMethod } from "../actions/cartActions";
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 import { Widget } from "@uploadcare/react-widget";
-
-
 
 const fileUpload = ({ history }) => {
   const cart = useSelector((state) => state.cart);
@@ -33,7 +31,9 @@ const fileUpload = ({ history }) => {
       <CheckoutSteps step1 step2 step3 step4 />
       <h1>File Upload</h1>
       <p variant="danger" style={{ color: "red" }}>
-        * If you don't have any files, please proceed. If the file upload widget does not work, use the button that says "Upload Google Drive Files" to upload to Google Drive
+        * If you don't have any files, please proceed. If the file upload widget
+        does not work, use the button that says "Upload Google Drive Files" to
+        upload to Google Drive
       </p>
       <br></br>
 
@@ -41,13 +41,9 @@ const fileUpload = ({ history }) => {
         publicKey="ea2d5f102203c327acc8"
         onChange={(info) => {
           console.log(info.cdnUrl);
-          alert(
-            "Your File URL is: " +
-              info.cdnUrl +
-              "Screenshot it"
-          );
-          setFileUpload(info.cdnUrl)
-        //   setFileUpload(info.cdnUrl)
+          alert("Your File URL is: " + info.cdnUrl + "Screenshot it");
+          setFileUpload(info.cdnUrl);
+          //   setFileUpload(info.cdnUrl)
         }}
         previewStep="true"
         // role="uploadcare-uploader"
@@ -85,7 +81,9 @@ const fileUpload = ({ history }) => {
       <br></br>
 
       <a href="https://drive.google.com/drive/folders/14whII9_d7N_VpJIqyeiyY9UoizauatDX?usp=sharing">
-      <Button className="btn btn-block" variant="success"><i class="fab fa-google-drive"></i>  Upload Google Drive Files</Button>
+        <Button className="btn btn-block" variant="success">
+          <i className="fab fa-google-drive"></i> Upload Google Drive Files
+        </Button>
       </a>
     </FormContainer>
   );
