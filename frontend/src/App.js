@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route} from "react-router-dom";
 // UI Components
 import { Container } from "react-bootstrap";
 import Header from "./components/Header";
@@ -7,6 +7,7 @@ import Footer from "./components/Footer";
 // Screens
 import HomeScreen from "./screens/HomeScreen";
 import ProductScreen from "./screens/ProductScreen";
+// import NotFoundPage from "./screens/NotFoundPage";
 // User Screens
 import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
@@ -43,6 +44,8 @@ import CustomWork from "./screens/CustomWork";
 
 // Support
 import contactus from "./screens/contactus";
+
+// 404
 
 const App = () => {
   return (
@@ -103,6 +106,7 @@ const App = () => {
           <Route path="/customwork" component={CustomWork} />
         </Container>
         <Route path="/login" component={LoginScreen} />
+        {/* <Route path='' exact={true} component={NotFoundPage} /> */}
       </main>
       <Footer />
     </Router>

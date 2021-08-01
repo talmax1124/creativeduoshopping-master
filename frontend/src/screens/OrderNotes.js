@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import FormContainer from "../components/FormContainer";
 import CheckoutSteps from "../components/CheckoutSteps";
 import { saveOrderNotesMethod } from "../actions/cartActions";
+
+import JoditEditor from 'jodit-react'
 
 import { Link } from "react-router-dom";
 
@@ -13,6 +15,13 @@ const OrderNotes = ({ history }) => {
 
   if (!shippingAddress.address) {
     history.push("/shipping");
+  }
+
+  const editor = useRef(null)
+  const config = {
+    readonly: false,
+    placeholder: 'Write product description...',
+    askBeforePasteHTML: false,
   }
 
   const [orderNotes, setOrderNotes] = useState("");
@@ -38,13 +47,21 @@ const OrderNotes = ({ history }) => {
       <Form onSubmit={submitHandler}>
         <Form.Group controlId="orderNotes">
           <Form.Label>Requests? Notes For The Order?</Form.Label>
-          <Form.Control
+          <JoditEditor
+                 id='description'
+                 ref={editor}
+                 value={orderNotes}
+                 config={config}
+                 tabIndex={1}
+                 onBlur={(e) => setOrderNotes(e)}
+               />
+          {/* <Form.Control
             type="text"
             as="textarea"
             placeholder="Enter your Request or Note."
             value={orderNotes}
             onChange={(e) => setOrderNotes(e.target.value)}
-          ></Form.Control>
+          ></Form.Control> */}
         </Form.Group>
 
         <Link to="/shipping">

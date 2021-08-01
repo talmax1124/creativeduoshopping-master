@@ -8,6 +8,8 @@ import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 
+import OrderNotesJoditOrder from '../components/OrderNotesJoditOrder'
+
 import { Widget } from "@uploadcare/react-widget";
 
 import {
@@ -465,6 +467,7 @@ const OrderScreen = ({ match, history }) => {
             )}
 
             <h3>Thank You {order.user.name} for ordering with us!</h3>
+            <h5>Your Purchase Really Means A Lot To Us! Thanks for supporting our small business.</h5>
             <ListGroup.Item>
               <h2>Shipping</h2>
               <p>
@@ -535,7 +538,8 @@ const OrderScreen = ({ match, history }) => {
               <h2>Order Notes:</h2>
               <p>
                 <strong>Note/Request: </strong>
-                {order.orderNotes}
+                {/* {order.orderNotes} */}
+                <OrderNotesJoditOrder  order={order}/>
               </p>
             </ListGroup.Item>
 

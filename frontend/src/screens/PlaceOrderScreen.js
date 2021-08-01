@@ -17,6 +17,8 @@ import { ORDER_CREATE_RESET } from "../constants/orderConstants";
 import { USER_DETAILS_RESET } from "../constants/userConstants";
 import { getCoupons } from "../actions/couponActions";
 
+import OrderNotesJodit from "../components/OrderNotesJodit";
+
 const PlaceOrderScreen = ({ history }) => {
   const dispatch = useDispatch();
 
@@ -145,7 +147,8 @@ const PlaceOrderScreen = ({ history }) => {
             <ListGroup.Item>
               <h2>Order Notes</h2>
               <strong>Notes/Request: </strong>
-              {cart.orderNotes}
+              {/* {cart.orderNotes} */}
+              <OrderNotesJodit  cart={cart}/>
             </ListGroup.Item>
 
             <ListGroup.Item>
@@ -206,7 +209,7 @@ const PlaceOrderScreen = ({ history }) => {
                 </Col>
                 <Col className="text-center">
                   <Button
-                    className="mt-4 text-center"
+                    className="mt-4 text-center btn btn-block"
                     type="submit"
                     variant="primary"
                   >
