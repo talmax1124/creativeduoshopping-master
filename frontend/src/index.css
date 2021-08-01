@@ -331,8 +331,7 @@ h2 {
   color: #000;
   padding: 0.35em;
   margin: 10px 0;
-  width: 100%;
-  border-radius: 2em;
+  border-radius: 10em;
   transition: 0.25s ease;
 }
 

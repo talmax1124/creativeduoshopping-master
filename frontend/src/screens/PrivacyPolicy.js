@@ -1,13 +1,14 @@
 import React from "react";
 import { Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const PrivacyPolicy = () => {
   return (
     <>
       <div>
-        <a href="/login">
+        <Link to="/login">
           <Button>Go Back</Button>
-        </a>
+        </Link>
         <h1>Privacy Policy</h1>
         <h3>Last Updated: 5/12/2021</h3>
         <br />

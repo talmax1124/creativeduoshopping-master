@@ -1,5 +1,6 @@
 import React from "react";
 // import { Container, Row, Col } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -11,10 +12,10 @@ const Footer = () => {
               <h3 style={{ color: "whitesmoke" }}>Links</h3>
               <ul>
                 <li>
-                  <a href="/privacypolicy" target="blank">Privacy Policy</a>
+                  <Link to="/privacypolicy" target="blank">Privacy Policy</Link>
                 </li>
                 <li>
-                  <a href="/termsandconditions" target="blank">Terms & Conditions </a>
+                  <Link to="/termsandconditions" target="blank">Terms & Conditions </Link>
                 </li>
                 <li>
                   <a href="https://creativeduo.statuspage.io" target="blank">Status Page</a>
@@ -25,16 +26,16 @@ const Footer = () => {
               <h3 style={{ color: "whitesmoke" }}>More</h3>
               <ul>
                 <li>
-                  <a href="https://creativeduo.netlify.app" target="blank">Home Website</a>
+                  <a href to="https://creativeduo.netlify.app" target="blank">Home Website</a>
                 </li>
                 <li>
                   <a href="https://linktr.ee/creativeduo2020" target="blank">More Links</a>
                 </li>
                 <li>
-                  <a href="/customwork" target="blank">Custom Digital Wesbites</a>
+                  <Link to="/customwork" target="blank">Custom Digital Wesbites</Link>
                 </li>
                 <li>
-                  <a href="/contactus" target="blank">Contact Us</a>
+                  <Link to="/contactus" target="blank">Contact Us</Link>
                 </li>
               </ul>
             </div>

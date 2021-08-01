@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 // import { Form, Button, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
@@ -7,12 +7,13 @@ import Loader from "../components/Loader";
 // import FormContainer from "../components/FormContainer";
 import { login, getGoogleUserInfo } from "../actions/userActions";
 
+
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 
-import Link from "@material-ui/core/Link";
+// import Link from "@material-ui/core/Link";
 import Paper from "@material-ui/core/Paper";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
@@ -174,12 +175,12 @@ const LoginScreen = ({ location, history }) => {
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link href="/forgotpassword" variant="body2">
+                  <Link to='/forgot-password' variant="body2">
                     Forgot password?
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link href="/register" variant="body2">
+                  <Link to="/register" variant="body2">
                     {"Don't have an account? Sign Up"}
                   </Link>
                 </Grid>
@@ -193,9 +194,7 @@ const LoginScreen = ({ location, history }) => {
                   src="https://img.icons8.com/fluent/48/000000/google-logo.png"
                   height="auto"
                   alt=""
-                  style={{ marginRight: "5px" }}
-                />{" "}
-                Sign In With Google
+                />
               </button>
               <Box mt={5}>
                 <Copyright />

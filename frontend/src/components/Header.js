@@ -3,6 +3,8 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../actions/userActions";
 
+import { Link } from "react-router-dom";
+
 // Search Bar
 import SearchBox from "./SearchBox";
 import { Route } from "react-router-dom";
@@ -113,11 +115,11 @@ const Header = () => {
         </div>
 
         <nav className="flex items-center bg-gray-800 p-3 flex-wrap navv">
-          <a href="/" className="p-2 mr-4 inline-flex items-center">
+          <Link to="/" className="p-2 mr-4 inline-flex items-center">
             <span className="text-xl text-white font-bold uppercase tracking-wide">
               Creative Duo
             </span>
-          </a>
+          </Link>
           <button
             className="text-white inline-flex p-3 hover:bg-gray-900 rounded lg:hidden ml-auto hover:text-white outline-none nav-toggler"
             data-target="#navigation"
@@ -139,31 +141,30 @@ const Header = () => {
               />
             </div>
             <div className="lg:inline-flex lg:flex-row lg:ml-auto lg:w-auto w-full lg:items-center items-start  flex flex-col lg:h-auto">
-              <a
-                href="/cart"
+              <Link
+                to="/cart"
                 className="lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-gray-400 items-center justify-center hover:bg-gray-900 hover:text-white"
               >
                 <span>
                   Cart ({cartItems.reduce((acc, item) => acc + item.qty, 0)})
                 </span>
-              </a>
+              </Link>
               {userInfo ? (
                 <>
-                  <a
-                    href="/wishlist"
+                  <Link
+                    to="/wishlist"
                     className="lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-gray-400 items-center justify-center hover:bg-gray-900 hover:text-white"
                   >
                     <span>Wishlist ({wishlist.length})</span>
-                  </a>
-                  <a
-                    href="/currentoffers"
+                  </Link>
+                  <Link
+                    to="/currentoffers"
                     className="lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-gray-400 items-center justify-center hover:bg-gray-900 hover:text-white"
                   >
                     <span>Offers</span>
-                  </a>
+                  </Link>
 
-                  <a
-                    href="#"
+                  <Link
                     className="lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-gray-400 items-center justify-center hover:bg-gray-900 hover:text-white us"
                     aria-controls="simple-menu"
                     aria-haspopup="true"
@@ -188,22 +189,22 @@ const Header = () => {
                         clip-rule="evenodd"
                       />
                     </svg>
-                  </a>
+                  </Link>
                 </>
               ) : (
                 <>
-                  <a
-                    href="/login"
+                  <Link
+                    to="/login"
                     className="lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-gray-400 items-center justify-center hover:bg-gray-900 hover:text-white"
                   >
                     <span>Sign In</span>
-                  </a>
-                  <a
-                    href="/register"
+                  </Link>
+                  <Link
+                    to="/register"
                     className="lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-gray-400 items-center justify-center hover:bg-gray-900 hover:text-white"
                   >
                     <span>Register</span>
-                  </a>
+                  </Link>
                 </>
               )}
             </div>
@@ -222,7 +223,7 @@ const Header = () => {
               },
             }}
           >
-            <a href="/profile">
+            <Link to="/profile">
               <MenuItem>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -241,7 +242,7 @@ const Header = () => {
                 </svg>{" "}
                 Profile
               </MenuItem>
-            </a>
+            </Link>
             <MenuItem onClick={logoutHandler}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -263,7 +264,7 @@ const Header = () => {
             {userInfo && userInfo.isAdmin && (
               <>
                 <hr />
-                <a href="/admin/userlist">
+                <Link to="/admin/userlist">
                   <MenuItem>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -282,8 +283,8 @@ const Header = () => {
                     </svg>
                     Users
                   </MenuItem>
-                </a>
-                <a href="/admin/productlist">
+                </Link>
+                <Link to="/admin/productlist">
                   <MenuItem>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -302,8 +303,8 @@ const Header = () => {
                     </svg>
                     Products
                   </MenuItem>
-                </a>
-                <a href="/admin/orderlist">
+                </Link>
+                <Link to="/admin/orderlist">
                   <MenuItem>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -322,8 +323,8 @@ const Header = () => {
                     </svg>
                     Orders
                   </MenuItem>
-                </a>
-                <a href="/admin/coupon">
+                </Link>
+                <Link to="/admin/coupon">
                   <MenuItem>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -342,7 +343,7 @@ const Header = () => {
                     </svg>
                     Coupon
                   </MenuItem>
-                </a>
+                </Link>
               </>
             )}
           </Menu>

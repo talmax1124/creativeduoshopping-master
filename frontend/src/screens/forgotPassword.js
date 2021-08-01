@@ -1,13 +1,15 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 
+import { Link } from "react-router-dom";
+
 const forgotPassword = () => {
   return (
     <>
       <div>
-        <a href="/login">
+        <Link to="/login">
           <Button>Go Back</Button>
-        </a>
+        </Link>
         <h1>Forgot Your Password?</h1>
 
         <form

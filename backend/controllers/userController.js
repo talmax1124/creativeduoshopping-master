@@ -3,6 +3,7 @@ import generateToken from "../utils/generateToken.js";
 import User from "../models/userModel.js";
 import jwt from "jsonwebtoken";
 import Mailgun from "mailgun-js";
+import bcrypt from "bcryptjs";
 
 // @desc    Auth user & get token
 // @route   POST /api/users/login
@@ -86,8 +87,6 @@ const verificationLink = asyncHandler(async (req, res) => {
     This email is sent from the website ${process.env.CLIENT_URL} and all information is secure.
     `,
   };
-
-  
 
   mailgun.messages().send(data, function (error, info) {
     if (error) {
@@ -188,7 +187,8 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     user.email = req.body.email || user.email;
     user.phone = req.body.phone || user.phone;
     user.profileImage = req.body.profileImage || user.profileImage;
-    user.profileBackground = req.body.profileBackground || user.profileBackground;
+    user.profileBackground =
+      req.body.profileBackground || user.profileBackground;
     if (req.body.password) {
       user.password = req.body.password;
     }
@@ -272,10 +272,11 @@ const updateUser = asyncHandler(async (req, res) => {
     user.email = req.body.email || user.email;
     user.isAdmin = req.body.isAdmin;
     user.ispromember = req.body.ispromember;
-    user.isMilitary = req.body.isMilitary,
-    user.phone = req.body.phone || user.phone;
+    (user.isMilitary = req.body.isMilitary),
+      (user.phone = req.body.phone || user.phone);
     user.profileImage = req.body.profileImage || user.profileImage;
-    user.profileBackground = req.body.profileBackground || user.profileBackground;
+    user.profileBackground =
+      req.body.profileBackground || user.profileBackground;
 
     const updatedUser = await user.save();
 
@@ -302,6 +303,162 @@ const updateUser = asyncHandler(async (req, res) => {
   }
 });
 
+const forgotPassword = (req, res) => {
+  const { email } = req.body;
+  var mg = new Mailgun({
+    apiKey: process.env.API_KEY,
+    domain: process.env.DOMAIN,
+  });
+
+  User.findOne({ email }, (err, user) => {
+    if (err || !user) {
+      return res
+        .status(400)
+        .json({ message: "User with this email does not exist" });
+    }
+
+    const token = generateToken(user._id);
+    const data = {
+      from: "Creative Duo Shopping <creativeduo2020@gmail.com>",
+      to: email,
+      subject: "Reset Your Password",
+      html: `
+      <body marginheight="0" topmargin="0" marginwidth="0" style="margin: 0px; background-color: #f2f3f8;" leftmargin="0">
+    <table cellspacing="0" border="0" cellpadding="0" width="100%" bgcolor="#f2f3f8"
+        style="@import url(https://fonts.googleapis.com/css?family=Rubik:300,400,500,700|Open+Sans:300,400,600,700); font-family: 'Open Sans', sans-serif;">
+        <tr>
+            <td>
+                <table style="background-color: #f2f3f8; max-width:670px;  margin:0 auto;" width="100%" border="0"
+                    align="center" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td style="height:80px;">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:center;">
+                          <a href="https://creativeduo.net" title="logo" target="_blank">
+                            <img width="60" src="https://i.ibb.co/mFJm6yt/Creative-Duo-New-Logo.png" title="logo" alt="logo">
+                          </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="height:20px;">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <table width="95%" border="0" align="center" cellpadding="0" cellspacing="0"
+                                style="max-width:670px;background:#fff; border-radius:3px; text-align:center;-webkit-box-shadow:0 6px 18px 0 rgba(0,0,0,.06);-moz-box-shadow:0 6px 18px 0 rgba(0,0,0,.06);box-shadow:0 6px 18px 0 rgba(0,0,0,.06);">
+                                <tr>
+                                    <td style="height:40px;">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:0 35px;">
+                                        <h1 style="color:#1e1e2d; font-weight:500; margin:0;font-size:32px;font-family:'Rubik',sans-serif;">You have
+                                            requested to reset your password</h1>
+                                        <span
+                                            style="display:inline-block; vertical-align:middle; margin:29px 0 26px; border-bottom:1px solid #cecece; width:100px;"></span>
+                                        <p style="color:#455056; font-size:15px;line-height:24px; margin:0;">
+                                            We cannot simply send you your old password. A unique link to reset your
+                                            password has been generated for you. To reset your password, click the
+                                            following link and follow the instructions.
+                                        </p>
+                                        <a href="${process.env.CLIENT_URL}/reset-password/${token}"
+                                            style="background:#20e277;text-decoration:none !important; font-weight:500; margin-top:35px; color:#fff;text-transform:uppercase; font-size:14px;padding:10px 24px;display:inline-block;border-radius:50px;">Reset
+                                            Password</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="height:40px;">&nbsp;</td>
+                                </tr>
+                            </table>
+                        </td>
+                    <tr>
+                        <td style="height:20px;">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:center;">
+                            <p style="font-size:14px; color:rgba(69, 80, 86, 0.7411764705882353); line-height:18px; margin:0 0 0;">&copy; <strong>creativeduo.net</strong></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="height:80px;">&nbsp;</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    <br></br>
+    <p style="color: red;">If by any chance you clicked the submit button button, please wait until a new email arrives. If you only clicked it once, please continue by clicking button above</p>
+</body>
+
+      `,
+    };
+
+    return user.updateOne({ resetLink: token }, function (err, success) {
+      if (err) {
+        return res.status(400).json({ error: "Reset password link error" });
+      } else {
+        mg.messages().send(data, function (error, body) {
+          if (error) {
+            return res.json({ error: error.message });
+          }
+          return res.json({
+            message:
+              "Email Has Been Sent To Email You Have Inputted Below. If this email exists, you should recieve an email in about 30 seconds. If you haven't recieved an email, please visit the spam folder or wait a couple minutes more. If this still doesn't work, please click the submit button once again.",
+          });
+        });
+      }
+    });
+  });
+};
+
+//@desc Allows user to update password using the resetLink received in email
+//@route PUT /api/users/reset-password
+//@access Public
+
+const resetPassword = (req, res) => {
+  const { resetLink, newPass } = req.body;
+  if (resetLink) {
+    jwt.verify(
+      resetLink,
+      process.env.JWT_SECRET,
+      function (error, decodedData) {
+        if (error) {
+          return res
+            .status(401)
+            .json({ message: "Token incorrect or expired" });
+        }
+        User.findOne({ resetLink }, function (err, user) {
+          if (err || !user) {
+            return res
+              .status(400)
+              .json({ message: "Token incorrect or expired" });
+          }
+          const obj = {
+            password: newPass,
+            resetLink: "",
+          };
+
+          user = Object.assign(user, obj);
+
+          user.save((err, result) => {
+            if (err) {
+              return res
+                .status(401)
+                .json({ error: "Token incorrect or expired" });
+            } else {
+              res
+                .status(200)
+                .json({ message: "Your password has been changed" });
+            }
+          });
+        });
+      }
+    );
+  } else {
+    return res.status(401).json({ error: "Authentication Error" });
+  }
+};
+
 export {
   authUser,
   verificationLink,
@@ -312,4 +469,6 @@ export {
   deleteUser,
   getUserById,
   updateUser,
+  forgotPassword,
+  resetPassword,
 };

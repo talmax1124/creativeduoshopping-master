@@ -1,22 +1,16 @@
 import React from "react";
 import { Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const TermsandConditions = () => {
-
-
-
-
   return (
     <>
       <div>
-        <a href="/login">
+        <Link to="/login">
           <Button>Go Back</Button>
-        </a>
+        </Link>
 
         <h1>Terms & Conditions</h1>
-
-
-       
       </div>
     </>
   );

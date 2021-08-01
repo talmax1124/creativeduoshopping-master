@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 import {
   USER_DETAILS_FAIL,
   USER_DETAILS_REQUEST,
@@ -29,8 +29,80 @@ import {
   USER_VERIFICATION_LINK_REQUEST,
   USER_VERIFICATION_LINK_RESET,
   USER_VERIFICATION_LINK_SUCCESS,
-} from '../constants/userConstants';
-import { ORDER_LIST_MY_RESET } from '../constants/orderConstants';
+  USER_FORGOT_PASSWORD_MAIL_REQUEST,
+  USER_FORGOT_PASSWORD_MAIL_SUCCESS,
+  USER_FORGOT_PASSWORD_MAIL_FAIL,
+  USER_RESET_PASSWORD_FAIL,
+  USER_RESET_PASSWORD_REQUEST,
+  USER_RESET_PASSWORD_SUCCESS,
+} from "../constants/userConstants";
+import { ORDER_LIST_MY_RESET } from "../constants/orderConstants";
+
+export const forgotPassword = (email) => async (dispatch) => {
+  try {
+    dispatch({
+      type: USER_FORGOT_PASSWORD_MAIL_REQUEST,
+    })
+
+    const config = {
+      headers: {
+        'Content-type': 'application/json',
+      },
+    }
+
+    const { data } = await axios.put(
+      '/api/users/forgot-password',
+      { email },
+      config
+    )
+
+    dispatch({
+      type: USER_FORGOT_PASSWORD_MAIL_SUCCESS,
+      payload: data.message,
+    })
+  } catch (error) {
+    dispatch({
+      type: USER_FORGOT_PASSWORD_MAIL_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
+  }
+}
+
+export const resetPassword = (password, token) => async (dispatch) => {
+  try {
+    dispatch({
+      type: USER_RESET_PASSWORD_REQUEST,
+    })
+
+    const config = {
+      headers: {
+        'Content-type': 'application/json',
+      },
+    }
+
+    const { data } = await axios.put(
+      '/api/users/reset-password',
+      { newPass: password, resetLink: token },
+      config
+    )
+
+    dispatch({
+      type: USER_RESET_PASSWORD_SUCCESS,
+      payload: data.message,
+    })
+  } catch (error) {
+    dispatch({
+      type: USER_RESET_PASSWORD_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
+  }
+}
 
 export const login = (email, password, phone) => async (dispatch) => {
   try {
@@ -40,12 +112,12 @@ export const login = (email, password, phone) => async (dispatch) => {
 
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     };
 
     const { data } = await axios.post(
-      '/api/users/login',
+      "/api/users/login",
       { email, password, phone },
       config
     );
@@ -55,7 +127,7 @@ export const login = (email, password, phone) => async (dispatch) => {
       payload: data,
     });
 
-    localStorage.setItem('userInfo', JSON.stringify(data));
+    localStorage.setItem("userInfo", JSON.stringify(data));
   } catch (error) {
     dispatch({
       type: USER_LOGIN_FAIL,
@@ -72,11 +144,11 @@ export const getGoogleUserInfo = () => {
     try {
       dispatch({ type: USER_LOGIN_REQUEST });
 
-      const { data } = await axios.get('/api/auth/currentuser');
+      const { data } = await axios.get("/api/auth/currentuser");
 
       dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
 
-      localStorage.setItem('userInfo', JSON.stringify(data));
+      localStorage.setItem("userInfo", JSON.stringify(data));
     } catch (error) {
       dispatch({
         type: USER_LOGIN_FAIL,
@@ -97,63 +169,62 @@ export const logout = () => {
       } = getState();
 
       if (userInfo.googleId) {
-        await axios.get('/api/auth/logout');
+        await axios.get("/api/auth/logout");
       }
 
-      localStorage.removeItem('userInfo');
-      localStorage.removeItem('cartItems');
-      localStorage.removeItem('shippingAddress');
-      localStorage.removeItem('paymentMethod');
-      localStorage.removeItem('ordernotes');
-      localStorage.removeItem("fileUpload")
+      localStorage.removeItem("userInfo");
+      localStorage.removeItem("cartItems");
+      localStorage.removeItem("shippingAddress");
+      localStorage.removeItem("paymentMethod");
+      localStorage.removeItem("ordernotes");
+      localStorage.removeItem("fileUpload");
       dispatch({ type: USER_LOGOUT });
       dispatch({
         type: USER_REGISTER_RESET,
-      })
+      });
       dispatch({ type: USER_DETAILS_RESET });
       dispatch({ type: ORDER_LIST_MY_RESET });
       dispatch({ type: USER_LIST_RESET });
       dispatch({
         type: USER_VERIFICATION_LINK_RESET,
-      })
-      document.location.href = '/login';
+      });
+      document.location.href = "/login";
     } catch (err) {
       console.error(err);
     }
   };
 };
 
-export const verify =
-  (name, email, password, phone) => async (dispatch) => {
-    try {
-      dispatch({
-        type: USER_VERIFICATION_LINK_REQUEST,
-      })
-      const config = {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }
+export const verify = (name, email, password, phone) => async (dispatch) => {
+  try {
+    dispatch({
+      type: USER_VERIFICATION_LINK_REQUEST,
+    });
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
 
-      const { data } = await axios.post(
-        '/api/users/verificationlink',
-        { name, email, password, phone },
-        config
-      )
-      dispatch({
-        type: USER_VERIFICATION_LINK_SUCCESS,
-        payload: data,
-      })
-    } catch (error) {
-      dispatch({
-        type: USER_VERIFICATION_LINK_FAIL,
-        payload:
-          error.response && error.response.data.message
-            ? error.response.data.message
-            : error.message,
-      })
-    }
+    const { data } = await axios.post(
+      "/api/users/verificationlink",
+      { name, email, password, phone },
+      config
+    );
+    dispatch({
+      type: USER_VERIFICATION_LINK_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: USER_VERIFICATION_LINK_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
   }
+};
 
 export const register = (token) => async (dispatch) => {
   try {
@@ -163,15 +234,11 @@ export const register = (token) => async (dispatch) => {
 
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     };
 
-    const { data } = await axios.post(
-      '/api/users',
-      { token },
-      config
-    );
+    const { data } = await axios.post("/api/users", { token }, config);
 
     dispatch({
       type: USER_REGISTER_SUCCESS,
@@ -183,7 +250,7 @@ export const register = (token) => async (dispatch) => {
       payload: data,
     });
 
-    localStorage.setItem('userInfo', JSON.stringify(data));
+    localStorage.setItem("userInfo", JSON.stringify(data));
   } catch (error) {
     dispatch({
       type: USER_REGISTER_FAIL,
@@ -222,7 +289,7 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
       error.response && error.response.data.message
         ? error.response.data.message
         : error.message;
-    if (message === 'Not authorized, token failed') {
+    if (message === "Not authorized, token failed") {
       dispatch(logout());
     }
     dispatch({
@@ -244,7 +311,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
 
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
@@ -259,13 +326,13 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
       type: USER_LOGIN_SUCCESS,
       payload: data,
     });
-    localStorage.setItem('userInfo', JSON.stringify(data));
+    localStorage.setItem("userInfo", JSON.stringify(data));
   } catch (error) {
     const message =
       error.response && error.response.data.message
         ? error.response.data.message
         : error.message;
-    if (message === 'Not authorized, token failed') {
+    if (message === "Not authorized, token failed") {
       dispatch(logout());
     }
     dispatch({
@@ -302,7 +369,7 @@ export const listUsers = () => async (dispatch, getState) => {
       error.response && error.response.data.message
         ? error.response.data.message
         : error.message;
-    if (message === 'Not authorized, token failed') {
+    if (message === "Not authorized, token failed") {
       dispatch(logout());
     }
     dispatch({
@@ -336,7 +403,7 @@ export const deleteUser = (id) => async (dispatch, getState) => {
       error.response && error.response.data.message
         ? error.response.data.message
         : error.message;
-    if (message === 'Not authorized, token failed') {
+    if (message === "Not authorized, token failed") {
       dispatch(logout());
     }
     dispatch({
@@ -358,7 +425,7 @@ export const updateUser = (user) => async (dispatch, getState) => {
 
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
@@ -375,7 +442,7 @@ export const updateUser = (user) => async (dispatch, getState) => {
       error.response && error.response.data.message
         ? error.response.data.message
         : error.message;
-    if (message === 'Not authorized, token failed') {
+    if (message === "Not authorized, token failed") {
       dispatch(logout());
     }
     dispatch({

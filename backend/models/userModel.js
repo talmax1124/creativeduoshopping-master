@@ -49,6 +49,10 @@ const userSchema = mongoose.Schema(
     googleId: {
       type: String,
     },
+    resetLink: {
+      type: String,
+      default: "",
+    },
   },
   {
     timestamps: true,

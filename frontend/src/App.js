@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route} from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 // UI Components
 import { Container } from "react-bootstrap";
 import Header from "./components/Header";
@@ -44,6 +44,8 @@ import CustomWork from "./screens/CustomWork";
 
 // Support
 import contactus from "./screens/contactus";
+import ForgotPasswordScreen from "./screens/ForgotPasswordScreen";
+import ResetPasswordScreen from "./screens/ResetPasswordScreen";
 
 // 404
 
@@ -71,6 +73,17 @@ const App = () => {
           <Route path="/admin/user/:id/edit" component={UserEditScreen} />
           <Route path="/currentoffers" component={CurrentOffers} />
           <Route path="/termsandconditions" component={TermsandConditions} />
+
+          <Route
+            path="/forgot-password"
+            component={ForgotPasswordScreen}
+            exact
+          />
+          <Route
+            path="/reset-password/:id"
+            component={ResetPasswordScreen}
+            exact
+          />
 
           <Route
             path="/admin/productlist"
