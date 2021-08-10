@@ -90,6 +90,9 @@ const productSchema = mongoose.Schema(
     productTutorial: {
       type: String,
     },
+    specialPriceDiscountText: {
+      type: Number,
+    },
     productImportantInformation: {
       type: String,
     },

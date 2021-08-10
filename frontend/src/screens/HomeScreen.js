@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Container } from "react-bootstrap";
 import Product from "../components/Product";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
@@ -50,66 +50,64 @@ const HomeScreen = ({ match, history, location }) => {
   return (
     <>
       <Meta />
-      {(pageNumber === 1 ||
-        pageNumber === 2 ||
-        pageNumber === 3 ||
-        pageNumber === 4) && <Hero />}
+      {pageNumber === 1 && <Hero />}
 
-      <ShopByCategory products={products} />
-      <br />
-      {!keyword && pageNumber === 1 ? (
-        <>
-          <h3>
-            Our Best Selling Products
-            <span role="img" aria-label="">
-              👇🏻
-            </span>
-          </h3>
-          <ProductCarousel />
-        </>
-      ) : (
-        <Link to="/" className="btn btn-dark">
-          <i className="fas fa-arrow-left"></i> Go Back
-        </Link>
-      )}
-      {/* <h1 className="titprd">Products</h1> */}
+      <Container>
+        <ShopByCategory products={products} />
+        <br />
+        {!keyword && pageNumber === 1 ? (
+          <>
+            <h3>
+              Our Best Selling Products
+              <span role="img" aria-label="">
+                👇🏻
+              </span>
+            </h3>
+            <ProductCarousel />
+          </>
+        ) : (
+          <Link to="/" className="btn btn-dark">
+            <i className="fas fa-arrow-left"></i> Go Back
+          </Link>
+        )}
 
-      {loading ? (
-        <Loader />
-      ) : error ? (
-        <Message variant="danger">{error}</Message>
-      ) : (
-        <>
-          {!keyword && pageNumber === 1 && <LatestProducts />}
+        {loading ? (
+          <Loader />
+        ) : error ? (
+          <Message variant="danger">{error}</Message>
+        ) : (
+          <>
+            {!keyword && pageNumber === 1 && <LatestProducts />}
 
-          <h1 id="prod">All products</h1>
+            <h1 id="prod">All products</h1>
 
-          <Row>
-            <Col md={3}>
-              <h6>Sort By:</h6>
-              <Sort products={products} pages={pages} page={page} />
-            </Col>
-          </Row>
-          <Row>
-            {products.map((product) => (
-              <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
-                <Product
-                  product={product}
-                  addToWishList={addToWishListHandler}
-                  checkWishlist={checkWishList(product._id)}
-                />
+            <Row>
+              <Col md={3}>
+                <h6>Sort By:</h6>
+                <Sort products={products} pages={pages} page={page} />
               </Col>
-            ))}
-          </Row>
-          <Paginate
-            pages={pages}
-            page={page}
-            keyword={keyword ? keyword : ""}
-          />
+            </Row>
+            <Row>
+              {products.map((product) => (
+                <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
+                  <Product
+                    product={product}
+                    addToWishList={addToWishListHandler}
+                    checkWishlist={checkWishList(product._id)}
+                  />
+                </Col>
+              ))}
+            </Row>
+            <Paginate
+              pages={pages}
+              page={page}
+              keyword={keyword ? keyword : ""}
+            />
 
-          <ShopByBrand products={products} />
-        </>
-      )}
+            <ShopByBrand products={products} />
+          </>
+        )}
+      </Container>
     </>
   );
 };

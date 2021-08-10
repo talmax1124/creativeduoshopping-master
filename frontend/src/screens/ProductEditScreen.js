@@ -30,6 +30,7 @@ const ProductEditScreen = ({ match, history }) => {
   const [additionalimagethree, setAdditionalimagethree] = useState("");
   const [productVideo, setProductVideo] = useState("");
   const [productTutorial, setProductTutorial] = useState("");
+  const [specialPriceDiscountText, setSpecialPriceDiscountText] = useState("");
   const [productImportantInformation, setProductImportantInformation] =
     useState("");
   const [brand, setBrand] = useState("");
@@ -76,6 +77,7 @@ const ProductEditScreen = ({ match, history }) => {
         setProductImportantInformation(product.productImportantInformation);
         setProductVideo(product.productVideo);
         setProductTutorial(product.productTutorial);
+        setSpecialPriceDiscountText(product.specialPriceDiscountText);
       }
     }
   }, [dispatch, history, productId, product, successUpdate]);
@@ -192,6 +194,7 @@ const ProductEditScreen = ({ match, history }) => {
           additionalimagethree,
           productVideo,
           productTutorial,
+          specialPriceDiscountText,
           productImportantInformation,
         })
       );
@@ -250,9 +253,9 @@ const ProductEditScreen = ({ match, history }) => {
             </Form.Group>
 
             <Form.Group controlId="lastPrice">
-              <Form.Label>Price Before Special Price</Form.Label>
+              <Form.Label>Price Before Discount</Form.Label>
               <p style={{ color: "red" }}>
-                * Enter Original Price If You Fill In The Input Above
+                * Enter Original Price Before Discount.
               </p>
               <Form.Control
                 type="number"
@@ -260,6 +263,17 @@ const ProductEditScreen = ({ match, history }) => {
                 placeholder="Enter Last Price"
                 value={lastPrice}
                 onChange={(e) => setLastPrice(e.target.value)}
+              ></Form.Control>
+            </Form.Group>
+
+            <Form.Group controlId="specialPriceDiscountText">
+              <Form.Label>Discount Percentage From Original Price</Form.Label>
+              <Form.Control
+                type="number"
+                step="any"
+                placeholder="Enter Discount Percentage"
+                value={specialPriceDiscountText}
+                onChange={(e) => setSpecialPriceDiscountText(e.target.value)}
               ></Form.Control>
             </Form.Group>
 

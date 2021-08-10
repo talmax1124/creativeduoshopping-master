@@ -206,23 +206,6 @@ const ProductScreen = ({ history, match }) => {
                   </ListGroup.Item>
                 )}
 
-                {product.lastPrice > 0 && (
-                  <>
-                    <ListGroup.Item>
-                      Original Price Before Discounted Price: ${" "}
-                      {product.lastPrice}
-                    </ListGroup.Item>
-                  </>
-                )}
-
-                {product.specialPrice > 0 && (
-                  <>
-                    <ListGroup.Item>
-                      Discounted Price: $ {product.specialPrice}
-                    </ListGroup.Item>
-                  </>
-                )}
-
                 <ListGroup.Item>
                   Date Created: <br></br>
                   <br></br> <h5> {moment(product.createdAt).format("L")}</h5>
@@ -256,11 +239,35 @@ const ProductScreen = ({ history, match }) => {
                   {product.specialPrice > 0 && (
                     <>
                       <ListGroup.Item>
-                        <Col>Discounted Price:</Col>{" "}
-                        <Col>$ {product.specialPrice}</Col>
+                        <Row>
+                          <Col>Price:</Col>
+                          <Col>
+                            {product.lastPrice && (
+                              <span className="lastPrice">
+                                ${product.lastPrice}
+                              </span>
+                            )}
+                            <span className="specialPrice">
+                              ${product.specialPrice}
+                            </span>
+                          </Col>
+                        </Row>
+                        {product.specialPriceDiscountText && (
+                          <>
+                            <Row>
+                              <br></br>
+                              <Col style={{marginTop: "6px"}}>
+                                <h6>
+                                  {product.specialPriceDiscountText}% Discount
+                                </h6>
+                              </Col>
+                            </Row>
+                          </>
+                        )}
                       </ListGroup.Item>
                     </>
                   )}
+
                   <ListGroup.Item>
                     <Row>
                       <Col>Status:</Col>
@@ -475,7 +482,7 @@ const ProductScreen = ({ history, match }) => {
               <ListGroup variant="flush">
                 {product.reviews.map((review) => (
                   <>
-                    <div style={{marginBottom: "1em"}}>
+                    <div style={{ marginBottom: "1em" }}>
                       <div class="bs-example">
                         <div class="card" style={{ maxWidth: "500px" }}>
                           <div class="row no-gutters">

@@ -53,8 +53,11 @@ const App = () => {
   return (
     <Router>
       <Header />
+
       <main className="py-3">
+        <Route path="/" component={HomeScreen} exact />
         <Container>
+          <Route path="/profile" component={ProfileScreen} />
           <Route path="/contactus" component={contactus} />
           <Route path="/forgotpassword" component={forgotPassword} />
           <Route path="/privacypolicy" component={PrivacyPolicy} />
@@ -66,7 +69,7 @@ const App = () => {
           <Route path="/placeorder" component={PlaceOrderScreen} />
           <Route path="/wishlist" component={WishList} />
           <Route path="/register" component={RegisterScreen} />
-          <Route path="/profile" component={ProfileScreen} />
+
           <Route path="/product/:id" component={ProductScreen} />
           <Route path="/cart/:id?" component={CartScreen} />
           <Route path="/admin/userlist" component={UserListScreen} />
@@ -99,7 +102,7 @@ const App = () => {
             component={HomeScreen}
             exact
           />
-          <Route path="/" component={HomeScreen} exact />
+
           <Route
             path="/products/category/:category"
             component={ShopByCategoryScreen}

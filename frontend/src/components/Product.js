@@ -1,28 +1,13 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { Card, Badge } from "react-bootstrap";
+import { Card, Badge, Row, Col } from "react-bootstrap";
 import Rating from "./Rating";
 import Favorites from "./Favorites";
-
-import Button from '@material-ui/core/Button';
-import Tooltip from '@material-ui/core/Tooltip';
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 
 const Product = ({ product }) => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
-
-  const [open, setOpen] = React.useState(false);
-
-  const handleTooltipClose = () => {
-    setOpen(false);
-  };
-
-  const handleTooltipOpen = () => {
-    setOpen(true);
-  };
-
 
   return (
     <Card className="my-3 p-1 rounded cardsss">
@@ -63,45 +48,28 @@ const Product = ({ product }) => {
           />
         </Card.Text>
 
-        {product.lastPrice > 0 && (
-          <>
-            <br />
-            <Card.Text as="h5">Original Price: ${product.lastPrice}</Card.Text>
-          </>
-        )}
-
         {product.price > 0 && (
           <>
             <Card.Text as="h3">${product.price}</Card.Text>
           </>
         )}
+
         {product.specialPrice > 0 && (
           <>
-            <Card.Text as="h3">
-              {" "}
-              Discounted Price: ${product.specialPrice}
-            </Card.Text>
+            <Row>
+              <Col className="specialPriceFlex">
+                {product.lastPrice && (
+                  <Card.Text className="lastPrice2" as="h4">
+                    ${product.lastPrice}
+                  </Card.Text>
+                )}
+                <Card.Text className="specialPrice2" as="h4">
+                  ${product.specialPrice}
+                </Card.Text>
+              </Col>
+            </Row>
           </>
         )}
-
-        <ClickAwayListener onClickAway={handleTooltipClose}>
-            <div>
-              <Tooltip
-                PopperProps={{
-                  disablePortal: true,
-                }}
-                onClose={handleTooltipClose}
-                open={open}
-                disableFocusListener
-                disableHoverListener
-                disableTouchListener
-                title={product.brand}
-              >
-                <Button onClick={handleTooltipOpen}>Product Brand</Button>
-              </Tooltip>
-            </div>
-          </ClickAwayListener>
-       
       </Card.Body>
     </Card>
   );

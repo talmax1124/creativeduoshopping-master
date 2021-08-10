@@ -43,8 +43,6 @@ const getProducts = asyncHandler(async (req, res) => {
     .skip(pageSize * (page - 1))
     .sort([["createdAt", -1]]);
 
-
-
   res.json({ products, page, pages: Math.ceil(count / pageSize) });
 });
 
@@ -110,6 +108,7 @@ const createProduct = asyncHandler(async (req, res) => {
     price: 0.0,
     specialPrice: 0.0,
     lastPrice: 0.0,
+    specialPriceDiscountText: "",
     user: req.user._id,
     image: "https://i.ibb.co/5cwCHky/FY3017-2.jpg",
     additionalimageone: "",
@@ -148,6 +147,7 @@ const updateProduct = asyncHandler(async (req, res) => {
     additionalimagethree,
     productVideo,
     productTutorial,
+    specialPriceDiscountText,
     productImportantInformation,
   } = req.body;
 
@@ -168,6 +168,7 @@ const updateProduct = asyncHandler(async (req, res) => {
     product.additionalimagethree = additionalimagethree;
     product.productVideo = productVideo;
     product.productTutorial = productTutorial;
+    product.specialPriceDiscountText = specialPriceDiscountText;
     product.productImportantInformation = productImportantInformation;
 
     const updatedProduct = await product.save();
@@ -221,8 +222,8 @@ const deleteProductReview = asyncHandler(async (req, res) => {
       (review) => review._id.toString() !== reviewId
     );
 
-    // This bottom part deletes the bug for the number of reviews made. 
-    product.numReviews = product.numReviews - 1
+    // This bottom part deletes the bug for the number of reviews made.
+    product.numReviews = product.numReviews - 1;
 
     product.rating =
       product.reviews.length > 0
