@@ -17,6 +17,8 @@ import { protect, admin } from "../middleware/authMiddleware.js";
 
 router.route("/").post(registerUser).get(protect, admin, getUsers);
 router.route("/verificationlink").post(verificationLink);
+router.put("/forgot-password", forgotPassword);
+router.put("/reset-password", resetPassword);
 router.post("/login", authUser);
 router
   .route("/profile")
@@ -27,8 +29,5 @@ router
   .delete(protect, admin, deleteUser)
   .get(protect, admin, getUserById)
   .put(protect, admin, updateUser);
-
-router.put("/forgot-password", forgotPassword);
-router.put("/reset-password", resetPassword);
 
 export default router;

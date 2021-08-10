@@ -399,48 +399,6 @@ const getUserById = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc    Update user
-// @route   PUT /api/users/:id
-// @access  Private/Admin
-const updateUser = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.params.id);
-
-  if (user) {
-    user.name = req.body.name || user.name;
-    user.email = req.body.email || user.email;
-    user.isAdmin = req.body.isAdmin;
-    user.ispromember = req.body.ispromember;
-    (user.isMilitary = req.body.isMilitary),
-      (user.phone = req.body.phone || user.phone);
-    user.profileImage = req.body.profileImage || user.profileImage;
-    user.profileBackground =
-      req.body.profileBackground || user.profileBackground;
-
-    const updatedUser = await user.save();
-
-    const response = {
-      _id: updatedUser._id,
-      name: updatedUser.name,
-      email: updatedUser.email,
-      phone: updatedUser.phone,
-      isAdmin: updatedUser.isAdmin,
-      ispromember: updatedUser.ispromember,
-      isMilitary: updatedUser.isMilitary,
-      profileImage: updatedUser.profileImage,
-      profileBackground: updatedUser.profileBackground,
-    };
-
-    if (updatedUser.googleId) {
-      response.googleId = updatedUser.googleId;
-    }
-
-    res.json(response);
-  } else {
-    res.status(404);
-    throw new Error("User not found");
-  }
-});
-
 const forgotPassword = (req, res) => {
   const { email } = req.body;
   var mg = new Mailgun({
@@ -596,6 +554,48 @@ const resetPassword = (req, res) => {
     return res.status(401).json({ error: "Authentication Error" });
   }
 };
+
+// @desc    Update user
+// @route   PUT /api/users/:id
+// @access  Private/Admin
+const updateUser = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id);
+
+  if (user) {
+    user.name = req.body.name || user.name;
+    user.email = req.body.email || user.email;
+    user.isAdmin = req.body.isAdmin;
+    user.ispromember = req.body.ispromember;
+    (user.isMilitary = req.body.isMilitary),
+      (user.phone = req.body.phone || user.phone);
+    user.profileImage = req.body.profileImage || user.profileImage;
+    user.profileBackground =
+      req.body.profileBackground || user.profileBackground;
+
+    const updatedUser = await user.save();
+
+    const response = {
+      _id: updatedUser._id,
+      name: updatedUser.name,
+      email: updatedUser.email,
+      phone: updatedUser.phone,
+      isAdmin: updatedUser.isAdmin,
+      ispromember: updatedUser.ispromember,
+      isMilitary: updatedUser.isMilitary,
+      profileImage: updatedUser.profileImage,
+      profileBackground: updatedUser.profileBackground,
+    };
+
+    if (updatedUser.googleId) {
+      response.googleId = updatedUser.googleId;
+    }
+
+    res.json(response);
+  } else {
+    res.status(404);
+    throw new Error("User not found");
+  }
+});
 
 export {
   authUser,

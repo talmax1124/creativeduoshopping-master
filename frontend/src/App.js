@@ -75,17 +75,6 @@ const App = () => {
           <Route path="/termsandconditions" component={TermsandConditions} />
 
           <Route
-            path="/forgot-password"
-            component={ForgotPasswordScreen}
-            exact
-          />
-          <Route
-            path="/reset-password/:id"
-            component={ResetPasswordScreen}
-            exact
-          />
-
-          <Route
             path="/admin/productlist"
             component={ProductListScreen}
             exact
@@ -119,6 +108,12 @@ const App = () => {
           <Route path="/customwork" component={CustomWork} />
         </Container>
         <Route path="/login" component={LoginScreen} />
+        <Route path="/forgot-password" component={ForgotPasswordScreen} exact />
+        <Route
+          path="/reset-password/:id"
+          component={ResetPasswordScreen}
+          exact
+        />
         {/* <Route path='' exact={true} component={NotFoundPage} /> */}
       </main>
       <Footer />
