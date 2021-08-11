@@ -402,8 +402,8 @@ const getUserById = asyncHandler(async (req, res) => {
 const forgotPassword = (req, res) => {
   const { email } = req.body;
   var mg = new Mailgun({
-    apiKey: process.env.API_KEY,
-    domain: process.env.DOMAIN,
+    apiKey: process.env.MailGunAPI,
+    domain: process.env.MailGunDomain,
   });
 
   User.findOne({ email }, (err, user) => {

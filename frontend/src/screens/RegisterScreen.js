@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 // import { Link } from "react-router-dom";
-import { Spinner } from "react-bootstrap";
+import { Spinner, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 // import FormContainer from "../components/FormContainer";
 import { verify } from "../actions/userActions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
+
 
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -61,6 +63,33 @@ const RegisterScreen = ({ location, history }) => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState(null);
   const [profileImage, setprofileImage] = useState("");
+  const [uploadingProfilePicture, setUploadingProfilePicture] = useState(false);
+
+  const uploadFileHandlerone = async (e) => {
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append("image", file);
+    setUploadingProfilePicture(true);
+
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      };
+
+      const { data } = await axios.post(
+        "/api/uploadprofilepicture",
+        formData,
+        config
+      );
+      setprofileImage(data);
+      setUploadingProfilePicture(false);
+    } catch (error) {
+      console.log(error);
+      setUploadingProfilePicture(false);
+    }
+  };
 
   const eye = <FontAwesomeIcon icon={faEye} />;
   const eye2 = <FontAwesomeIcon icon={faEye} />;
@@ -187,9 +216,17 @@ const RegisterScreen = ({ location, history }) => {
                 value={profileImage}
                 onChange={(e) => setprofileImage(e.target.value)}
               />
+              <Form.File
+                id="image-file"
+                label="Choose File"
+                custom
+                onChange={uploadFileHandlerone}
+                className="mb-1 mt-1"
+              ></Form.File>
+              {uploadingProfilePicture && <Loader />}
             </Grid>
 
-            <Grid item xs={12} >
+            <Grid item xs={12}>
               <TextField
                 variant="outlined"
                 required
@@ -213,7 +250,7 @@ const RegisterScreen = ({ location, history }) => {
                 Show/Hide Password
               </Button>
             </Grid>
-            <Grid item xs={12} >
+            <Grid item xs={12}>
               <TextField
                 variant="outlined"
                 required
