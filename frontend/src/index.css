@@ -731,14 +731,21 @@ h2 {
 
 .navvunder li a {
   color: whitesmoke;
-  opacity: 70%;
+  opacity: 90%;
 }
 
 .navvunder li:hover a:hover {
   color: white;
   opacity: 100%;
+  background-color: #1f2225;
 }
 
 .navvunder {
   width: 100%;
+}
+
+@media (max-width: 1000px) {
+  .herooooo {
+    flex-direction: column-reverse;
+  }
 }
