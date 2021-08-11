@@ -728,3 +728,17 @@ h2 {
   display: flex;
   margin: 1em 0;
 }
+
+.navvunder li a {
+  color: whitesmoke;
+  opacity: 70%;
+}
+
+.navvunder li:hover a:hover {
+  color: white;
+  opacity: 100%;
+}
+
+.navvunder {
+  width: 100%;
+}

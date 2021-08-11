@@ -9,7 +9,7 @@ import Paginate from "../components/Paginate";
 import ProductCarousel from "../components/ProductCarousel";
 import Meta from "../components/Meta";
 import LatestProducts from "../components/LatestProducts";
-import ShopByCategory from "../components/ShopByCategory";
+// import ShopByCategory from "../components/ShopByCategory";
 import ShopByBrand from "../components/ShopByBrand";
 import Sort from "../components/Sort";
 import Hero from "../components/Hero";
@@ -53,7 +53,7 @@ const HomeScreen = ({ match, history, location }) => {
       {pageNumber === 1 && <Hero />}
 
       <Container>
-        <ShopByCategory products={products} />
+        {/* <ShopByCategory products={products} /> */}
         <br />
         {!keyword && pageNumber === 1 ? (
           <>
@@ -79,7 +79,20 @@ const HomeScreen = ({ match, history, location }) => {
           <>
             {!keyword && pageNumber === 1 && <LatestProducts />}
 
-            <h1 id="prod">All products</h1>
+            {/* <div className="w-full mt-2 mb-3" style={{ marginLeft: "-1em" }}>
+              <section class="text-gray-600 body-font">
+                <div class="container  ">
+                  <div class="flex flex-wrap w-full">
+                    <div class="lg:w-1/2 w-full  lg:mb-0">
+                      <h1 class="sm:text-3xl text-2xl font-medium title-font mb-1 text-gray-900">
+                        All Products
+                      </h1>
+                      <div class="h-1 w-20 bg-blue-500 rounded"></div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div> */}
 
             <Row>
               <Col md={3}>

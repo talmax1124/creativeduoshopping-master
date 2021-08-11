@@ -17,11 +17,15 @@ import Fade from "@material-ui/core/Fade";
 
 import Avatar from "@material-ui/core/Avatar";
 
+
+
 // Dropdown from Material UI
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 
-const Header = () => {
+const Header = ({products}) => {
+
+
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClickr = (event) => {
@@ -347,10 +351,129 @@ const Header = () => {
               </>
             )}
           </Menu>
-        </nav>
+          
+    <div
+    class="container items-center  bg-gray-800 navvunder mt-3 w-full w-max-full"
+    style={{ color: "white", width: "100%" }}
+  >
+    <div
+      class="p-3  overflow-y-auto border-t whitespace-nowrap scroll-hidden"
+      style={{ color: "white" }}
+    >
+      <ul
+        class="inline-flex items-center list-none"
+        style={{ color: "white" }}
+      >
+        <li style={{ color: "white" }}>
+          <a href="/products/category/Infused%20Design"
+            class="px-4 py-1 mr-1 text-base text-blueGray-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-black "
+          >
+            Infused Design
+          </a>
+        </li>
+
+        <li>
+          <a href="/products/category/Anna%20Sweet%20Treats%20Merch"
+            class="px-4 py-1 mr-1 text-base text-blueGray-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-black "
+          >
+            Anna Sweet Treats Merch
+          </a>
+        </li>
+
+        <li>
+          <a href="/products/category/Cups-Tumblers-Mugs"
+            class="px-4 py-1 mr-1 text-base text-blueGray-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-black "
+          >
+            Cups/Tumblers/Mugs
+          </a>
+        </li>
+
+        <li>
+          <a href="/products/category/Kitchen"
+            class="px-4 py-1 mr-1 text-base text-blueGray-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-black "
+          >
+            Kitchen
+          </a>
+        </li>
+
+        <li>
+          <a
+            href="/products/category/Other"
+            class="px-4 py-1 mr-1 text-base text-blueGray-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-black "
+          >
+            Other
+          </a>
+        </li>
         
+        <li>
+          <a
+            href="/products/category/Business"
+            class="px-4 py-1 mr-1 text-base text-blueGray-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-black "
+          >
+            For Business
+          </a>
+        </li>
+
+        <li>
+          <a
+            href="/products/category/Handmade"
+            class="px-4 py-1 mr-1 text-base text-blueGray-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-black "
+          >
+            Handmade
+          </a>
+        </li>
+
+        <li>
+          <a
+            href="/products/category/Adults"
+            class="px-4 py-1 mr-1 text-base text-blueGray-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-black "
+          >
+           Adults
+          </a>
+        </li>
+
+        <li>
+          <a
+            href="/products/category/Covid-19"
+            class="px-4 py-1 mr-1 text-base text-blueGray-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-black "
+          >
+           Covid-19
+          </a>
+        </li>
+
+        <li>
+          <a
+            href="/products/category/Stickers"
+            class="px-4 py-1 mr-1 text-base text-blueGray-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-black "
+          >
+           Stickers
+          </a>
+        </li>
+
+        <li>
+          <a
+            href="/products/category/Design%20Assets"
+            class="px-4 py-1 mr-1 text-base text-blueGray-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-black "
+          >
+           Design Assets
+          </a>
+        </li>
+
+        <li>
+          <a
+            href="/products/category/Holidays"
+            class="px-4 py-1 mr-1 text-base text-blueGray-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-black "
+          >
+           Holidays
+          </a>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+    
+        </nav>
       </header>
-      
     </>
   );
 };
