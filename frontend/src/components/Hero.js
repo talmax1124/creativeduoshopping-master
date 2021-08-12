@@ -34,7 +34,7 @@ const Hero = () => {
   // const classes = useStyles();
 
   return (
-    <div className="bg-gray-50 dark:bg-gray-800" style={{marginTop: "-1.2em"}}>
+    <div className="bg-gray-100 dark:bg-gray-800" style={{marginTop: "-1.2em"}}>
       <div class="container flex flex-col px-6 py-10 mx-auto space-y-6 lg:h-128 lg:py-16 lg:flex-row lg:items-center lg:space-x-6  herooooo">
         <div class="w-full lg:w-1/2">
           <div class="lg:max-w-lg">

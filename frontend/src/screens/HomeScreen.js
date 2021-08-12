@@ -15,6 +15,11 @@ import Sort from "../components/Sort";
 import Hero from "../components/Hero";
 import { listProducts } from "../actions/productActions";
 import { addToWishList } from "../actions/wishListActions";
+
+// Treact Components
+import AnimationRevealPage from "../importedcomponents/helpers/AnimationRevealPage";
+import Testimonials from "../importedcomponents/components/testimonials/TwoColumnWithImage";
+
 const HomeScreen = ({ match, history, location }) => {
   const productId = match.params.id;
   const qty = location.search ? Number(location.search.split("=")[1]) : 1;
@@ -120,6 +125,9 @@ const HomeScreen = ({ match, history, location }) => {
             <ShopByBrand products={products} />
           </>
         )}
+        <AnimationRevealPage disabled>
+          <Testimonials />
+        </AnimationRevealPage>
       </Container>
     </>
   );
