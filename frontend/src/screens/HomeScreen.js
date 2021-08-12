@@ -84,7 +84,7 @@ const HomeScreen = ({ match, history, location }) => {
           <>
             {!keyword && pageNumber === 1 && <LatestProducts />}
 
-            {/* <div className="w-full mt-2 mb-3" style={{ marginLeft: "-1em" }}>
+            <div className="w-full mt-2 mb-3" style={{ marginLeft: "-1em" }}>
               <section class="text-gray-600 body-font">
                 <div class="container  ">
                   <div class="flex flex-wrap w-full">
@@ -97,7 +97,7 @@ const HomeScreen = ({ match, history, location }) => {
                   </div>
                 </div>
               </section>
-            </div> */}
+            </div>
 
             <Row>
               <Col md={3}>
