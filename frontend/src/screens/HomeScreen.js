@@ -125,9 +125,13 @@ const HomeScreen = ({ match, history, location }) => {
             <ShopByBrand products={products} />
           </>
         )}
-        <AnimationRevealPage disabled>
+
+        {pageNumber === 1 && (
+          <AnimationRevealPage disabled>
           <Testimonials />
         </AnimationRevealPage>
+        )}
+        
       </Container>
     </>
   );
