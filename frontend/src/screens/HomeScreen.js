@@ -16,9 +16,7 @@ import Hero from "../components/Hero";
 import { listProducts } from "../actions/productActions";
 import { addToWishList } from "../actions/wishListActions";
 
-// Treact Components
-import AnimationRevealPage from "../importedcomponents/helpers/AnimationRevealPage";
-import Testimonials from "../importedcomponents/components/testimonials/TwoColumnWithImage";
+
 
 const HomeScreen = ({ match, history, location }) => {
   const productId = match.params.id;
@@ -55,7 +53,7 @@ const HomeScreen = ({ match, history, location }) => {
   return (
     <>
       <Meta />
-      {pageNumber === 1 && <Hero />}
+      {!keyword && pageNumber === 1 && <Hero />}
 
       <Container>
         {/* <ShopByCategory products={products} /> */}
@@ -125,13 +123,6 @@ const HomeScreen = ({ match, history, location }) => {
             <ShopByBrand products={products} />
           </>
         )}
-
-        {pageNumber === 1 && (
-          <AnimationRevealPage disabled>
-          <Testimonials />
-        </AnimationRevealPage>
-        )}
-        
       </Container>
     </>
   );

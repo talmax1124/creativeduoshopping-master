@@ -1,51 +1,27 @@
 import React from "react";
-// import { makeStyles } from "@material-ui/core/styles";
-// import Box from "@material-ui/core/Box";
-// import Button from "@material-ui/core/Button";
-// import Typography from "@material-ui/core/Typography";
-// import ReactPlayer from "react-player";
-// import herovideo from "../herovideo.mp4";
 
 const Hero = () => {
-  // const useStyles = makeStyles((theme) => ({
-  //   root: {
-  //     width: "100%",
-  //     height: "80vh",
-  //     position: "relative",
-  //     "& video": {
-  //       objectFit: "contain",
-  //     },
-  //   },
-  //   overlay: {
-  //     position: "absolute",
-  //     top: 0,
-  //     left: 0,
-  //     width: "100%",
-  //     height: "100%",
-  //     backgroundColor: "rgba(0, 0, 0, 0.7)",
-  //   },
-  //   title: {
-  //     paddingBottom: theme.spacing(4),
-  //     color: "whitesmoke",
-  //     fontSize: "2.5em",
-  //     textAlign: "center",
-  //   },
-  // }));
-  // const classes = useStyles();
-
   return (
-    <div className="bg-gray-100 dark:bg-gray-800" style={{marginTop: "-1.2em"}}>
+    <div
+      style={{
+        marginTop: "-1.2em",
+        background:
+          "linear-gradient( rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8) ), url('https://t3.ftcdn.net/jpg/02/95/66/28/360_F_295662882_7K71sF8R44hJYBNDW2fwCZsrX5gtMbeJ.jpg')",
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+      }}
+    >
       <div class="container flex flex-col px-6 py-10 mx-auto space-y-6 lg:h-128 lg:py-16 lg:flex-row lg:items-center lg:space-x-6  herooooo">
         <div class="w-full lg:w-1/2">
           <div class="lg:max-w-lg">
-            <h1 class="text-2xl font-medium tracking-wide text-gray-800 dark:text-white lg:text-4xl">
-              Customize To Your Heart's Content
+            <h1 class="text-2xl font-medium tracking-wide text-white dark:text-white lg:text-4xl">
+              Customizable Products
             </h1>
-            <p class="mt-2 text-gray-600 dark:text-gray-300">
-              We are ready to customize any product to your heart's content!
+            <p class="mt-2 text-white dark:text-gray-300">
+              Customize any products! Get products for birthdays, events, holidays, and more!
             </p>
             <div class="grid gap-6 mt-8 sm:grid-cols-2">
-              <div class="flex items-center space-x-6 text-gray-800 dark:text-gray-200">
+              <div class="flex items-center space-x-6 text-white dark:text-gray-200">
                 <svg
                   class="w-5 h-5"
                   xmlns="http://www.w3.org/2000/svg"
@@ -64,7 +40,7 @@ const Hero = () => {
                 <span>5 Star Customer Service</span>
               </div>
 
-              <div class="flex items-center space-x-6 text-gray-800 dark:text-gray-200">
+              <div class="flex items-center space-x-6 text-white dark:text-gray-200">
                 <svg
                   class="w-5 h-5"
                   xmlns="http://www.w3.org/2000/svg"
@@ -83,7 +59,7 @@ const Hero = () => {
                 <span>Digital Asset(s) Creations</span>
               </div>
 
-              <div class="flex items-center space-x-6 text-gray-800 dark:text-gray-200">
+              <div class="flex items-center space-x-6 text-white dark:text-gray-200">
                 <svg
                   class="w-5 h-5"
                   xmlns="http://www.w3.org/2000/svg"
@@ -102,7 +78,7 @@ const Hero = () => {
                 <span>Affordable Prices</span>
               </div>
 
-              <div class="flex items-center space-x-6 text-gray-800 dark:text-gray-200">
+              <div class="flex items-center space-x-6 text-white dark:text-gray-200">
                 <svg
                   class="w-5 h-5"
                   xmlns="http://www.w3.org/2000/svg"
@@ -121,7 +97,7 @@ const Hero = () => {
                 <span>Top Notch Quality Products</span>
               </div>
 
-              <div class="flex items-center space-x-6 text-gray-800 dark:text-gray-200">
+              <div class="flex items-center space-x-6 text-white dark:text-gray-200">
                 <svg
                   class="w-5 h-5"
                   xmlns="http://www.w3.org/2000/svg"
@@ -140,7 +116,7 @@ const Hero = () => {
                 <span>Payment Security</span>
               </div>
 
-              <div class="flex items-center space-x-6 text-gray-800 dark:text-gray-200">
+              <div class="flex items-center space-x-6 text-white dark:text-gray-200">
                 <svg
                   class="w-5 h-5"
                   xmlns="http://www.w3.org/2000/svg"
@@ -163,14 +139,11 @@ const Hero = () => {
         </div>
 
         <div class="flex items-center justify-center w-full h-96 lg:w-1/2">
-
-        <iframe frameborder="0" allowfullscreen="" scrolling="no" allow="autoplay;fullscreen" src="https://onelineplayer.com/player.html?autoplay=true&autopause=false&muted=true&loop=true&url=https%3A%2F%2Fwww.dropbox.com%2Fs%2Ff2vxoruutilu54n%2Fherovideo.mp4%3Fraw%3D1&poster=&time=false&progressBar=false&overlay=false&muteButton=false&fullscreenButton=false&style=light&quality=1080p&playButton=false" className="object-contain-center w-full h-full max-w-2xl rounded-md" title="key"></iframe>
-         
-          {/* <img
+          <img
             class="object-cover w-full h-full max-w-2xl rounded-md"
-            src="https://onelineplayer.com/player.html?autoplay=true&autopause=false&muted=true&loop=true&url=https%3A%2F%2Fvimeo.com%2F226137389&poster=&time=false&progressBar=false&overlay=false&muteButton=false&fullscreenButton=false&style=light&quality=1080p&playButton=false"
+            src="https://scontent.ftpa1-2.fna.fbcdn.net/v/t39.30808-6/254921081_298489432277972_3136038529501951091_n.jpg?_nc_cat=102&ccb=1-5&_nc_sid=8bfeb9&_nc_ohc=9Qym6xx02YMAX8cIrTL&_nc_ht=scontent.ftpa1-2.fna&oh=2ced816a03f52ea291c29ce0097ec89f&oe=61A386B2"
             alt="glasses"
-          /> */}
+          />
         </div>
       </div>
     </div>
