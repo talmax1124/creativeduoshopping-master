@@ -96,6 +96,14 @@ const productSchema = mongoose.Schema(
     productImportantInformation: {
       type: String,
     },
+    productOptions: [
+      {
+        type: [String],
+      },
+    ],
+
+    // width, size, color || shape, width, color
+    // size: lg, sm, md
   },
   {
     timestamps: true,

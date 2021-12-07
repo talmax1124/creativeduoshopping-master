@@ -140,8 +140,24 @@ const ProductScreen = ({ history, match }) => {
     window.location.reload();
   }
 
+  // state that holds dynamic data from backend (optionsState)
+  // function optionsChangeHandler
+
+  // // const options = ["all", "users", "managers", "administrators"];
+  // // const selectOptions = options.map((option) => option);
+
+  // // <select onChange={optionChangeHandler}>
+  // //     {selectOptions.map((address, key) => (
+  // //       <option key={key} value={address}>
+  // //         {address}
+  // //       </option>
+  // //     ))}
+  // //   </select>
+
+  // What fragments do: A common pattern in React is for a component to return multiple elements. Fragments let you group a list of children without adding extra nodes to the DOM.
+
   return (
-    <>
+    <React.Fragment>
       <Link className="btn btn-dark my-3" to="/">
         Go Back
       </Link>
@@ -256,7 +272,7 @@ const ProductScreen = ({ history, match }) => {
                           <>
                             <Row>
                               <br></br>
-                              <Col style={{marginTop: "6px"}}>
+                              <Col style={{ marginTop: "6px" }}>
                                 <h6>
                                   {product.specialPriceDiscountText}% Discount
                                 </h6>
@@ -590,7 +606,7 @@ const ProductScreen = ({ history, match }) => {
           </Row>
         </>
       )}
-    </>
+    </React.Fragment>
   );
 };
 
