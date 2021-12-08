@@ -91,6 +91,7 @@
     "react-swipeable-tabs": "^2.2.0",
     "react-swipeable-views": "^0.14.0",
     "slick-carousel": "^1.8.1",
+    "sockjs": "^0.3.24",
     "ssl-express-www": "^3.0.7",
     "styled-components": "^5.3.0",
     "swiper": "^6.7.1",

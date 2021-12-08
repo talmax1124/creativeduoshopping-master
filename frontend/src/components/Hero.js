@@ -18,7 +18,8 @@ const Hero = () => {
               Customizable Products
             </h1>
             <p class="mt-2 text-white dark:text-gray-300">
-              Customize any products! Get products for birthdays, events, holidays, and more!
+              Customize any products! Get products for birthdays, events,
+              holidays, and more!
             </p>
             <div class="grid gap-6 mt-8 sm:grid-cols-2">
               <div class="flex items-center space-x-6 text-white dark:text-gray-200">
@@ -141,8 +142,8 @@ const Hero = () => {
         <div class="flex items-center justify-center w-full h-96 lg:w-1/2">
           <img
             class="object-cover w-full h-full max-w-2xl rounded-md"
-            src="https://scontent.ftpa1-2.fna.fbcdn.net/v/t39.30808-6/254921081_298489432277972_3136038529501951091_n.jpg?_nc_cat=102&ccb=1-5&_nc_sid=8bfeb9&_nc_ohc=9Qym6xx02YMAX8cIrTL&_nc_ht=scontent.ftpa1-2.fna&oh=2ced816a03f52ea291c29ce0097ec89f&oe=61A386B2"
-            alt="glasses"
+            src="https://scontent.ftpa1-1.fna.fbcdn.net/v/t39.30808-6/262086481_312347220892193_561374558070534836_n.jpg?_nc_cat=107&ccb=1-5&_nc_sid=730e14&_nc_ohc=EXWZMq_ClIIAX_YY9yF&_nc_ht=scontent.ftpa1-1.fna&oh=1a9f79fbac0b34c52da63f8573d635b9&oe=61B52A4A"
+            alt="ImageALt"
           />
         </div>
       </div>
