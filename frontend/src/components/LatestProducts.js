@@ -22,14 +22,14 @@ const LatestProducts = () => {
   ) : (
     <>
  <div className="w-full mt-2 mb-1" style={{marginLeft: "-1em"}}>
-        <section class="text-gray-600 body-font">
-          <div class="container  ">
-            <div class="flex flex-wrap w-full">
-              <div class="lg:w-1/2 w-full  lg:mb-0">
-                <h1 class="sm:text-3xl text-2xl font-medium title-font mb-1 text-gray-900">
+        <section className="text-gray-600 body-font">
+          <div className="container  ">
+            <div className="flex flex-wrap w-full">
+              <div className="lg:w-1/2 w-full  lg:mb-0">
+                <h1 className="sm:text-3xl text-2xl font-medium title-font mb-1 text-gray-900">
                   Newest Product Releases
                 </h1>
-                <div class="h-1 w-20 bg-blue-500 rounded"></div>
+                <div className="h-1 w-20 bg-blue-500 rounded"></div>
               </div>
             </div>
           </div>

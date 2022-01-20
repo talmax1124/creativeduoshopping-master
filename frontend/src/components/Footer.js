@@ -26,7 +26,7 @@ const Footer = () => {
               <h3 style={{ color: "whitesmoke" }}>More</h3>
               <ul>
                 <li>
-                  <a href to="https://creativeduo.netlify.app" target="blank">Home Website</a>
+                  <a href="https://creativeduo.netlify.app" target="blank">Home Website</a>
                 </li>
                 <li>
                   <a href="https://linktr.ee/creativeduo2020" target="blank">More Links</a>

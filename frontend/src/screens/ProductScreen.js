@@ -154,6 +154,19 @@ const ProductScreen = ({ history, match }) => {
   // //     ))}
   // //   </select>
 
+
+  // const productOptions = productOptions.map((state) => state)
+  /*
+
+  for (productOptions) {
+    {mainOptions => options.option (
+      
+    )}
+    {}
+  }
+
+  */
+
   // What fragments do: A common pattern in React is for a component to return multiple elements. Fragments let you group a list of children without adding extra nodes to the DOM.
 
   return (
@@ -499,27 +512,27 @@ const ProductScreen = ({ history, match }) => {
                 {product.reviews.map((review) => (
                   <>
                     <div style={{ marginBottom: "1em" }}>
-                      <div class="bs-example">
-                        <div class="card" style={{ maxWidth: "500px" }}>
-                          <div class="row no-gutters">
+                      <div className="bs-example">
+                        <div className="card" style={{ maxWidth: "500px" }}>
+                          <div className="row no-gutters">
                             {review.profileImage && (
                               <div
-                                class="col-sm-5"
+                                className="col-sm-5"
                                 style={{ backgroundColor: "#868e96" }}
                               >
                                 <img
                                   src={review.profileImage}
-                                  class="card-img-top"
+                                  className="card-img-top"
                                   alt="..."
                                 />
                               </div>
                             )}
-                            <div class="col-sm-7">
-                              <div class="card-body">
-                                <h5 class="card-title">{review.name}</h5>
+                            <div className="col-sm-7">
+                              <div className="card-body">
+                                <h5 className="card-title">{review.name}</h5>
                                 <Rating value={review.rating} />
                                 <p>{review.createdAt.substring(0, 10)}</p>
-                                <p class="card-text">{review.comment}</p>
+                                <p className="card-text">{review.comment}</p>
                                 {userInfo.isAdmin && (
                                   <Button
                                     className="btn btn-danger btn-block"

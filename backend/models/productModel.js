@@ -17,6 +17,13 @@ const reviewSchema = mongoose.Schema(
   }
 );
 
+// Could we do something like:
+// var reviewSchema = mongoose.Schema(
+//   {
+//   optionName: { type: String, required: true },
+//     optionPrice: { type: Number},
+// });
+
 const productSchema = mongoose.Schema(
   {
     user: {
@@ -96,14 +103,36 @@ const productSchema = mongoose.Schema(
     productImportantInformation: {
       type: String,
     },
+
     productOptions: [
       {
-        type: [String],
+        mainOptionTitle: {
+          type: String,
+        },
+        subOptions: [
+          {
+            subOptionTitle: {
+              type: String,
+              default: "standard",
+            },
+            subOptionPrice: {
+              type: Number,
+              default: 0,
+            },
+          },
+        ],
       },
     ],
 
     // width, size, color || shape, width, color
     // size: lg, sm, md
+    // For each option, get price from data and + it to productPrice or Total
+    // Order Model Code Line 50 =>
+    // totalPrice: {
+    //   type: Number,
+    //   required: true,
+    //   default: 0.0,
+    // },
   },
   {
     timestamps: true,

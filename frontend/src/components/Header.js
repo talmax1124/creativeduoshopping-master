@@ -17,15 +17,11 @@ import Fade from "@material-ui/core/Fade";
 
 import Avatar from "@material-ui/core/Avatar";
 
-
-
 // Dropdown from Material UI
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 
-const Header = ({products}) => {
-
-
+const Header = ({ products }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClickr = (event) => {
@@ -169,6 +165,7 @@ const Header = ({products}) => {
                   </Link>
 
                   <Link
+                    to="false"
                     className="lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-gray-400 items-center justify-center hover:bg-gray-900 hover:text-white us"
                     aria-controls="simple-menu"
                     aria-haspopup="true"
@@ -188,9 +185,9 @@ const Header = ({products}) => {
                       fill="currentColor"
                     >
                       <path
-                        fill-rule="evenodd"
+                        fillRule="evenodd"
                         d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                        clip-rule="evenodd"
+                        clipRule="evenodd"
                       />
                     </svg>
                   </Link>
@@ -238,9 +235,9 @@ const Header = ({products}) => {
                   style={{ marginRight: "10px" }}
                 >
                   <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"
                   />
                 </svg>{" "}
@@ -257,9 +254,9 @@ const Header = ({products}) => {
                 style={{ marginRight: "10px" }}
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
                 />
               </svg>
@@ -279,9 +276,9 @@ const Header = ({products}) => {
                       style={{ marginRight: "10px" }}
                     >
                       <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
                         d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
                       />
                     </svg>
@@ -299,9 +296,9 @@ const Header = ({products}) => {
                       style={{ marginRight: "10px" }}
                     >
                       <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
                         d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
                       />
                     </svg>
@@ -319,9 +316,9 @@ const Header = ({products}) => {
                       stroke="currentColor"
                     >
                       <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
                         d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"
                       />
                     </svg>
@@ -339,9 +336,9 @@ const Header = ({products}) => {
                       style={{ marginRight: "10px" }}
                     >
                       <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
                         d="M9 14l6-6m-5.5.5h.01m4.99 5h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2zM10 8.5a.5.5 0 11-1 0 .5.5 0 011 0zm5 5a.5.5 0 11-1 0 .5.5 0 011 0z"
                       />
                     </svg>
@@ -351,127 +348,129 @@ const Header = ({products}) => {
               </>
             )}
           </Menu>
-          
-    <div
-    class="container items-center  bg-gray-800 navvunder mt-3 w-full w-max-full"
-    style={{ color: "white", width: "100%" }}
-  >
-    <div
-      class="p-3  overflow-y-auto border-t whitespace-nowrap scroll-hidden"
-      style={{ color: "white" }}
-    >
-      <ul
-        class="inline-flex items-center list-none"
-        style={{ color: "white" }}
-      >
-        <li style={{ color: "white" }}>
-          <a href="/products/category/Infused%20Design"
-            class="px-4 py-1 mr-1 text-base text-blueGray-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-black "
-          >
-            Infused Design
-          </a>
-        </li>
 
-        <li>
-          <a href="/products/category/Anna%20Sweet%20Treats%20Merch"
-            class="px-4 py-1 mr-1 text-base text-blueGray-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-black "
+          <div
+            className="container items-center  bg-gray-800 navvunder mt-3 w-full w-max-full"
+            style={{ color: "white", width: "100%" }}
           >
-            Anna Sweet Treats Merch
-          </a>
-        </li>
+            <div
+              className="p-3  overflow-y-auto border-t whitespace-nowrap scroll-hidden"
+              style={{ color: "white" }}
+            >
+              <ul
+                className="inline-flex items-center list-none"
+                style={{ color: "white" }}
+              >
+                <li style={{ color: "white" }}>
+                  <a
+                    href="/products/category/Infused%20Design"
+                    className="px-4 py-1 mr-1 text-base text-blueGray-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-black "
+                  >
+                    Infused Design
+                  </a>
+                </li>
 
-        <li>
-          <a href="/products/category/Cups-Tumblers-Mugs"
-            class="px-4 py-1 mr-1 text-base text-blueGray-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-black "
-          >
-            Cups/Tumblers/Mugs
-          </a>
-        </li>
+                <li>
+                  <a
+                    href="/products/category/Anna%20Sweet%20Treats%20Merch"
+                    className="px-4 py-1 mr-1 text-base text-blueGray-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-black "
+                  >
+                    Anna Sweet Treats Merch
+                  </a>
+                </li>
 
-        <li>
-          <a href="/products/category/Kitchen"
-            class="px-4 py-1 mr-1 text-base text-blueGray-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-black "
-          >
-            Kitchen
-          </a>
-        </li>
+                <li>
+                  <a
+                    href="/products/category/Cups-Tumblers-Mugs"
+                    className="px-4 py-1 mr-1 text-base text-blueGray-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-black "
+                  >
+                    Cups/Tumblers/Mugs
+                  </a>
+                </li>
 
-        <li>
-          <a
-            href="/products/category/Other"
-            class="px-4 py-1 mr-1 text-base text-blueGray-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-black "
-          >
-            Other
-          </a>
-        </li>
-        
-        <li>
-          <a
-            href="/products/category/Business"
-            class="px-4 py-1 mr-1 text-base text-blueGray-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-black "
-          >
-            For Business
-          </a>
-        </li>
+                <li>
+                  <a
+                    href="/products/category/Kitchen"
+                    className="px-4 py-1 mr-1 text-base text-blueGray-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-black "
+                  >
+                    Kitchen
+                  </a>
+                </li>
 
-        <li>
-          <a
-            href="/products/category/Handmade"
-            class="px-4 py-1 mr-1 text-base text-blueGray-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-black "
-          >
-            Handmade
-          </a>
-        </li>
+                <li>
+                  <a
+                    href="/products/category/Other"
+                    className="px-4 py-1 mr-1 text-base text-blueGray-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-black "
+                  >
+                    Other
+                  </a>
+                </li>
 
-        <li>
-          <a
-            href="/products/category/Adults"
-            class="px-4 py-1 mr-1 text-base text-blueGray-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-black "
-          >
-           Adults
-          </a>
-        </li>
+                <li>
+                  <a
+                    href="/products/category/Business"
+                    className="px-4 py-1 mr-1 text-base text-blueGray-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-black "
+                  >
+                    For Business
+                  </a>
+                </li>
 
-        <li>
-          <a
-            href="/products/category/Covid-19"
-            class="px-4 py-1 mr-1 text-base text-blueGray-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-black "
-          >
-           Covid-19
-          </a>
-        </li>
+                <li>
+                  <a
+                    href="/products/category/Handmade"
+                    className="px-4 py-1 mr-1 text-base text-blueGray-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-black "
+                  >
+                    Handmade
+                  </a>
+                </li>
 
-        <li>
-          <a
-            href="/products/category/Stickers"
-            class="px-4 py-1 mr-1 text-base text-blueGray-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-black "
-          >
-           Stickers
-          </a>
-        </li>
+                <li>
+                  <a
+                    href="/products/category/Adults"
+                    className="px-4 py-1 mr-1 text-base text-blueGray-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-black "
+                  >
+                    Adults
+                  </a>
+                </li>
 
-        <li>
-          <a
-            href="/products/category/Design%20Assets"
-            class="px-4 py-1 mr-1 text-base text-blueGray-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-black "
-          >
-           Design Assets
-          </a>
-        </li>
+                <li>
+                  <a
+                    href="/products/category/Covid-19"
+                    className="px-4 py-1 mr-1 text-base text-blueGray-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-black "
+                  >
+                    Covid-19
+                  </a>
+                </li>
 
-        <li>
-          <a
-            href="/products/category/Holidays"
-            class="px-4 py-1 mr-1 text-base text-blueGray-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-black "
-          >
-           Holidays
-          </a>
-        </li>
+                <li>
+                  <a
+                    href="/products/category/Stickers"
+                    className="px-4 py-1 mr-1 text-base text-blueGray-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-black "
+                  >
+                    Stickers
+                  </a>
+                </li>
 
-      </ul>
-    </div>
-  </div>
-    
+                <li>
+                  <a
+                    href="/products/category/Design%20Assets"
+                    className="px-4 py-1 mr-1 text-base text-blueGray-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-black "
+                  >
+                    Design Assets
+                  </a>
+                </li>
+
+                <li>
+                  <a
+                    href="/products/category/Holidays"
+                    className="px-4 py-1 mr-1 text-base text-blueGray-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-black "
+                  >
+                    Holidays
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
         </nav>
       </header>
     </>
